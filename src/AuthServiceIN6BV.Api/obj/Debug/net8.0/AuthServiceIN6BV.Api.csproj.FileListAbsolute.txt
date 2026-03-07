@@ -1,0 +1,532 @@
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\appsettings.Development.json
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\appsettings.json
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.exe
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.deps.json
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.runtimeconfig.json
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.pdb
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Application.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Domain.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Persistence.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Application.pdb
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Persistence.pdb
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Domain.pdb
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.csproj.AssemblyReference.cache
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.AssemblyInfoInputs.cache
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.AssemblyInfo.cs
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.csproj.CoreCompileInputs.cache
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets.build.json
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets.development.json
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets\msbuild.AuthServiceIN6BV.Api.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets\msbuild.build.AuthServiceIN6BV.Api.props
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.AuthServiceIN6BV.Api.props
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.AuthServiceIN6BV.Api.props
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\scopedcss\bundle\AuthServiceIN6BV.Api.styles.css
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServ.468FC023.Up2Date
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\refint\AuthServiceIN6BV.Api.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.pdb
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.genruntimeconfig.cache
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\ref\AuthServiceIN6BV.Api.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\EFCore.NamingConventions.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Humanizer.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Konscious.Security.Cryptography.Argon2.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Konscious.Security.Cryptography.Blake2.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Build.Locator.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\NetEscapades.AspNetCore.SecurityHeaders.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Npgsql.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.AspNetCore.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Sinks.File.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.CodeDom.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.AttributedModel.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.Convention.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.Hosting.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.Runtime.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.TypedParts.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.IO.Pipelines.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Text.Json.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\CloudinaryDotNet.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\FluentValidation.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\MailKit.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\MimeKit.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.sourcelink.json
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\appsettings.Development.json
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\appsettings.json
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.staticwebassets.runtime.json
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.exe
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.deps.json
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.runtimeconfig.json
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.pdb
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\CloudinaryDotNet.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\EFCore.NamingConventions.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\FluentValidation.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Humanizer.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Konscious.Security.Cryptography.Argon2.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Konscious.Security.Cryptography.Blake2.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\MailKit.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Build.Locator.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\MimeKit.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\NetEscapades.AspNetCore.SecurityHeaders.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Npgsql.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.AspNetCore.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Sinks.File.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.CodeDom.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.AttributedModel.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.Convention.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.Hosting.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.Runtime.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.TypedParts.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.IO.Pipelines.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Text.Json.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Application.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Domain.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Persistence.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Application.pdb
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Persistence.pdb
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Domain.pdb
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.csproj.AssemblyReference.cache
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.AssemblyInfoInputs.cache
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.AssemblyInfo.cs
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.csproj.CoreCompileInputs.cache
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.sourcelink.json
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets.build.json
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets.development.json
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets\msbuild.AuthServiceIN6BV.Api.Microsoft.AspNetCore.StaticWebAssets.props
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets\msbuild.build.AuthServiceIN6BV.Api.props
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.AuthServiceIN6BV.Api.props
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.AuthServiceIN6BV.Api.props
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets.pack.json
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\scopedcss\bundle\AuthServiceIN6BV.Api.styles.css
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServ.468FC023.Up2Date
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\refint\AuthServiceIN6BV.Api.dll
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.pdb
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.genruntimeconfig.cache
+C:\.NET-IN6BV\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\ref\AuthServiceIN6BV.Api.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\appsettings.Development.json
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\appsettings.json
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.staticwebassets.runtime.json
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.exe
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.deps.json
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.runtimeconfig.json
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Api.pdb
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\CloudinaryDotNet.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\EFCore.NamingConventions.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\FluentValidation.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Humanizer.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Konscious.Security.Cryptography.Argon2.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Konscious.Security.Cryptography.Blake2.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\MailKit.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Build.Locator.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\MimeKit.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Mono.TextTemplating.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\NetEscapades.AspNetCore.SecurityHeaders.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Npgsql.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.AspNetCore.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Serilog.Sinks.File.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.CodeDom.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.AttributedModel.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.Convention.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.Hosting.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.Runtime.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Composition.TypedParts.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.IO.Pipelines.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\System.Text.Json.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Application.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Domain.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Persistence.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Application.pdb
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Persistence.pdb
+C:\SignTrack\src\AuthServiceIN6BV.Api\bin\Debug\net8.0\AuthServiceIN6BV.Domain.pdb
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.csproj.AssemblyReference.cache
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.AssemblyInfoInputs.cache
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.AssemblyInfo.cs
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.csproj.CoreCompileInputs.cache
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets.build.json
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets.development.json
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets\msbuild.AuthServiceIN6BV.Api.Microsoft.AspNetCore.StaticWebAssets.props
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets\msbuild.build.AuthServiceIN6BV.Api.props
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.AuthServiceIN6BV.Api.props
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.AuthServiceIN6BV.Api.props
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\staticwebassets.pack.json
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\scopedcss\bundle\AuthServiceIN6BV.Api.styles.css
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServ.468FC023.Up2Date
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\refint\AuthServiceIN6BV.Api.dll
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.pdb
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\AuthServiceIN6BV.Api.genruntimeconfig.cache
+C:\SignTrack\src\AuthServiceIN6BV.Api\obj\Debug\net8.0\ref\AuthServiceIN6BV.Api.dll

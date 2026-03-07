@@ -1,0 +1,622 @@
+[2026-02-09 12:16:29 ERR] Failed executing DbCommand (35ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT migration_id, product_version
+FROM "__EFMigrationsHistory"
+ORDER BY migration_id; {"EventId":{"Id":20102,"Name":"Microsoft.EntityFrameworkCore.Database.Command.CommandError"},"SourceContext":"Microsoft.EntityFrameworkCore.Database.Command"}
+[2026-02-09 12:17:36 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-02-09 12:17:37 INF] Database ready. Running seed data... {"SourceContext":"Program"}
+[2026-02-09 12:17:39 INF] Database initialization completed successfully {"SourceContext":"Program"}
+[2026-02-09 12:17:39 INF] AuthService API is running at http://localhost:5104. Health endpoint: http://localhost:5104/health {"SourceContext":"Program"}
+[2026-02-09 12:17:56 WRN] Failed to determine the https port for redirect. {"EventId":{"Id":3,"Name":"FailedToDeterminePort"},"SourceContext":"Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware","RequestId":"0HNJ80U625QBD:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ80U625QBD"}
+[2026-02-09 12:17:58 INF] User esantos registered successfully. {"EventId":{"Id":1001,"Name":"LogUserRegistered"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"9dd6cde5-a9a1-41ed-bbf4-2474a0c83014","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ80U625QBD:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ80U625QBD"}
+[2026-02-09 12:17:58 INF] HTTP POST /api/v1/auth/register responded 201 in 2936.6454 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ80U625QBD:00000001","ConnectionId":"0HNJ80U625QBD"}
+[2026-02-09 12:18:20 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"9dd6cde5-a9a1-41ed-bbf4-2474a0c83014","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ80U625QBD:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ80U625QBD"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:18:20 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"9dd6cde5-a9a1-41ed-bbf4-2474a0c83014","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ80U625QBD:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ80U625QBD"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:18:20 ERR] Failed to send verification email {"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"9dd6cde5-a9a1-41ed-bbf4-2474a0c83014","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ80U625QBD:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ80U625QBD"}
+System.InvalidOperationException: Failed to send email: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+ ---> System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+   --- End of inner exception stack trace ---
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 170
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailVerificationAsync(String email, String username, String token) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 29
+   at AuthServiceIN6BV.Application.Services.AuthService.<>c__DisplayClass9_0.<<RegisterAsync>b__0>d.MoveNext() in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthService.cs:line 138
+[2026-02-09 12:23:32 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-02-09 12:23:34 INF] Database ready. Running seed data... {"SourceContext":"Program"}
+[2026-02-09 12:23:35 INF] Database initialization completed successfully {"SourceContext":"Program"}
+[2026-02-09 12:23:35 INF] AuthService API is running at http://localhost:5104. Health endpoint: http://localhost:5104/health {"SourceContext":"Program"}
+[2026-02-09 12:23:39 WRN] Failed to determine the https port for redirect. {"EventId":{"Id":3,"Name":"FailedToDeterminePort"},"SourceContext":"Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware","RequestId":"0HNJ811CH5K3L:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ811CH5K3L"}
+[2026-02-09 12:23:42 INF] User kveleasquez registered successfully. {"EventId":{"Id":1001,"Name":"LogUserRegistered"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"e128d3ae-010e-4c1b-925a-d16555abbe64","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ811CH5K3L:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ811CH5K3L"}
+[2026-02-09 12:23:42 INF] HTTP POST /api/v1/auth/register responded 201 in 3146.1510 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ811CH5K3L:00000001","ConnectionId":"0HNJ811CH5K3L"}
+[2026-02-09 12:24:03 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"e128d3ae-010e-4c1b-925a-d16555abbe64","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ811CH5K3L:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ811CH5K3L"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:24:03 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"e128d3ae-010e-4c1b-925a-d16555abbe64","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ811CH5K3L:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ811CH5K3L"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:24:03 ERR] Failed to send verification email {"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"e128d3ae-010e-4c1b-925a-d16555abbe64","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ811CH5K3L:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ811CH5K3L"}
+System.InvalidOperationException: Failed to send email: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+ ---> System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+   --- End of inner exception stack trace ---
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 170
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailVerificationAsync(String email, String username, String token) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 29
+   at AuthServiceIN6BV.Application.Services.AuthService.<>c__DisplayClass9_0.<<RegisterAsync>b__0>d.MoveNext() in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthService.cs:line 138
+[2026-02-09 12:25:22 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-02-09 12:25:23 INF] Database ready. Running seed data... {"SourceContext":"Program"}
+[2026-02-09 12:25:23 INF] Database initialization completed successfully {"SourceContext":"Program"}
+[2026-02-09 12:25:24 INF] AuthService API is running at http://localhost:5104. Health endpoint: http://localhost:5104/health {"SourceContext":"Program"}
+[2026-02-09 12:25:35 WRN] Failed to determine the https port for redirect. {"EventId":{"Id":3,"Name":"FailedToDeterminePort"},"SourceContext":"Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware","RequestId":"0HNJ812F2NBQG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ812F2NBQG"}
+[2026-02-09 12:25:38 INF] User kveleasquez registered successfully. {"EventId":{"Id":1001,"Name":"LogUserRegistered"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"563bd589-47dd-4431-a83a-9ceab6816249","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ812F2NBQG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ812F2NBQG"}
+[2026-02-09 12:25:38 INF] HTTP POST /api/v1/auth/register responded 201 in 2536.6318 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ812F2NBQG:00000001","ConnectionId":"0HNJ812F2NBQG"}
+[2026-02-09 12:25:59 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"563bd589-47dd-4431-a83a-9ceab6816249","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ812F2NBQG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ812F2NBQG"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:25:59 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"563bd589-47dd-4431-a83a-9ceab6816249","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ812F2NBQG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ812F2NBQG"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:25:59 ERR] Failed to send verification email {"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"563bd589-47dd-4431-a83a-9ceab6816249","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ812F2NBQG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ812F2NBQG"}
+System.InvalidOperationException: Failed to send email: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+ ---> System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+   --- End of inner exception stack trace ---
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 170
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailVerificationAsync(String email, String username, String token) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 29
+   at AuthServiceIN6BV.Application.Services.AuthService.<>c__DisplayClass9_0.<<RegisterAsync>b__0>d.MoveNext() in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthService.cs:line 138
+[2026-02-09 12:28:16 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-02-09 12:28:19 INF] Database ready. Running seed data... {"SourceContext":"Program"}
+[2026-02-09 12:28:19 INF] Database initialization completed successfully {"SourceContext":"Program"}
+[2026-02-09 12:28:19 INF] AuthService API is running at http://localhost:5104. Health endpoint: http://localhost:5104/health {"SourceContext":"Program"}
+[2026-02-09 12:28:27 WRN] Failed to determine the https port for redirect. {"EventId":{"Id":3,"Name":"FailedToDeterminePort"},"SourceContext":"Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware","RequestId":"0HNJ81428G5J4:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ81428G5J4"}
+[2026-02-09 12:28:29 INF] User kveleasquez registered successfully. {"EventId":{"Id":1001,"Name":"LogUserRegistered"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"70cd0186-803e-428c-b13b-f2d0560a6538","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ81428G5J4:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ81428G5J4"}
+[2026-02-09 12:28:30 INF] HTTP POST /api/v1/auth/register responded 201 in 2437.3374 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ81428G5J4:00000001","ConnectionId":"0HNJ81428G5J4"}
+[2026-02-09 12:28:51 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"70cd0186-803e-428c-b13b-f2d0560a6538","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ81428G5J4:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ81428G5J4"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:28:51 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"70cd0186-803e-428c-b13b-f2d0560a6538","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ81428G5J4:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ81428G5J4"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:28:51 ERR] Failed to send verification email {"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"70cd0186-803e-428c-b13b-f2d0560a6538","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ81428G5J4:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ81428G5J4"}
+System.InvalidOperationException: Failed to send email: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+ ---> System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+   --- End of inner exception stack trace ---
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 170
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailVerificationAsync(String email, String username, String token) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 29
+   at AuthServiceIN6BV.Application.Services.AuthService.<>c__DisplayClass9_0.<<RegisterAsync>b__0>d.MoveNext() in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthService.cs:line 138
+[2026-02-09 12:29:18 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-02-09 12:29:19 INF] Database ready. Running seed data... {"SourceContext":"Program"}
+[2026-02-09 12:29:19 INF] Database initialization completed successfully {"SourceContext":"Program"}
+[2026-02-09 12:29:19 INF] AuthService API is running at http://localhost:5104. Health endpoint: http://localhost:5104/health {"SourceContext":"Program"}
+[2026-02-09 12:29:29 WRN] Failed to determine the https port for redirect. {"EventId":{"Id":3,"Name":"FailedToDeterminePort"},"SourceContext":"Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware","RequestId":"0HNJ814KQQ8AG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ814KQQ8AG"}
+[2026-02-09 12:29:33 INF] User kveleasquez registered successfully. {"EventId":{"Id":1001,"Name":"LogUserRegistered"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"25c02552-a5ec-4898-a029-b6e971e506e1","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ814KQQ8AG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ814KQQ8AG"}
+[2026-02-09 12:29:33 INF] HTTP POST /api/v1/auth/register responded 201 in 4065.1929 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ814KQQ8AG:00000001","ConnectionId":"0HNJ814KQQ8AG"}
+[2026-02-09 12:29:54 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"25c02552-a5ec-4898-a029-b6e971e506e1","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ814KQQ8AG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ814KQQ8AG"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:29:54 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"25c02552-a5ec-4898-a029-b6e971e506e1","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ814KQQ8AG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ814KQQ8AG"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:29:55 ERR] Failed to send verification email {"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"25c02552-a5ec-4898-a029-b6e971e506e1","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ814KQQ8AG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ814KQQ8AG"}
+System.InvalidOperationException: Failed to send email: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+ ---> System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+   --- End of inner exception stack trace ---
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 170
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailVerificationAsync(String email, String username, String token) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 29
+   at AuthServiceIN6BV.Application.Services.AuthService.<>c__DisplayClass9_0.<<RegisterAsync>b__0>d.MoveNext() in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthService.cs:line 138
+[2026-02-09 12:31:41 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-02-09 12:31:43 INF] Database ready. Running seed data... {"SourceContext":"Program"}
+[2026-02-09 12:31:44 INF] Database initialization completed successfully {"SourceContext":"Program"}
+[2026-02-09 12:31:44 INF] AuthService API is running at http://localhost:5104. Health endpoint: http://localhost:5104/health {"SourceContext":"Program"}
+[2026-02-09 12:31:49 WRN] Failed to determine the https port for redirect. {"EventId":{"Id":3,"Name":"FailedToDeterminePort"},"SourceContext":"Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware","RequestId":"0HNJ815UCSNE5:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ815UCSNE5"}
+[2026-02-09 12:31:53 INF] User kveleasquez registered successfully. {"EventId":{"Id":1001,"Name":"LogUserRegistered"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"aff01921-32db-41a6-93a9-edd0fa8263ac","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ815UCSNE5:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ815UCSNE5"}
+[2026-02-09 12:31:53 INF] HTTP POST /api/v1/auth/register responded 201 in 4381.0693 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ815UCSNE5:00000001","ConnectionId":"0HNJ815UCSNE5"}
+[2026-02-09 12:32:14 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"aff01921-32db-41a6-93a9-edd0fa8263ac","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ815UCSNE5:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ815UCSNE5"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:32:14 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"aff01921-32db-41a6-93a9-edd0fa8263ac","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ815UCSNE5:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ815UCSNE5"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:32:14 ERR] Failed to send verification email {"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"aff01921-32db-41a6-93a9-edd0fa8263ac","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ815UCSNE5:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ815UCSNE5"}
+System.InvalidOperationException: Failed to send email: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+ ---> System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+   --- End of inner exception stack trace ---
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 170
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailVerificationAsync(String email, String username, String token) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 29
+   at AuthServiceIN6BV.Application.Services.AuthService.<>c__DisplayClass9_0.<<RegisterAsync>b__0>d.MoveNext() in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthService.cs:line 138
+[2026-02-09 12:36:03 INF] User kveleasquez registered successfully. {"EventId":{"Id":1001,"Name":"LogUserRegistered"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"aff01921-32db-41a6-93a9-edd0fa8263ac","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ815UCSNE7:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ815UCSNE7"}
+[2026-02-09 12:36:03 INF] HTTP POST /api/v1/auth/register responded 201 in 1780.0761 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ815UCSNE7:00000001","ConnectionId":"0HNJ815UCSNE7"}
+[2026-02-09 12:36:24 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"aff01921-32db-41a6-93a9-edd0fa8263ac","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ815UCSNE7:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ815UCSNE7"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:36:24 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"aff01921-32db-41a6-93a9-edd0fa8263ac","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ815UCSNE7:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ815UCSNE7"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:36:24 ERR] Failed to send verification email {"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"aff01921-32db-41a6-93a9-edd0fa8263ac","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ815UCSNE7:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ815UCSNE7"}
+System.InvalidOperationException: Failed to send email: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+ ---> System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+   --- End of inner exception stack trace ---
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 170
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailVerificationAsync(String email, String username, String token) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 29
+   at AuthServiceIN6BV.Application.Services.AuthService.<>c__DisplayClass9_0.<<RegisterAsync>b__0>d.MoveNext() in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthService.cs:line 138
+[2026-02-09 12:37:03 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-02-09 12:37:04 INF] Database ready. Running seed data... {"SourceContext":"Program"}
+[2026-02-09 12:37:05 INF] Database initialization completed successfully {"SourceContext":"Program"}
+[2026-02-09 12:37:05 INF] AuthService API is running at http://localhost:5104. Health endpoint: http://localhost:5104/health {"SourceContext":"Program"}
+[2026-02-09 12:37:07 WRN] Failed to determine the https port for redirect. {"EventId":{"Id":3,"Name":"FailedToDeterminePort"},"SourceContext":"Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware","RequestId":"0HNJ818T5TMTG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ818T5TMTG"}
+[2026-02-09 12:37:10 INF] User kveleasquez registered successfully. {"EventId":{"Id":1001,"Name":"LogUserRegistered"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"390cfaec-cb30-4415-85ff-64c690c86661","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ818T5TMTG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ818T5TMTG"}
+[2026-02-09 12:37:10 INF] HTTP POST /api/v1/auth/register responded 201 in 3140.2368 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ818T5TMTG:00000001","ConnectionId":"0HNJ818T5TMTG"}
+[2026-02-09 12:37:31 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"390cfaec-cb30-4415-85ff-64c690c86661","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ818T5TMTG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ818T5TMTG"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:37:31 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"390cfaec-cb30-4415-85ff-64c690c86661","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ818T5TMTG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ818T5TMTG"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:37:31 ERR] Failed to send verification email {"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"390cfaec-cb30-4415-85ff-64c690c86661","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ818T5TMTG:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ818T5TMTG"}
+System.InvalidOperationException: Failed to send email: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+ ---> System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+   --- End of inner exception stack trace ---
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 170
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailVerificationAsync(String email, String username, String token) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 29
+   at AuthServiceIN6BV.Application.Services.AuthService.<>c__DisplayClass9_0.<<RegisterAsync>b__0>d.MoveNext() in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthService.cs:line 138
+[2026-02-09 12:37:55 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-02-09 12:37:57 INF] Database ready. Running seed data... {"SourceContext":"Program"}
+[2026-02-09 12:37:57 INF] Database initialization completed successfully {"SourceContext":"Program"}
+[2026-02-09 12:37:57 INF] AuthService API is running at http://localhost:5104. Health endpoint: http://localhost:5104/health {"SourceContext":"Program"}
+[2026-02-09 12:38:01 WRN] Failed to determine the https port for redirect. {"EventId":{"Id":3,"Name":"FailedToDeterminePort"},"SourceContext":"Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware","RequestId":"0HNJ819DBULJD:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ819DBULJD"}
+[2026-02-09 12:38:04 INF] User kveleasquez registered successfully. {"EventId":{"Id":1001,"Name":"LogUserRegistered"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"f3a4fb83-88f1-4d92-b733-8bdb35d2de2c","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ819DBULJD:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ819DBULJD"}
+[2026-02-09 12:38:04 INF] HTTP POST /api/v1/auth/register responded 201 in 3236.3334 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ819DBULJD:00000001","ConnectionId":"0HNJ819DBULJD"}
+[2026-02-09 12:38:34 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-02-09 12:38:36 INF] Database ready. Running seed data... {"SourceContext":"Program"}
+[2026-02-09 12:38:37 INF] Database initialization completed successfully {"SourceContext":"Program"}
+[2026-02-09 12:38:37 INF] AuthService API is running at http://localhost:5104. Health endpoint: http://localhost:5104/health {"SourceContext":"Program"}
+[2026-02-09 12:38:40 WRN] Failed to determine the https port for redirect. {"EventId":{"Id":3,"Name":"FailedToDeterminePort"},"SourceContext":"Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware","RequestId":"0HNJ819OTILHU:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ819OTILHU"}
+[2026-02-09 12:38:44 INF] User kveleasquez registered successfully. {"EventId":{"Id":1001,"Name":"LogUserRegistered"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"e9d31628-ece7-44ef-ab64-14b9f65d32bd","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ819OTILHU:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ819OTILHU"}
+[2026-02-09 12:38:44 INF] HTTP POST /api/v1/auth/register responded 201 in 4274.6216 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ819OTILHU:00000001","ConnectionId":"0HNJ819OTILHU"}
+[2026-02-09 12:39:05 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"e9d31628-ece7-44ef-ab64-14b9f65d32bd","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ819OTILHU:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ819OTILHU"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:39:05 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"e9d31628-ece7-44ef-ab64-14b9f65d32bd","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ819OTILHU:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ819OTILHU"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:39:05 ERR] Failed to send verification email {"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"e9d31628-ece7-44ef-ab64-14b9f65d32bd","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ819OTILHU:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ819OTILHU"}
+System.InvalidOperationException: Failed to send email: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+ ---> System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+   --- End of inner exception stack trace ---
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 170
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailVerificationAsync(String email, String username, String token) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 29
+   at AuthServiceIN6BV.Application.Services.AuthService.<>c__DisplayClass9_0.<<RegisterAsync>b__0>d.MoveNext() in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthService.cs:line 138
+[2026-02-09 12:39:55 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-02-09 12:39:56 INF] Database ready. Running seed data... {"SourceContext":"Program"}
+[2026-02-09 12:39:57 INF] Database initialization completed successfully {"SourceContext":"Program"}
+[2026-02-09 12:39:57 INF] AuthService API is running at http://localhost:5104. Health endpoint: http://localhost:5104/health {"SourceContext":"Program"}
+[2026-02-09 12:40:05 WRN] Failed to determine the https port for redirect. {"EventId":{"Id":3,"Name":"FailedToDeterminePort"},"SourceContext":"Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware","RequestId":"0HNJ81AIDICHC:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ81AIDICHC"}
+[2026-02-09 12:40:10 INF] User kveleasquez registered successfully. {"EventId":{"Id":1001,"Name":"LogUserRegistered"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"72294ee2-98bf-48fa-a7c9-8804a39c929d","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ81AIDICHC:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ81AIDICHC"}
+[2026-02-09 12:40:10 INF] HTTP POST /api/v1/auth/register responded 201 in 4687.0214 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ81AIDICHC:00000001","ConnectionId":"0HNJ81AIDICHC"}
+[2026-02-09 12:40:31 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"72294ee2-98bf-48fa-a7c9-8804a39c929d","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ81AIDICHC:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ81AIDICHC"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:40:31 ERR] Failed to send email {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"72294ee2-98bf-48fa-a7c9-8804a39c929d","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ81AIDICHC:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ81AIDICHC"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+[2026-02-09 12:40:31 ERR] Failed to send verification email {"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"72294ee2-98bf-48fa-a7c9-8804a39c929d","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ81AIDICHC:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ81AIDICHC"}
+System.InvalidOperationException: Failed to send email: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+ ---> System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 118
+   --- End of inner exception stack trace ---
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 170
+   at AuthServiceIN6BV.Application.Services.EmailService.SendEmailVerificationAsync(String email, String username, String token) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\EmailService.cs:line 29
+   at AuthServiceIN6BV.Application.Services.AuthService.<>c__DisplayClass9_0.<<RegisterAsync>b__0>d.MoveNext() in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthService.cs:line 138
+[2026-02-09 13:52:22 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-02-09 13:52:24 INF] Database ready. Running seed data... {"SourceContext":"Program"}
+[2026-02-09 13:52:25 INF] Database initialization completed successfully {"SourceContext":"Program"}
+[2026-02-09 13:52:25 INF] AuthService API is running at http://localhost:5104. Health endpoint: http://localhost:5104/health {"SourceContext":"Program"}
+[2026-02-09 15:29:49 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-02-09 15:29:52 INF] Database ready. Running seed data... {"SourceContext":"Program"}
+[2026-02-09 15:29:52 INF] Database initialization completed successfully {"SourceContext":"Program"}
+[2026-02-09 15:29:53 INF] AuthService API is running at http://localhost:5104. Health endpoint: http://localhost:5104/health {"SourceContext":"Program"}
+[2026-02-09 15:35:31 WRN] Failed to determine the https port for redirect. {"EventId":{"Id":3,"Name":"FailedToDeterminePort"},"SourceContext":"Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware","RequestId":"0HNJ84CJ9RUQI:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ84CJ9RUQI"}
+[2026-02-09 15:35:43 INF] User esantos registered successfully. {"EventId":{"Id":1001,"Name":"LogUserRegistered"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"08bf3328-1a26-48d9-8915-61bc6a4e9f50","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQI:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ84CJ9RUQI"}
+[2026-02-09 15:35:45 INF] HTTP POST /api/v1/auth/register responded 201 in 13729.3770 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ84CJ9RUQI:00000001","ConnectionId":"0HNJ84CJ9RUQI"}
+[2026-02-09 15:35:49 INF] Email sent successfully {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"08bf3328-1a26-48d9-8915-61bc6a4e9f50","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQI:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ84CJ9RUQI"}
+[2026-02-09 15:35:49 INF] Email pipeline completed {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"08bf3328-1a26-48d9-8915-61bc6a4e9f50","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQI:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ84CJ9RUQI"}
+[2026-02-09 15:35:49 INF] Email processed {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"08bf3328-1a26-48d9-8915-61bc6a4e9f50","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQI:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ84CJ9RUQI"}
+[2026-02-09 15:35:49 INF] Verification email sent {"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"08bf3328-1a26-48d9-8915-61bc6a4e9f50","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Register (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQI:00000001","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNJ84CJ9RUQI"}
+[2026-02-09 15:38:16 WRN] Failed login attempt {"EventId":{"Id":1003,"Name":"LogFailedLoginAttempt"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"19f3157b-2e2f-46b5-b990-cddd01b99ea2","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Login (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQK:00000001","RequestPath":"/api/v1/auth/login","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:38:16 ERR] An unhandled exception occurred {"SourceContext":"AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware","RequestId":"0HNJ84CJ9RUQK:00000001","RequestPath":"/api/v1/auth/login","ConnectionId":"0HNJ84CJ9RUQK"}
+System.UnauthorizedAccessException: User account is disabled
+   at AuthServiceIN6BV.Application.Services.AuthService.LoginAsync(LoginDto loginDto) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthService.cs:line 184
+   at AuthServiceIN6BV.Api.Controllers.AuthController.Login(LoginDto loginDto) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Controllers\AuthController.cs:line 51
+   at lambda_method541(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Middlewares\GlobalExceptionMiddleware.cs:line 18
+[2026-02-09 15:38:16 INF] HTTP POST /api/v1/auth/login responded 401 in 414.0090 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ84CJ9RUQK:00000001","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:38:44 INF] Email sent successfully {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"e7244ef1-5ed7-4cb6-8845-128108fd5073","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.VerifyEmail (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQK:00000002","RequestPath":"/api/v1/auth/verify-email","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:38:44 INF] Email pipeline completed {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"e7244ef1-5ed7-4cb6-8845-128108fd5073","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.VerifyEmail (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQK:00000002","RequestPath":"/api/v1/auth/verify-email","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:38:44 INF] Email processed {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"e7244ef1-5ed7-4cb6-8845-128108fd5073","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.VerifyEmail (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQK:00000002","RequestPath":"/api/v1/auth/verify-email","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:38:44 INF] Email verified successfully for user esantos {"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"e7244ef1-5ed7-4cb6-8845-128108fd5073","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.VerifyEmail (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQK:00000002","RequestPath":"/api/v1/auth/verify-email","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:38:44 INF] HTTP POST /api/v1/auth/verify-email responded 200 in 1787.2500 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ84CJ9RUQK:00000002","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:38:54 INF] User login successfully. {"EventId":{"Id":1002,"Name":"LogUserLoggedIn"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"19f3157b-2e2f-46b5-b990-cddd01b99ea2","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Login (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQK:00000003","RequestPath":"/api/v1/auth/login","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:38:54 INF] HTTP POST /api/v1/auth/login responded 200 in 485.3358 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ84CJ9RUQK:00000003","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:39:28 INF] HTTP POST /api/v1/auth/resend-verification responded 400 in 149.9826 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ84CJ9RUQK:00000004","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:39:58 INF] Email sent successfully {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"67ccd1b0-a4f7-4730-a1a6-df8bf0d5dfcd","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.ForgotPassword (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQK:00000005","RequestPath":"/api/v1/auth/forgot-password","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:39:58 INF] Email pipeline completed {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"67ccd1b0-a4f7-4730-a1a6-df8bf0d5dfcd","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.ForgotPassword (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQK:00000005","RequestPath":"/api/v1/auth/forgot-password","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:39:58 INF] Email processed {"SourceContext":"AuthServiceIN6BV.Application.Services.EmailService","ActionId":"67ccd1b0-a4f7-4730-a1a6-df8bf0d5dfcd","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.ForgotPassword (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQK:00000005","RequestPath":"/api/v1/auth/forgot-password","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:39:58 INF] Password reset email sent to ersantos0018@gmail.com {"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"67ccd1b0-a4f7-4730-a1a6-df8bf0d5dfcd","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.ForgotPassword (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQK:00000005","RequestPath":"/api/v1/auth/forgot-password","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:39:58 INF] HTTP POST /api/v1/auth/forgot-password responded 200 in 1477.7612 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ84CJ9RUQK:00000005","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:40:46 INF] Password reset successfully for user esantos {"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"b33c0116-bc91-43bc-8817-79038f39f865","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.ResetPassword (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQK:00000006","RequestPath":"/api/v1/auth/reset-password","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:40:46 INF] HTTP POST /api/v1/auth/reset-password responded 200 in 629.8660 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ84CJ9RUQK:00000006","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:40:55 WRN] Failed login attempt {"EventId":{"Id":1003,"Name":"LogFailedLoginAttempt"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"19f3157b-2e2f-46b5-b990-cddd01b99ea2","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Login (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQK:00000007","RequestPath":"/api/v1/auth/login","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:40:55 ERR] An unhandled exception occurred {"SourceContext":"AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware","RequestId":"0HNJ84CJ9RUQK:00000007","RequestPath":"/api/v1/auth/login","ConnectionId":"0HNJ84CJ9RUQK"}
+System.UnauthorizedAccessException: Invalid credentials
+   at AuthServiceIN6BV.Application.Services.AuthService.LoginAsync(LoginDto loginDto) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Application\Services\AuthService.cs:line 191
+   at AuthServiceIN6BV.Api.Controllers.AuthController.Login(LoginDto loginDto) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Controllers\AuthController.cs:line 51
+   at lambda_method541(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at AuthServiceIN6BV.Api.Middlewares.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Proyectos 2026\AuthServiceIN6BV\src\AuthServiceIN6BV.Api\Middlewares\GlobalExceptionMiddleware.cs:line 18
+[2026-02-09 15:40:55 INF] HTTP POST /api/v1/auth/login responded 401 in 338.8462 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ84CJ9RUQK:00000007","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:41:02 INF] User login successfully. {"EventId":{"Id":1002,"Name":"LogUserLoggedIn"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"19f3157b-2e2f-46b5-b990-cddd01b99ea2","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Login (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQK:00000008","RequestPath":"/api/v1/auth/login","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:41:02 INF] HTTP POST /api/v1/auth/login responded 200 in 174.8248 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ84CJ9RUQK:00000008","ConnectionId":"0HNJ84CJ9RUQK"}
+[2026-02-09 15:42:06 INF] HTTP GET /api/v1/auth/profile responded 200 in 232.9606 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ84CJ9RUQM:00000001","ConnectionId":"0HNJ84CJ9RUQM"}
+[2026-02-09 15:42:50 INF] User login successfully. {"EventId":{"Id":1002,"Name":"LogUserLoggedIn"},"SourceContext":"AuthServiceIN6BV.Application.Services.AuthService","ActionId":"19f3157b-2e2f-46b5-b990-cddd01b99ea2","ActionName":"AuthServiceIN6BV.Api.Controllers.AuthController.Login (AuthServiceIN6BV.Api)","RequestId":"0HNJ84CJ9RUQM:00000002","RequestPath":"/api/v1/auth/login","ConnectionId":"0HNJ84CJ9RUQM"}
+[2026-02-09 15:42:50 INF] HTTP POST /api/v1/auth/login responded 200 in 348.4606 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ84CJ9RUQM:00000002","ConnectionId":"0HNJ84CJ9RUQM"}
+[2026-02-09 15:43:34 INF] HTTP PUT /api/v1/users/usr_1XN5365qe2J9/role responded 403 in 63.1627 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNJ84CJ9RUQM:00000003","ConnectionId":"0HNJ84CJ9RUQM"}

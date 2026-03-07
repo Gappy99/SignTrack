@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "Hash": "VT6diclgInxndCPlRP3v4fM3e1WRV1v/SHFapEl6Td8=",
+  "Source": "AuthServiceIN6BV.Api",
+  "BasePath": "_content/AuthServiceIN6BV.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "AuthServiceIN6BV.Api\\wwwroot",
+      "Source": "AuthServiceIN6BV.Api",
+      "ContentRoot": "C:\\SignTrack\\src\\AuthServiceIN6BV.Api\\wwwroot\\",
+      "BasePath": "_content/AuthServiceIN6BV.Api",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\SignTrack\\src\\AuthServiceIN6BV.Api\\wwwroot\\signs\\placeholder.mp4",
+      "SourceId": "AuthServiceIN6BV.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\SignTrack\\src\\AuthServiceIN6BV.Api\\wwwroot\\",
+      "BasePath": "_content/AuthServiceIN6BV.Api",
+      "RelativePath": "signs/placeholder.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\signs\\placeholder.mp4"
+    },
+    {
+      "Identity": "C:\\SignTrack\\src\\AuthServiceIN6BV.Api\\wwwroot\\signs\\placeholder.png",
+      "SourceId": "AuthServiceIN6BV.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\SignTrack\\src\\AuthServiceIN6BV.Api\\wwwroot\\",
+      "BasePath": "_content/AuthServiceIN6BV.Api",
+      "RelativePath": "signs/placeholder.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\signs\\placeholder.png"
+    }
+  ]
+}

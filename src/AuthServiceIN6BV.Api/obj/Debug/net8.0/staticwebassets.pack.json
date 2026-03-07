@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\SignTrack\\src\\AuthServiceIN6BV.Api\\wwwroot\\signs\\placeholder.mp4",
+      "PackagePath": "staticwebassets\\signs\\placeholder.mp4"
+    },
+    {
+      "Id": "C:\\SignTrack\\src\\AuthServiceIN6BV.Api\\wwwroot\\signs\\placeholder.png",
+      "PackagePath": "staticwebassets\\signs\\placeholder.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.AuthServiceIN6BV.Api.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.AuthServiceIN6BV.Api.props",
+      "PackagePath": "build\\AuthServiceIN6BV.Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.AuthServiceIN6BV.Api.props",
+      "PackagePath": "buildMultiTargeting\\AuthServiceIN6BV.Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.AuthServiceIN6BV.Api.props",
+      "PackagePath": "buildTransitive\\AuthServiceIN6BV.Api.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

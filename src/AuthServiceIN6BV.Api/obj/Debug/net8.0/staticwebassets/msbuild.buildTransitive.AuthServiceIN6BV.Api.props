@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\AuthServiceIN6BV.Api.props" />
+</Project>
