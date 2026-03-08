@@ -1,0 +1,16 @@
+C:\SignTrack\src\AuthServiceSignTrack.Application\bin\Debug\net8.0\AuthServiceSignTrack.Application.deps.json
+C:\SignTrack\src\AuthServiceSignTrack.Application\bin\Debug\net8.0\AuthServiceSignTrack.Application.dll
+C:\SignTrack\src\AuthServiceSignTrack.Application\bin\Debug\net8.0\AuthServiceSignTrack.Application.pdb
+C:\SignTrack\src\AuthServiceSignTrack.Application\bin\Debug\net8.0\AuthServiceSignTrack.Domain.dll
+C:\SignTrack\src\AuthServiceSignTrack.Application\bin\Debug\net8.0\AuthServiceSignTrack.Domain.pdb
+C:\SignTrack\src\AuthServiceSignTrack.Application\obj\Debug\net8.0\AuthServiceSignTrack.Application.csproj.AssemblyReference.cache
+C:\SignTrack\src\AuthServiceSignTrack.Application\obj\Debug\net8.0\AuthServiceSignTrack.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\SignTrack\src\AuthServiceSignTrack.Application\obj\Debug\net8.0\AuthServiceSignTrack.Application.AssemblyInfoInputs.cache
+C:\SignTrack\src\AuthServiceSignTrack.Application\obj\Debug\net8.0\AuthServiceSignTrack.Application.AssemblyInfo.cs
+C:\SignTrack\src\AuthServiceSignTrack.Application\obj\Debug\net8.0\AuthServiceSignTrack.Application.csproj.CoreCompileInputs.cache
+C:\SignTrack\src\AuthServiceSignTrack.Application\obj\Debug\net8.0\AuthServiceSignTrack.Application.sourcelink.json
+C:\SignTrack\src\AuthServiceSignTrack.Application\obj\Debug\net8.0\AuthServ.D618F21E.Up2Date
+C:\SignTrack\src\AuthServiceSignTrack.Application\obj\Debug\net8.0\AuthServiceSignTrack.Application.dll
+C:\SignTrack\src\AuthServiceSignTrack.Application\obj\Debug\net8.0\refint\AuthServiceSignTrack.Application.dll
+C:\SignTrack\src\AuthServiceSignTrack.Application\obj\Debug\net8.0\AuthServiceSignTrack.Application.pdb
+C:\SignTrack\src\AuthServiceSignTrack.Application\obj\Debug\net8.0\ref\AuthServiceSignTrack.Application.dll

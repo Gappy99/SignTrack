@@ -1,86 +1,107 @@
-import { body, param } from 'express-validator';
-import { checkValidators } from './checkValidators.js';
 import { validateJWT } from './validate-JWT.js';
 import { requireRole } from './validate-role.js';
+import mongoose from 'mongoose';
 
-// Validaciones para crear campos (field)
-export const validateCreateField = [
-    validateJWT,
-    requireRole('ADMIN_ROLE'),
-    body('fieldName')
-        .trim()
-        .notEmpty()
-        .withMessage('El nombre del campo es requerido')
-        .isLength({ min: 2, max: 100 })
-        .withMessage('El nombre debe tener entre 2 y 100 caracteres'),
-    body('fieldType')
-        .notEmpty()
-        .withMessage('El tipo de campo es requerido')
-        .isIn(['NATURAL', 'SINTETICA', 'CONCRETO'])
-        .withMessage('Tipo de superficie no válida'),
-    body('capacity')
-        .notEmpty()
-        .withMessage('La capacidad es requerida')
-        .isIn(['FUTBOL_5', 'FUTBOL_7', 'FUTBOL_11'])
-        .withMessage('Capacidad no válida'),
-    body('pricePerHour')
-        .notEmpty()
-        .withMessage('El precio por hora es requerido')
-        .isFloat({ min: 0 })
-        .withMessage('El precio debe ser mayor o igual a 0'),
-    body('description')
-        .optional()
-        .trim()
-        .isLength({ max: 500 })
-        .withMessage('La descripción no puede exceder 500 caracteres'),
-    checkValidators,
-];
+const isValidId = (id) => mongoose.Types.ObjectId.isValid(id);
 
-export const validateUpdateFieldRequest = [
-    validateJWT,
-    requireRole('ADMIN_ROLE'),
-    param('id')
-        .isMongoId()
-        .withMessage('ID debe ser un ObjectId válido de MongoDB'),
-    body('fieldName')
-        .optional()
-        .trim()
-        .isLength({ min: 2, max: 100 })
-        .withMessage('El nombre debe tener entre 2 y 100 caracteres'),
-    body('fieldType')
-        .optional()
-        .isIn(['NATURAL', 'SINTETICA', 'CONCRETO'])
-        .withMessage('Tipo de superficie no válida'),
-    body('capacity')
-        .optional()
-        .isIn(['FUTBOL_5', 'FUTBOL_7', 'FUTBOL_11'])
-        .withMessage('Capacidad no válida'),
-    body('pricePerHour')
-        .optional()
-        .isFloat({ min: 0 })
-        .withMessage('El precio por hora debe ser mayor o igual a 0'),
-    body('description')
-        .optional()
-        .trim()
-        .isLength({ max: 500 })
-        .withMessage('La descripción no puede exceder 500 caracteres'),
-    checkValidators,
-];
+const buildErrorResponse = (errors) => ({
+  success: false,
+  message: 'Errores de validación',
+  errors,
+});
 
-// Validaciones para activar/desactivar campos
-export const validateFieldStatusChange = [
-    validateJWT,
-    requireRole('ADMIN_ROLE'),
-    param('id')
-        .isMongoId()
-        .withMessage('ID debe ser un ObjectId válido de MongoDB'),
-    checkValidators,
-];
+export const validateCreateField = async (req, res, next) => {
+  try {
+    const errors = [];
+    const { fieldName, fieldType, capacity, pricePerHour, description } = req.body;
 
-// Validación para obtener campo por ID
-export const validateGetFieldById = [
-    param('id')
-        .isMongoId()
-        .withMessage('ID debe ser un ObjectId válido de MongoDB'),
-    checkValidators,
-];
+    if (!fieldName || typeof fieldName !== 'string' || fieldName.trim().length < 2 || fieldName.trim().length > 100) {
+      errors.push({ field: 'fieldName', message: 'El nombre debe tener entre 2 y 100 caracteres' });
+    }
+
+    const ALLOWED_TYPES = ['NATURAL', 'SINTETICA', 'CONCRETO'];
+    if (!fieldType || !ALLOWED_TYPES.includes(fieldType)) {
+      errors.push({ field: 'fieldType', message: 'Tipo de superficie no válida' });
+    }
+
+    const ALLOWED_CAPACITIES = ['FUTBOL_5', 'FUTBOL_7', 'FUTBOL_11'];
+    if (!capacity || !ALLOWED_CAPACITIES.includes(capacity)) {
+      errors.push({ field: 'capacity', message: 'Capacidad no válida' });
+    }
+
+    const price = parseFloat(pricePerHour);
+    if (isNaN(price) || price < 0) {
+      errors.push({ field: 'pricePerHour', message: 'El precio debe ser mayor o igual a 0' });
+    }
+
+    if (description && description.length > 500) {
+      errors.push({ field: 'description', message: 'La descripción no puede exceder 500 caracteres' });
+    }
+
+    if (errors.length) return res.status(400).json(buildErrorResponse(errors));
+
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const validateUpdateFieldRequest = async (req, res, next) => {
+  try {
+    const errors = [];
+    const { id } = req.params;
+
+    if (!isValidId(id)) {
+      errors.push({ field: 'id', message: 'ID debe ser un ObjectId válido de MongoDB' });
+    }
+
+    const { fieldName, fieldType, capacity, pricePerHour, description } = req.body;
+
+    if (fieldName && (fieldName.trim().length < 2 || fieldName.trim().length > 100)) {
+      errors.push({ field: 'fieldName', message: 'El nombre debe tener entre 2 y 100 caracteres' });
+    }
+
+    const ALLOWED_TYPES = ['NATURAL', 'SINTETICA', 'CONCRETO'];
+    if (fieldType && !ALLOWED_TYPES.includes(fieldType)) {
+      errors.push({ field: 'fieldType', message: 'Tipo de superficie no válida' });
+    }
+
+    const ALLOWED_CAPACITIES = ['FUTBOL_5', 'FUTBOL_7', 'FUTBOL_11'];
+    if (capacity && !ALLOWED_CAPACITIES.includes(capacity)) {
+      errors.push({ field: 'capacity', message: 'Capacidad no válida' });
+    }
+
+    if (pricePerHour !== undefined) {
+      const price = parseFloat(pricePerHour);
+      if (isNaN(price) || price < 0) {
+        errors.push({ field: 'pricePerHour', message: 'El precio por hora debe ser mayor o igual a 0' });
+      }
+    }
+
+    if (description && description.length > 500) {
+      errors.push({ field: 'description', message: 'La descripción no puede exceder 500 caracteres' });
+    }
+
+    if (errors.length) return res.status(400).json(buildErrorResponse(errors));
+
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const validateFieldStatusChange = (req, res, next) => {
+  const { id } = req.params;
+  if (!isValidId(id)) {
+    return res.status(400).json(buildErrorResponse([{ field: 'id', message: 'ID debe ser un ObjectId válido de MongoDB' }]));
+  }
+  next();
+};
+
+export const validateGetFieldById = (req, res, next) => {
+  const { id } = req.params;
+  if (!isValidId(id)) {
+    return res.status(400).json(buildErrorResponse([{ field: 'id', message: 'ID debe ser un ObjectId válido de MongoDB' }]));
+  }
+  next();
+};

@@ -1,42 +1,31 @@
-import { cloudinary } from "./file-uploader.js";
+import { unlink } from "fs/promises";
+
+const tryUnlink = async (path) => {
+  if (!path) return;
+  try {
+    await unlink(path);
+    console.log(`Archivo eliminado: ${path}`);
+  } catch (e) {
+    // ignore missing files or permission issues, but log for visibility
+    console.error(`No se pudo eliminar el archivo ${path}: ${e.message}`);
+  }
+};
 
 export const cleanUploaderFileOnFinish = (req, res, next) => {
-    if(req.file){
-        res.on('finish', async () => {
-            try {
-                if(res.statusCode >= 400) {
-                    const publicId = req.file.public_id || req.file.filename;
-                    if(publicId){
-                        await cloudinary.uploader.destroy(publicId);
-                        console.log(
-                            `Archivo Cloudinary eliminado por respuesta ${res.statusCode}: ${publicId}`
-                        )
-                    }
-                }
-            } catch (error) {
-                console.error(`Error al eliminar archivo de cloudinary tras error de respuesta: ${e.message}`)
-            }
-        })
-    }
+  if (req.file) {
+    res.on("finish", async () => {
+      if (res.statusCode >= 400) {
+        await tryUnlink(req.file.path);
+      }
+    });
+  }
 
-    next();
-}
+  next();
+};
 
-export const deleteFileOnError = async(err, req, res, next) => {
-    try {
-        if(req.file) {
-            const publicId = req.file.public_id || req.file.filename;
-            if(publicId){
-                await cloudinary.uploader.destroy(publicId);
-                console.log(
-                    `Archivo Cloudinary eliminado por error en cadena: ${publicId}`
-                )
-            }
-        }
-    } catch (unlinkErr) {
-        console.error(
-            `Error al eliminar archivo de Clodinary (error handler): ${unlinkErr.message}`
-        )
-    }
-    return next(err);
-}
+export const deleteFileOnError = async (err, req, res, next) => {
+  if (req.file) {
+    await tryUnlink(req.file.path);
+  }
+  return next(err);
+};

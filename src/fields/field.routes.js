@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { changeFieldStatus, createField, getFieldById, getFields, updateField } from './field.controller.js';
-import { uploadFieldImage } from '../../middlewares/file-uploader.js';
-import { cleanUploaderFileOnFinish } from '../../middlewares/delete-file-on-error.js';
-import { validateCreateField, validateFieldStatusChange, validateGetFieldById, validateUpdateFieldRequest } from '../../middlewares/field-validators.js';
+import { uploadFieldImage } from '../Middlewares/file-uploader.js';
+import { cleanUploaderFileOnFinish } from '../Middlewares/delete-file-on-error.js';
+import { validateCreateField, validateFieldStatusChange, validateGetFieldById, validateUpdateFieldRequest } from '../Middlewares/field-validators.js';
 
 const router = Router();
 

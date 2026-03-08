@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "Hash": "oEbPStGyXEDCKpXizGmT7MVvo3Dftbg9+w3VFPf2Vzc=",
+  "Source": "AuthServiceSignTrack.Api",
+  "BasePath": "_content/AuthServiceSignTrack.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "AuthServiceSignTrack.Api\\wwwroot",
+      "Source": "AuthServiceSignTrack.Api",
+      "ContentRoot": "C:\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\",
+      "BasePath": "_content/AuthServiceSignTrack.Api",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\signs\\placeholder.mp4",
+      "SourceId": "AuthServiceSignTrack.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\",
+      "BasePath": "_content/AuthServiceSignTrack.Api",
+      "RelativePath": "signs/placeholder.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\signs\\placeholder.mp4"
+    },
+    {
+      "Identity": "C:\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\signs\\placeholder.png",
+      "SourceId": "AuthServiceSignTrack.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\",
+      "BasePath": "_content/AuthServiceSignTrack.Api",
+      "RelativePath": "signs/placeholder.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\signs\\placeholder.png"
+    }
+  ]
+}

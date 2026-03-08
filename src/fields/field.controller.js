@@ -111,12 +111,7 @@ export const updateField = async (req, res) => {
         const updateData = { ...req.body };
 
         if (req.file) {
-            if (currentField.photo_public_id) {
-                await cloudinary.uploader.destroy(currentField.photo_public_id);
-            }
-
             updateData.photo = req.file.path;
-            updateData.photo_public_id = req.file.filename;
         }
 
         const updatedField = await Field.findByIdAndUpdate(id, updateData, {

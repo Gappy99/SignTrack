@@ -9,7 +9,7 @@ import { corsOptions } from './cors-configuration.js';
 import { helmetConfiguration } from './helmet-configuration.js';
 import { requestLimit } from '../middlewares/request-limit.js';
 import { errorHandler } from '../middlewares/handle-errors.js';
-import fieldRoutes from '../src/fields/field.routes.js'
+import fieldRoutes from '../fields/field.routes.js'
 
 const BASE_PATH = '/kinalSportsAdmin/v1';
 
