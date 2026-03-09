@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "oEbPStGyXEDCKpXizGmT7MVvo3Dftbg9+w3VFPf2Vzc=",
+  "Hash": "F1jy8I/WFlXxrRUAQoIqKmBhfsr8+LuCSAX/97c2UXM=",
   "Source": "AuthServiceSignTrack.Api",
   "BasePath": "_content/AuthServiceSignTrack.Api",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "AuthServiceSignTrack.Api\\wwwroot",
       "Source": "AuthServiceSignTrack.Api",
-      "ContentRoot": "C:\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\",
+      "ContentRoot": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\",
       "BasePath": "_content/AuthServiceSignTrack.Api",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\signs\\placeholder.mp4",
+      "Identity": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\signs\\placeholder.mp4",
       "SourceId": "AuthServiceSignTrack.Api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\",
+      "ContentRoot": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\",
       "BasePath": "_content/AuthServiceSignTrack.Api",
       "RelativePath": "signs/placeholder.mp4",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot\\signs\\placeholder.mp4"
     },
     {
-      "Identity": "C:\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\signs\\placeholder.png",
+      "Identity": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\signs\\placeholder.png",
       "SourceId": "AuthServiceSignTrack.Api",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\",
+      "ContentRoot": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\",
       "BasePath": "_content/AuthServiceSignTrack.Api",
       "RelativePath": "signs/placeholder.png",
       "AssetKind": "All",
