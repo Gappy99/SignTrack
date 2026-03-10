@@ -1,139 +1,131 @@
-# SignTrack IA - Next Steps
+# SignTrack IA
 
-## Current Status
-✅ Architecture: R2 (storage) → Python (extraction) → Neon (metadata) → Model (training)
-✅ All Python scripts ready (MediaPipe + sklearn)
-✅ All Node.js APIs ready
-✅ Database schema created
-⏳ **Blocker**: No training data in R2
+Sistema de reconocimiento de lengua de signos usando MediaPipe + RandomForest + Node.js.
 
-## What to Do Next
+## Estado Actual
 
-### Step 1: Upload Training Data to R2
+✅ Arquitectura: R2 (storage) → Python (extracción) → Neon (metadata) → Modelo (entrenamiento)
+✅ Scripts Python listos (MediaPipe + sklearn)
+✅ APIs Node.js listas
+✅ Schema de base de datos creado
+⏳ **Bloqueante**: Sin datos de entrenamiento en R2
 
-Create folders and upload sample images:
-- `dataset/A/` - letter A images
-- `dataset/B/` - letter B images
-- `dataset/C/` - letter C images
-- ... (repeat for all letters A-Z)
+## Flujo Completo
 
-**Image Requirements:**
-- JPG format, at least 20 images per letter
-- Clear hand pose showing the letter
-- Well-lit, different angles/lighting conditions
-- 480x640 pixels or larger
+Imágenes R2 → backfillFromR2.js → Neon DB → exportCSV → train_model.py → model.pkl → API
 
-### Step 2: Extract Landmarks from R2
+## Pasos para Levantar el Modelo
 
-Run the backfill process:
-```bash
+### Paso 1: Subir imágenes de entrenamiento a R2
+
+Estructura de carpetas requerida:
+
+dataset/A/img1.jpg
+dataset/B/img1.jpg
+dataset/C/img1.jpg
+... (A-Z)
+
+Requisitos de imágenes:
+- Formato JPG
+- Mínimo 20 imágenes por letra
+- Mano visible y bien iluminada
+- Diferentes ángulos y condiciones de luz
+- Resolución mínima 480x640px
+
+### Paso 2: Extraer landmarks desde R2
+
 node src/IA/db/backfillFromR2.js
-```
 
-This will:
-1. Download all images from R2
-2. Extract 21-point hand landmarks using MediaPipe
-3. Calculate 9-value feature vectors
-4. Save to Neon database
+Descarga imágenes de R2, extrae 21 puntos de mano con MediaPipe, calcula 9 features por mano y guarda todo en Neon.
 
-**Expected Output:**
-```
+Salida esperada:
+
 Processing: dataset/A/img1.jpg
-✓ Extracted landmarks
-✓ Saved to signs/datasets/landmarks/features tables
-Processing: dataset/B/img1.jpg
+✓ Landmarks extraídos
+✓ Guardado en Neon
 ...
-Backfill complete! Loaded X signs with Y datasets
-```
+Backfill completo: X señas con Y datasets
 
-### Step 3: Generate Training CSV
+### Paso 3: Exportar CSV de entrenamiento
 
-Export landmarks from Neon to CSV:
-```bash
 node src/IA/db/exportLetterDatasetFromNeon.js
-```
 
-Creates: `src/IA/dataset/letter_training.csv`
+Genera: src/IA/dataset/letter_training.csv
 
-### Step 4: Train Model
+### Paso 4: Entrenar el modelo
 
-Train a RandomForest classifier:
-```bash
+Windows:
 c:/2024505/SignTrack/.venv/Scripts/python.exe src/IA/model/train_model.py
-```
 
-Creates: `src/IA/model/model.pkl`
+Mac/Linux:
+python src/IA/model/train_model.py
 
-### Step 5: Start API
+Genera: src/IA/model/sign_model.pkl
 
-Start the prediction server:
-```bash
+### Paso 5: Levantar la API
+
 node src/IA/api/server.js
-```
 
-Server runs on `http://localhost:3000`
+Servidor corriendo en http://localhost:3000
 
-### Step 6: Test Prediction
+### Paso 6: Probar predicción
 
-Make a prediction request:
+Con imagen:
+curl -X POST http://localhost:3000/predict-letter -H "Content-Type: application/json" -d '{"imagePath":"./test_a.jpg"}'
 
-**Option A: With image path**
-```bash
-curl -X POST http://localhost:3000/predict-letter \
-  -H "Content-Type: application/json" \
-  -d '{"imagePath":"./test_a.jpg"}'
-```
+Con features extraídas:
+curl -X POST http://localhost:3000/predict-letter -H "Content-Type: application/json" -d '{"features":[0.12, 0.08, 0.11, 1.45, 1.39, 0.92, 1.23, 0.78, 0.95]}'
 
-**Option B: With extracted features**
-```bash
-curl -X POST http://localhost:3000/predict-letter \
-  -H "Content-Type: application/json" \
-  -d '{"features":[0.12, 0.08, 0.11, 1.45, 1.39, 0.92, 1.23, 0.78, 0.95]}'
-```
+## Archivos Clave
 
-## Troubleshooting
+| Archivo | Propósito |
+|---------|-----------|
+| src/IA/recognition/extract_from_image.py | Extrae 21 landmarks + 9 features de una imagen |
+| src/IA/db/backfillFromR2.js | Descarga R2 → extrae landmarks → guarda en Neon |
+| src/IA/db/exportLetterDatasetFromNeon.js | Exporta features de Neon a CSV |
+| src/IA/model/train_model.py | Entrena RandomForest sobre el CSV |
+| src/IA/api/server.js | API de predicción en puerto 3000 |
 
-**"relation 'signs' does not exist"**
-→ Run `node src/IA/db/initSchema.js` first
+## Arquitectura
 
-**"No landmarks extracted"**
-→ Check image format (JPG/PNG), hand visibility, file permissions
+| Capa | Tecnología |
+|------|-----------|
+| Almacenamiento de archivos | Cloudflare R2 (S3-compatible) |
+| Metadata y features | Neon PostgreSQL |
+| Procesamiento de mano | Python + MediaPipe |
+| Modelo ML | scikit-learn RandomForest |
+| API de predicción | Node.js Express (puerto 3000) |
 
-**"ModuleNotFoundError: joblib"**
-→ Install: `./.venv/Scripts/pip install joblib scikit-learn pandas numpy opencv-python mediapipe`
+## Tiempo Estimado
 
-**"Dataset not found at sign_dataset.csv"**
-→ Need to run Step 2 (backfill) and Step 3 (export) first
+Con 20 imágenes por letra (26 letras = 520 imágenes total):
 
-## Architecture Files
+| Paso | Tiempo |
+|------|--------|
+| Backfill desde R2 | 10-15 min |
+| Exportar CSV | ~1 min |
+| Entrenar modelo | 2-5 min |
+| Total | ~20 min |
 
-- **Data**: R2 (S3-compatible)
-- **Metadata**: Neon PostgreSQL
-- **Processing**: Python MediaPipe + scikit-learn
-- **API**: Node.js Express (port 3007)
+## Solución de Errores Comunes
 
-### Key Python Scripts
+"relation 'signs' does not exist"
+→ node src/IA/db/initSchema.js
 
-| File | Purpose |
-|------|---------|
-| `src/IA/recognition/extract_from_image.py` | Extract 21 landmarks + 9 features |
-| `src/IA/db/backfillFromR2.js` | Download R2 images → extract → save Neon |
-| `src/IA/db/exportLetterDatasetFromNeon.js` | Export features → CSV for training |
-| `src/IA/model/train_model.py` | Train RandomForest on CSV |
-| `src/IA/api/server.js` | Prediction API endpoint |
+"No landmarks extracted"
+→ Verificar formato JPG/PNG, visibilidad de la mano y permisos del archivo
 
-## Timeline
+"ModuleNotFoundError: joblib"
+→ ./.venv/Scripts/pip install joblib scikit-learn pandas numpy opencv-python mediapipe
 
-With ~20 images per letter (26 letters = 520 total):
+"Dataset not found at sign_dataset.csv"
+→ Ejecutar primero el Paso 2 y Paso 3
 
-- Step 2 (backfill): ~10-15 mins (depends on R2 bandwidth)
-- Step 3 (export): ~1 min
-- Step 4 (training): ~2-5 mins
-- **Total**: ~20 mins to working model
+## Mejoras Futuras
 
-## Future Enhancements
-
-- [ ] Word recognition (sequence-based detection)
-- [ ] Gemini integration for text refinement
-- [ ] Prisma ORM (optional, for type safety)
-- [ ] React UI for live prediction
+- [ ] Reconocimiento de palabras con detección de secuencias
+- [ ] Integración con Gemini para refinamiento de texto
+- [ ] Prisma ORM para type safety
+- [ ] UI en React para predicción en vivo
+- [ ] Aumentación de datos para mejorar precisión del modelo
+- [ ] Tests automatizados por endpoint
