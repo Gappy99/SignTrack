@@ -8,6 +8,68 @@ namespace AuthServiceSignTrack.Application.Services;
 
 public class UserManagementService(IUserRepository users, IRoleRepository roles, ICloudinaryService cloudinary) : IUserManagementService
 {
+    public async Task<UserResponseDto?> GetUserProfileAsync(string userId)
+    {
+        if (string.IsNullOrWhiteSpace(userId)) return null;
+
+        var user = await users.GetByIdAsync(userId);
+        if (user == null) return null;
+
+        return new UserResponseDto
+        {
+            Id = user.Id,
+            Name = user.Name,
+            Surname = user.Surname,
+            Username = user.Username,
+            Email = user.Email,
+            ProfilePicture = cloudinary.GetFullImageUrl(user.UserProfile?.ProfilePicture ?? string.Empty),
+            Phone = user.UserProfile?.Phone ?? string.Empty,
+            Role = user.UserRoles.FirstOrDefault()?.Role?.Name ?? string.Empty,
+            Status = user.Status,
+            IsEmailVerified = user.UserEmail?.EmailVerified ?? false,
+            CreatedAt = user.CreatedAt,
+            UpdatedAt = user.UpdatedAt
+        };
+    }
+
+    public async Task<UserResponseDto> UpdateUserProfileAsync(string userId, UpdateUserProfileDto dto)
+    {
+        if (string.IsNullOrWhiteSpace(userId)) throw new ArgumentException("Invalid userId", nameof(userId));
+
+        var user = await users.GetByIdAsync(userId) ?? throw new InvalidOperationException("User not found");
+
+        if (!string.IsNullOrWhiteSpace(dto.Name))
+            user.Name = dto.Name.Trim();
+
+        if (!string.IsNullOrWhiteSpace(dto.Surname))
+            user.Surname = dto.Surname.Trim();
+
+        if (!string.IsNullOrWhiteSpace(dto.ProfilePicture))
+            user.UserProfile.ProfilePicture = dto.ProfilePicture.Trim();
+
+        if (!string.IsNullOrWhiteSpace(dto.Phone))
+            user.UserProfile.Phone = dto.Phone.Trim();
+
+        user.UpdatedAt = DateTime.UtcNow;
+
+        var updated = await users.UpdateAsync(user);
+
+        return new UserResponseDto
+        {
+            Id = updated.Id,
+            Name = updated.Name,
+            Surname = updated.Surname,
+            Username = updated.Username,
+            Email = updated.Email,
+            ProfilePicture = cloudinary.GetFullImageUrl(updated.UserProfile?.ProfilePicture ?? string.Empty),
+            Phone = updated.UserProfile?.Phone ?? string.Empty,
+            Role = updated.UserRoles.FirstOrDefault()?.Role?.Name ?? string.Empty,
+            Status = updated.Status,
+            IsEmailVerified = updated.UserEmail?.EmailVerified ?? false,
+            CreatedAt = updated.CreatedAt,
+            UpdatedAt = updated.UpdatedAt
+        };
+    }
     public async Task<UserResponseDto> UpdateUserRoleAsync(string userId, string roleName)
     {
         // Normalize

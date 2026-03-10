@@ -1,5 +1,3 @@
-import { validateJWT } from './validate-JWT.js';
-import { requireRole } from './validate-role.js';
 import mongoose from 'mongoose';
 
 const isValidId = (id) => mongoose.Types.ObjectId.isValid(id);

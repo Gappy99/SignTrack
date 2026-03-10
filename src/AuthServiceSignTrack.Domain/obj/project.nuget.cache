@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "QCe7YnisfgY=",
+  "dgSpecHash": "Aik0ZLf1WdQ=",
   "success": true,
-  "projectFilePath": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Domain\\AuthServiceSignTrack.Domain.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/Users/josueboror/Visual/SignTrak/SignTrack/src/AuthServiceSignTrack.Domain/AuthServiceSignTrack.Domain.csproj",
+  "expectedPackageFiles": [
+    "/Users/josueboror/.nuget/packages/microsoft.netcore.app.ref/8.0.23/microsoft.netcore.app.ref.8.0.23.nupkg.sha512",
+    "/Users/josueboror/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.23/microsoft.aspnetcore.app.ref.8.0.23.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -41,6 +41,30 @@ public class UsersController(IUserManagementService userManagementService) : Con
         return Ok(roles);
     }
 
+    [HttpGet("me")]
+    [Authorize]
+    public async Task<ActionResult<UserResponseDto?>> GetMyProfile()
+    {
+        var userId = User.Claims.FirstOrDefault(c => c.Type == "sub" || c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+        if (string.IsNullOrEmpty(userId)) return Unauthorized(new { success = false, message = "Usuario no autenticado" });
+
+        var profile = await userManagementService.GetUserProfileAsync(userId);
+        if (profile == null) return NotFound(new { success = false, message = "Perfil no encontrado" });
+
+        return Ok(profile);
+    }
+
+    [HttpPut("me")]
+    [Authorize]
+    public async Task<ActionResult<UserResponseDto>> UpdateMyProfile([FromBody] UpdateUserProfileDto dto)
+    {
+        var userId = User.Claims.FirstOrDefault(c => c.Type == "sub" || c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+        if (string.IsNullOrEmpty(userId)) return Unauthorized(new { success = false, message = "Usuario no autenticado" });
+
+        var updated = await userManagementService.UpdateUserProfileAsync(userId, dto);
+        return Ok(updated);
+    }
+
     [HttpGet("by-role/{roleName}")]
     [Authorize]
     [EnableRateLimiting("ApiPolicy")]
