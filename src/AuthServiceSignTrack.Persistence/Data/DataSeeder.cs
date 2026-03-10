@@ -29,10 +29,15 @@ public static class DataSeeder
             await context.SaveChangesAsync();
         }
 
-        if(!await context.Users.AnyAsync())
+        // Ensure an administrator user exists. Create one if no user with ADMIN_ROLE is present.
+        var adminRole = await context.Roles.FirstOrDefaultAsync(r => r.Name == RoleConstants.ADMIN_ROLE);
+        if (adminRole != null)
         {
-            var adminRole = await context.Roles.FirstOrDefaultAsync(r => r.Name == RoleConstants.ADMIN_ROLE);
-            if(adminRole != null)
+            var adminExists = await context.Users
+                .Include(u => u.UserRoles)
+                .AnyAsync(u => u.UserRoles.Any(ur => ur.RoleId == adminRole.Id) || u.Email == "admin@SignTrack.com" || u.Username == "admin");
+
+            if (!adminExists)
             {
                 var passwordHasher = new PasswordHashService();
                 var profileId = UuidGenerator.GenerateUserId();
