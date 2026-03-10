@@ -8,6 +8,7 @@ const fieldSchema = mongoose.Schema(
             type: String,
             required: [true, 'El nombre del campo es requerido'],
             trim: true,
+            minLength: [2, 'El nombre debe tener al menos 2 caracteres'],
             maxLength: [100, 'El nombre no puede exceder 100 caracteres']
         },
         fieldType: {

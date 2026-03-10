@@ -15,6 +15,8 @@ public class RegisterDto
     public string Surname { get; set; } = string.Empty;
 
     [Required]
+    [MaxLength(50, ErrorMessage = "El usuario no puede exceder 50 caracteres")]
+    [MinLength(2, ErrorMessage = "El usuario debe tener al menos 2 caracteres")]
     public string Username { get; set; } = string.Empty;
 
     [Required]

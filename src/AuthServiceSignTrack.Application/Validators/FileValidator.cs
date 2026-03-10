@@ -20,15 +20,16 @@ public static class FileValidator
             return(false, $"File size cannot exceed {MaxFileSizeInBytes / (1024 * 1024)}MB");
         }
 
-        var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+        var extension = Path.GetExtension(file.FileName ?? string.Empty).ToLowerInvariant();
 
         if(!AllowedImageExtensions.Contains(extension))
         {
             return(false, $"Only the following file types are allowed: {string.Join(", ", AllowedImageExtensions)}");
         }
 
+        var contentType = file.ContentType?.ToLowerInvariant() ?? string.Empty;
         var allowedContentTypes = new [] { "image/jpeg", "image/jpg", "image/png", "image/webp"};
-        if(!allowedContentTypes.Contains(file.ContentType.ToLowerInvariant()))
+        if(string.IsNullOrWhiteSpace(contentType) || !allowedContentTypes.Contains(contentType))
         {
             return (false, "Invalid file type");
         }
@@ -38,7 +39,12 @@ public static class FileValidator
 
     public static string GenerateSecureFileName(string originalFileName)
     {
-        var extension = Path.GetExtension(originalFileName).ToLowerInvariant();
+        var safeName = originalFileName ?? string.Empty;
+        var extension = Path.GetExtension(safeName).ToLowerInvariant();
+        if (string.IsNullOrEmpty(extension))
+        {
+            extension = ".jpg";
+        }
         var uniqueId = Guid.NewGuid().ToString("N")[..12];
         return $"profile-{uniqueId}{extension}";
     }

@@ -32,7 +32,7 @@ export const validateCreateField = async (req, res, next) => {
       errors.push({ field: 'pricePerHour', message: 'El precio debe ser mayor o igual a 0' });
     }
 
-    if (description && description.length > 500) {
+    if (description != null && typeof description === 'string' && description.length > 500) {
       errors.push({ field: 'description', message: 'La descripción no puede exceder 500 caracteres' });
     }
 
@@ -55,8 +55,11 @@ export const validateUpdateFieldRequest = async (req, res, next) => {
 
     const { fieldName, fieldType, capacity, pricePerHour, description } = req.body;
 
-    if (fieldName && (fieldName.trim().length < 2 || fieldName.trim().length > 100)) {
-      errors.push({ field: 'fieldName', message: 'El nombre debe tener entre 2 y 100 caracteres' });
+    if (fieldName !== undefined) {
+      const name = typeof fieldName === 'string' ? fieldName.trim() : '';
+      if (name.length < 2 || name.length > 100) {
+        errors.push({ field: 'fieldName', message: 'El nombre debe tener entre 2 y 100 caracteres' });
+      }
     }
 
     const ALLOWED_TYPES = ['NATURAL', 'SINTETICA', 'CONCRETO'];
@@ -76,7 +79,7 @@ export const validateUpdateFieldRequest = async (req, res, next) => {
       }
     }
 
-    if (description && description.length > 500) {
+    if (description != null && typeof description === 'string' && description.length > 500) {
       errors.push({ field: 'description', message: 'La descripción no puede exceder 500 caracteres' });
     }
 
