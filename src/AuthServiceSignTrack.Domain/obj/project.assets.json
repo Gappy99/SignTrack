@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\razep\\.nuget\\packages\\": {}
+    "C:\\Users\\edy14\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\SignTrack\\src\\AuthServiceSignTrack.Domain\\AuthServiceSignTrack.Domain.csproj",
+      "projectUniqueName": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Domain\\AuthServiceSignTrack.Domain.csproj",
       "projectName": "AuthServiceSignTrack.Domain",
-      "projectPath": "C:\\SignTrack\\src\\AuthServiceSignTrack.Domain\\AuthServiceSignTrack.Domain.csproj",
-      "packagesPath": "C:\\Users\\razep\\.nuget\\packages\\",
-      "outputPath": "C:\\SignTrack\\src\\AuthServiceSignTrack.Domain\\obj\\",
+      "projectPath": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Domain\\AuthServiceSignTrack.Domain.csproj",
+      "packagesPath": "C:\\Users\\edy14\\.nuget\\packages\\",
+      "outputPath": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\razep\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\edy14\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.417/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

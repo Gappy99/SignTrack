@@ -3,34 +3,35 @@
 import mongoose from "mongoose";
 
 export const dbConnection = async () => {
-    try {
-        mongoose.connection.on('error', () => {
-            console.log('MongoDB | no se pudo conectar a mongoDB');
-            mongoose.disconnect();
-        });
-        mongoose.connection.on('connecting', () => {
-            console.log('MongoDB | intentando conectar a mongoDB');
-        });
-        mongoose.connection.on('connected', () => {
-            console.log('MongoDB | conectado a mongoDB');
-        });
-        mongoose.connection.on('open', () => {
-            console.log('MongoDB | conectado a la base de datos kinalSports');
-        });
-        mongoose.connection.on('reconnected', () => {
-            console.log('MongoDB | reconectando a mongoDB');
-        });
-        mongoose.connection.on('disconnected', () => {
-            console.log('MongoDB | desconectando a mongoDB');
-        });
-
-        await mongoose.connect(process.env.URI_MONGO, {
-            serverSelectionTimeoutMS: 5000,
-            maxPoolSize: 10
-        })
-    } catch (error) {
-        console.log(`Error al conectar la db: ${error}`);
+    const mongoUri = process.env.URI_MONGO;
+    if (!mongoUri) {
+        throw new Error('URI_MONGO no está definida en variables de entorno');
     }
+
+    mongoose.connection.on('error', () => {
+        console.log('MongoDB | no se pudo conectar a mongoDB');
+        mongoose.disconnect();
+    });
+    mongoose.connection.on('connecting', () => {
+        console.log('MongoDB | intentando conectar a mongoDB');
+    });
+    mongoose.connection.on('connected', () => {
+        console.log('MongoDB | conectado a mongoDB');
+    });
+    mongoose.connection.on('open', () => {
+        console.log('MongoDB | conectado a la base de datos kinalSports');
+    });
+    mongoose.connection.on('reconnected', () => {
+        console.log('MongoDB | reconectando a mongoDB');
+    });
+    mongoose.connection.on('disconnected', () => {
+        console.log('MongoDB | desconectando a mongoDB');
+    });
+
+    await mongoose.connect(mongoUri, {
+        serverSelectionTimeoutMS: 5000,
+        maxPoolSize: 10
+    });
 }
 
 const gracefulShutdown = async (signal) => {
@@ -47,4 +48,4 @@ const gracefulShutdown = async (signal) => {
 
 process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
-process.on('SIGURS2', () => gracefulShutdown('SIGURS2'));
+process.on('SIGUSR2', () => gracefulShutdown('SIGUSR2'));

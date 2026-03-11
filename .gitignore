@@ -1,0 +1,64 @@
+# CREDENCIALES — nunca subir al repositorio
+.env
+.env.local
+.env.*.local
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+*.secret
+
+# GEMINI (credenciales locales)
+gemini*.json
+gemini*.key
+*gemini*credentials*
+
+# NODE
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# .NET — build artifacts
+**/bin/
+**/obj/
+*.user
+*.suo
+.vs/
+*.nupkg
+*.snupkg
+
+# PYTHON
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+.venv311/
+*.egg-info/
+dist/
+build/
+
+# MODELOS ENTRENADOS (archivos grandes)
+src/IA/model/sign_model.pkl
+src/IA/words/word_model.pkl
+
+# DATASETS GENERADOS
+src/IA/dataset/sign_dataset.csv
+src/IA/words/word_dataset.csv
+
+# LOGS
+*.log
+logs/
+src/AuthServiceSignTrack.Api/logs/
+
+# UPLOADS / ARCHIVOS LOCALES
+uploads/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/settings.json

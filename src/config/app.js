@@ -4,12 +4,14 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import { dbConnection } from './db.js';
 import { corsOptions } from './cors-configuration.js';
 import { helmetConfiguration } from './helmet-configuration.js';
 import { requestLimit } from '../middlewares/request-limit.js';
 import { errorHandler } from '../middlewares/handle-errors.js';
-import fieldRoutes from '../fields/field.routes.js'
+import { dbConnection } from './db.js';
+import fieldRoutes from '../fields/field.routes.js';
+import sectionRoutes from '../museum/section.routes.js';
+import guideRoutes from '../museum/guide.routes.js';
 
 const BASE_PATH = '/kinalSportsAdmin/v1';
 
@@ -25,6 +27,8 @@ const middlewares = (app) => {
 const routes = (app) => {
 
     app.use(`${BASE_PATH}/fields`, fieldRoutes);
+    app.use(`${BASE_PATH}/sections`, sectionRoutes);
+    app.use(`${BASE_PATH}/guide`, guideRoutes);
 
     app.get(`${BASE_PATH}/Health`, (request, response) => {
         response.status(200).json({
@@ -45,7 +49,7 @@ const routes = (app) => {
 export const initServer = async () => {
     const app = express();
     const PORT = process.env.PORT;
-    app.set('trus proxy', 1);
+    app.set('trust proxy', 1);
 
     try {
         await dbConnection();
@@ -55,7 +59,7 @@ export const initServer = async () => {
         app.use(errorHandler);
 
         app.listen(PORT, () => {
-            console.log(`KinalSports Admin server running on port ${PORT}`);
+            console.log(`SignTrack Admin server running on port ${PORT}`);
             console.log(`Health check: http://localhost:${PORT}${BASE_PATH}/health`);
         })
     } catch (error) {
