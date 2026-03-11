@@ -24,6 +24,7 @@ pnpm-debug.log*
 # .NET — build artifacts
 **/bin/
 **/obj/
+obj/
 *.user
 *.suo
 .vs/
