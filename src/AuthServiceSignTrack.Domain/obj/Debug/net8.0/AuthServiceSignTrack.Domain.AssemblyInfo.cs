@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AuthServiceSignTrack.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b4802d00ee872dcdf99731ddf7aacaf7345d4a8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bd4e145101741569875e86bd0b85e07cdaa63d8a")]
 [assembly: System.Reflection.AssemblyProductAttribute("AuthServiceSignTrack.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AuthServiceSignTrack.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

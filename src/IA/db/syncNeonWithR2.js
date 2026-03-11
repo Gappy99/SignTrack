@@ -43,7 +43,7 @@ const getAllR2Urls = async () => {
 
 const syncNeonWithR2 = async (dryRun = false) => {
     if (dryRun) {
-        console.log("🔍 MODO CONSULTA (dry-run) — no se eliminará nada\n")
+        console.log(" MODO CONSULTA (dry-run) — no se eliminará nada\n")
     } else {
         console.log("Iniciando sincronización Neon ↔ R2...\n")
     }
@@ -64,15 +64,15 @@ const syncNeonWithR2 = async (dryRun = false) => {
     const orphans = datasets.filter((row) => !r2Urls.has(row.file_url))
 
     if (orphans.length === 0) {
-        console.log("✅ Neon está sincronizado con R2. No hay registros huérfanos.")
+        console.log("Neon está sincronizado con R2. No hay registros huérfanos.")
         return
     }
 
-    console.log(`⚠️  Se encontraron ${orphans.length} registros huérfanos:`)
+    console.log(`  Se encontraron ${orphans.length} registros huérfanos:`)
     orphans.forEach((row) => console.log(`   [id=${row.id}] ${row.file_url}`))
 
     if (dryRun) {
-        console.log("\n✅ Consulta finalizada. Ejecuta sin --dry-run para eliminarlos.")
+        console.log("\n Consulta finalizada. Ejecuta sin --dry-run para eliminarlos.")
         return
     }
 
@@ -85,7 +85,7 @@ const syncNeonWithR2 = async (dryRun = false) => {
         [orphanIds]
     )
 
-    console.log(`\n✅ Sincronización completada:`)
+    console.log(`\n Sincronización completada:`)
     console.log(`   - Registros eliminados de datasets: ${result.rowCount}`)
     console.log(`   - landmarks y features eliminados en cascada automáticamente`)
 }
@@ -94,7 +94,7 @@ const dryRun = process.argv.includes("--dry-run")
 
 syncNeonWithR2(dryRun)
     .catch((error) => {
-        console.error("❌ Error en la sincronización:", error.message)
+        console.error(" Error en la sincronización:", error.message)
         process.exitCode = 1
     })
     .finally(async () => {

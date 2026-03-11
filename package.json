@@ -14,7 +14,8 @@
     "ia:word-train": "python src/IA/words/train_word_model.py",
     "ia:word-predict": "python src/IA/words/predict_word.py",
     "ia:eval-letters": "python src/IA/model/evaluate_letters.py",
-    "ia:eval-words": "python src/IA/words/evaluate_words.py"
+    "ia:eval-words": "python src/IA/words/evaluate_words.py",
+    "ia:backfill-r2": "node src/IA/db/backfillFromR2.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.883.0",

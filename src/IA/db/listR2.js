@@ -22,11 +22,11 @@ const listObjects = async () => {
         }))
 
         if (!response.Contents || response.Contents.length === 0) {
-            console.log("⚠️ Bucket vacío")
+            console.log(" Bucket vacío")
             return
         }
 
-        console.log(`\n📦 Total de objetos: ${response.Contents.length}\n`)
+        console.log(`\n Total de objetos: ${response.Contents.length}\n`)
         
         response.Contents.forEach(obj => {
             console.log(`  ${obj.Key} (${(obj.Size / 1024).toFixed(2)} KB)`)
@@ -43,13 +43,13 @@ const listObjects = async () => {
             folders.get(folder).push(obj)
         })
 
-        console.log("\n📂 Carpetas encontradas:")
+        console.log("\n Carpetas encontradas:")
         folders.forEach((items, folder) => {
             console.log(`  ${folder}/: ${items.length} archivos`)
         })
 
     } catch (error) {
-        console.error("❌ Error:", error.message)
+        console.error(" Error:", error.message)
     }
 }
 

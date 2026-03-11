@@ -109,6 +109,19 @@ const saveFeaturesIfAvailable = async (datasetId, features) => {
     }
 }
 
+const clearDatasetArtifacts = async (datasetId) => {
+    await pool.query(
+        `DELETE FROM landmarks
+         WHERE dataset_id = $1`,
+        [datasetId]
+    )
+    await pool.query(
+        `DELETE FROM features
+         WHERE dataset_id = $1`,
+        [datasetId]
+    )
+}
+
 async function processDataset() {
 
     const folders = fs.readdirSync(DATASET_PATH)
@@ -176,6 +189,8 @@ async function processDataset() {
             )
 
             const datasetId = datasetResult.rows[0].id
+
+            await clearDatasetArtifacts(datasetId)
 
             if (fileType === "image") {
                 const landmarks = extractionResult.landmarks

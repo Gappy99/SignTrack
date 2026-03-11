@@ -4,15 +4,14 @@ import sys
 from pathlib import Path
 
 import cv2
-import mediapipe as mp
 import numpy as np
 
 IA_ROOT = Path(__file__).resolve().parent.parent
 if str(IA_ROOT) not in sys.path:
     sys.path.append(str(IA_ROOT))
 
-from recognition.extract_from_image import extract_features as extract_landmark_features
-
+from shared.hand_features import LETTER_FEATURE_COUNT, build_letter_feature_vector, extract_ordered_hands
+from shared.mp_hands_compat import Hands as _MpHands
 
 VIDEO_EXTENSIONS = {".mp4", ".mov", ".avi", ".mkv", ".webm"}
 
@@ -48,9 +47,9 @@ def extract_video_features(video_path: str, max_frames: int = 64) -> dict:
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
     stride = max(total_frames // max_frames, 1) if total_frames > 0 else 1
 
-    hands = mp.solutions.hands.Hands(
+    hands = _MpHands(
         static_image_mode=False,
-        max_num_hands=1,
+        max_num_hands=2,
         min_detection_confidence=0.5,
         min_tracking_confidence=0.5,
     )
@@ -77,9 +76,8 @@ def extract_video_features(video_path: str, max_frames: int = 64) -> dict:
             results = hands.process(rgb)
 
             if results.multi_hand_landmarks:
-                hand = results.multi_hand_landmarks[0]
-                points = [[float(lm.x), float(lm.y), float(lm.z)] for lm in hand.landmark]
-                collected.append(extract_landmark_features(points))
+                hands_data = extract_ordered_hands(results)
+                collected.append(build_letter_feature_vector(hands_data))
 
             index += 1
     finally:
@@ -94,6 +92,12 @@ def extract_video_features(video_path: str, max_frames: int = 64) -> dict:
         }
 
     feature_matrix = np.asarray(collected, dtype=float)
+    if feature_matrix.ndim != 2 or feature_matrix.shape[1] != LETTER_FEATURE_COUNT:
+        return {
+            "success": False,
+            "error": "INVALID_TWO_HAND_FEATURE_MATRIX",
+            "detected_frames": len(collected),
+        }
     vector = _to_feature_vector(feature_matrix, sampled)
 
     return {

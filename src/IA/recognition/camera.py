@@ -1,20 +1,29 @@
 import sys
 import time
+import os
 from pathlib import Path
+from collections import deque
 
 import cv2
-import mediapipe as mp
 import numpy as np
 
 IA_ROOT = Path(__file__).resolve().parent.parent
 if str(IA_ROOT) not in sys.path:
     sys.path.append(str(IA_ROOT))
 
-from recognition.extract_from_image import extract_features
+from shared.mp_hands_compat import (
+    Hands as _MpHands,
+    HAND_CONNECTIONS as _HAND_CONNECTIONS,
+    DrawingUtils,
+    DrawingSpec,
+)
+from shared.hand_features import LETTER_FEATURE_COUNT, build_letter_feature_vector, extract_ordered_hands
+
 from model.predictor import predict as predict_letter
 from shared.sentence_builder import SentenceBuilder
 from shared.speech import speak_text
 from translation.coherence import make_coherent_text
+from translation.museum_guide import ask_museum_guide
 
 # Intenta cargar el modelo de palabras (opcional — puede no estar entrenado aún)
 try:
@@ -29,6 +38,8 @@ except Exception:
 # ------------------------------------------------------------------
 MODE_LETTER = "LETRA"
 MODE_WORD   = "PALABRA"
+FLOW_NORMAL = "NORMAL"
+FLOW_MUSEUM = "MUSEO"
 
 COLOR_GREEN  = (0, 220, 0)
 COLOR_BLUE   = (255, 180, 0)
@@ -51,9 +62,14 @@ RELEASE_DIFF_THRESHOLD = 0.05
 # Tiempo mínimo de estabilidad antes de capturar automáticamente.
 LETTER_STABLE_SECONDS = 0.35
 WORD_STABLE_SECONDS = 0.9
+LETTER_MIN_CONFIDENCE = 0.05
+WORD_MIN_CONFIDENCE = 0.05
+LETTER_CONSENSUS_FRAMES = 3
+SMOOTHING_ALPHA = 0.45
 
 # Si desaparece la mano por este tiempo, se libera el bloqueo para siguiente seña.
 NO_HAND_RELEASE_SECONDS = 0.35
+WORD_MIN_FRAMES = 5
 
 
 def _feature_diff(a, b):
@@ -64,6 +80,53 @@ def _feature_diff(a, b):
     return float(np.mean(np.abs(arr_a - arr_b)))
 
 
+def _smooth_features(previous, current):
+    if previous is None:
+        return current
+
+    prev_arr = np.asarray(previous, dtype=float)
+    curr_arr = np.asarray(current, dtype=float)
+    return ((1.0 - SMOOTHING_ALPHA) * prev_arr + SMOOTHING_ALPHA * curr_arr).astype(float).tolist()
+
+
+def _has_prediction_consensus(history):
+    if len(history) < LETTER_CONSENSUS_FRAMES:
+        return None
+
+    labels = [item[0] for item in history]
+    first_label = labels[0]
+    if any(label != first_label for label in labels[1:]):
+        return None
+
+    confidences = [item[1] for item in history if item[1] is not None]
+    confidence = min(confidences) if confidences else None
+    return first_label, confidence
+
+
+def _to_word_feature_vector(frame_features_window):
+    """Convierte una ventana de features por frame al vector temporal de palabras."""
+    if not frame_features_window:
+        return None
+
+    frame_features = np.asarray(frame_features_window, dtype=float)
+    if frame_features.ndim != 2 or frame_features.shape[1] != LETTER_FEATURE_COUNT:
+        return None
+
+    mean = frame_features.mean(axis=0)
+    std = frame_features.std(axis=0)
+    min_vals = frame_features.min(axis=0)
+    max_vals = frame_features.max(axis=0)
+
+    if len(frame_features) > 1:
+        diffs = np.abs(np.diff(frame_features, axis=0)).mean(axis=0)
+    else:
+        diffs = np.zeros(frame_features.shape[1], dtype=float)
+
+    detection_ratio = 1.0
+    output = np.concatenate([mean, std, min_vals, max_vals, diffs, [detection_ratio]])
+    return output.astype(float).tolist()
+
+
 def _put_text_bg(frame, text, pos, scale, color, thickness=1):
     """Dibuja texto con fondo semiopaco para mejor legibilidad."""
     (tw, th), _ = cv2.getTextSize(text, FONT, scale, thickness)
@@ -72,39 +135,35 @@ def _put_text_bg(frame, text, pos, scale, color, thickness=1):
     cv2.putText(frame, text, (x, y), FONT, scale, color, thickness, cv2.LINE_AA)
 
 
-def get_hand_points(results):
-    if not results.multi_hand_landmarks:
-        return None
-    hand = results.multi_hand_landmarks[0]
-    return [[float(lm.x), float(lm.y), float(lm.z)] for lm in hand.landmark]
-
-
 def main():
-    mp_hands = mp.solutions.hands.Hands(
+    mp_hands = _MpHands(
         static_image_mode=False,
-        max_num_hands=1,
+        max_num_hands=2,
         min_detection_confidence=0.7,
         min_tracking_confidence=0.5,
     )
-    mp_drawing = mp.solutions.drawing_utils
+    mp_drawing = DrawingUtils()
 
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
-        print("❌ No se pudo abrir la cámara")
+        print(" No se pudo abrir la cámara")
         return
 
-    print("✓ Cámara abierta")
+    print(" Cámara abierta")
     print("  CAPTURA AUTOMÁTICA ACTIVADA")
     print("  W       : cambiar modo letra / palabra")
+    print("  M       : activar/desactivar modo museo")
     print("  BKSP    : deshacer último signo")
     print("  ENTER   : finalizar — imprimir oración")
     print("  ESC     : salir")
     print("  Gemini  : correccion de coherencia al finalizar")
     if not WORD_MODEL_AVAILABLE:
-        print("⚠️  Modelo de palabras no disponible (entrena con train_word_model.py)")
+        print("  Modelo de palabras no disponible (entrena con train_word_model.py)")
 
     builder  = SentenceBuilder()
     mode     = MODE_LETTER
+    flow_mode = FLOW_NORMAL
+    current_museum_node = os.getenv("MUSEUM_START_NODE", "lobby")
     last_sign = ""
     feedback  = ""           # mensaje de estado temporal en pantalla
 
@@ -114,6 +173,9 @@ def main():
     capture_locked = False
     captured_features = None
     hand_missing_since = None
+    word_frame_features = []
+    smoothed_features = None
+    recent_letter_predictions = deque(maxlen=LETTER_CONSENSUS_FRAMES)
 
     while True:
         now = time.monotonic()
@@ -132,19 +194,23 @@ def main():
         if results.multi_hand_landmarks:
             for hand_lm in results.multi_hand_landmarks:
                 mp_drawing.draw_landmarks(
-                    frame, hand_lm, mp.solutions.hands.HAND_CONNECTIONS,
-                    mp_drawing.DrawingSpec(color=COLOR_GREEN, thickness=2, circle_radius=2),
-                    mp_drawing.DrawingSpec(color=COLOR_BLUE,  thickness=2),
+                    frame, hand_lm, _HAND_CONNECTIONS,
+                    DrawingSpec(color=COLOR_GREEN, thickness=2, circle_radius=2),
+                    DrawingSpec(color=COLOR_BLUE,  thickness=2),
                 )
 
         # ── HUD ────────────────────────────────────────────────────
         # Fila 1: modo activo
         mode_color = COLOR_GREEN if mode == MODE_LETTER else COLOR_YELLOW
-        mode_label = f"MODO: {mode}"
+        flow_suffix = f" | FLUJO: {flow_mode}"
+        mode_label = f"MODO: {mode}{flow_suffix}"
         if mode == MODE_WORD and not WORD_MODEL_AVAILABLE:
             mode_label += " (sin modelo)"
             mode_color = COLOR_RED
         _put_text_bg(frame, mode_label, (10, 35), 0.8, mode_color, 2)
+
+        if flow_mode == FLOW_MUSEUM:
+            _put_text_bg(frame, f"Ubicacion actual: {current_museum_node}", (10, 105), 0.6, COLOR_YELLOW, 1)
 
         # Fila 2: último signo detectado
         if last_sign:
@@ -165,18 +231,22 @@ def main():
         _put_text_bg(frame, f"Auto: {auto_state}", (10, hint_y - 56), 0.5, COLOR_GRAY, 1)
         _put_text_bg(
             frame,
-            "Auto ON  W:modo  BKSP:deshacer  ENTER:finalizar  ESC:salir",
+            "Auto ON  W:modo  M:museo  BKSP:deshacer  ENTER:finalizar  ESC:salir",
             (10, hint_y), 0.45, COLOR_GRAY, 1,
         )
 
         cv2.imshow("SignTrack - Reconocimiento de Senas", frame)
 
         # ── Captura automática ─────────────────────────────────────
-        points = get_hand_points(results)
+        detected_hands = extract_ordered_hands(results)
 
-        if points is None:
+        if not detected_hands:
             stable_start_ts = None
             last_features = None
+            smoothed_features = None
+            recent_letter_predictions.clear()
+            if not capture_locked:
+                word_frame_features = []
 
             if capture_locked:
                 if hand_missing_since is None:
@@ -192,29 +262,41 @@ def main():
             hand_missing_since = None
 
             try:
-                current_features = extract_features(points)
+                current_features = build_letter_feature_vector(detected_hands)
             except Exception as exc:
                 feedback = f"Error extrayendo features: {exc}"
                 current_features = None
 
             if current_features is not None:
+                smoothed_features = _smooth_features(smoothed_features, current_features)
+
+                if mode == MODE_WORD and not capture_locked:
+                    word_frame_features.append(smoothed_features)
+                    if len(word_frame_features) > 64:
+                        word_frame_features.pop(0)
+                elif mode == MODE_LETTER:
+                    word_frame_features = []
+
                 if capture_locked:
                     # Se desbloquea cuando cambia suficientemente respecto a la seña capturada.
-                    if _feature_diff(current_features, captured_features) >= RELEASE_DIFF_THRESHOLD:
+                    if _feature_diff(smoothed_features, captured_features) >= RELEASE_DIFF_THRESHOLD:
                         capture_locked = False
                         captured_features = None
                         stable_start_ts = now
-                        last_features = current_features
+                        last_features = smoothed_features
+                        recent_letter_predictions.clear()
                         feedback = "Cambio detectado: listo para nueva seña"
                 else:
                     if stable_start_ts is None:
                         stable_start_ts = now
-                        last_features = current_features
+                        last_features = smoothed_features
+                        recent_letter_predictions.clear()
                     else:
                         # Si cambia demasiado, reinicia ventana de estabilidad.
-                        if _feature_diff(current_features, last_features) > STABLE_DIFF_THRESHOLD:
+                        if _feature_diff(smoothed_features, last_features) > STABLE_DIFF_THRESHOLD:
                             stable_start_ts = now
-                        last_features = current_features
+                            recent_letter_predictions.clear()
+                        last_features = smoothed_features
 
                     required_stable = LETTER_STABLE_SECONDS if mode == MODE_LETTER else WORD_STABLE_SECONDS
                     stable_for = now - stable_start_ts
@@ -222,27 +304,49 @@ def main():
                     if stable_for >= required_stable:
                         try:
                             if mode == MODE_LETTER:
-                                label = str(predict_letter(current_features))
+                                label, conf = predict_letter(smoothed_features, return_confidence=True)
+                                recent_letter_predictions.append((str(label), conf))
+                                consensus = _has_prediction_consensus(recent_letter_predictions)
+                                if consensus is None:
+                                    conf_str = f"{conf*100:.0f}%" if conf is not None else "?"
+                                    feedback = f"Validando letra ({len(recent_letter_predictions)}/{LETTER_CONSENSUS_FRAMES})..."
+                                    continue
+
+                                label, conf = consensus
                                 builder.add_letter(label)
                                 last_sign = label
-                                feedback = f"Letra: {label}"
-                                print(f"  Letra: {label}  →  {builder.build()}")
-                            else:
-                                label, conf = predict_word(current_features)
-                                builder.add_word(label)
-                                last_sign = label
                                 conf_str = f"{conf*100:.0f}%" if conf is not None else "?"
-                                feedback = f"Palabra: {label} ({conf_str})"
-                                print(f"  Palabra: {label} ({conf_str})  →  {builder.build()}")
+                                feedback = f"Letra: {label} ({conf_str})"
+                                print(f"  Letra: {label} ({conf_str})  →  {builder.build()}")
+                            else:
+                                if len(word_frame_features) < WORD_MIN_FRAMES:
+                                    feedback = f"Mantén la seña más tiempo ({len(word_frame_features)}/{WORD_MIN_FRAMES})"
+                                    stable_start_ts = now
+                                    continue
 
-                            capture_locked = True
-                            captured_features = current_features
+                                word_features = _to_word_feature_vector(word_frame_features)
+                                if not word_features:
+                                    feedback = "No se pudieron construir features de palabra"
+                                    stable_start_ts = now
+                                    continue
+
+                                label, conf = predict_word(word_features)
+                                if conf is not None and conf < WORD_MIN_CONFIDENCE:
+                                    feedback = f"Palabra ambigua ({conf*100:.0f}%). Repite el movimiento"
+                                    stable_start_ts = now
+                                    continue
+
+                                builder.add_word(label)
+                                ure_locked = True
+                            captured_features = smoothed_features
                             stable_start_ts = None
                             last_features = None
+                            word_frame_features = []
+                            recent_letter_predictions.clear()
 
                         except Exception as exc:
                             feedback = f"Error: {exc}"
-                            print(f"❌ {exc}")
+                            print(f"Error {exc}")
 
         # ── Teclado ────────────────────────────────────────────────
         key = cv2.waitKey(1) & 0xFF
@@ -257,23 +361,44 @@ def main():
                 coherent_sentence = coherence.get("coherent_text", sentence)
                 provider = coherence.get("provider", "local")
 
-                print(f"\n📝 Oración cruda: {sentence}")
-                print(f"✨ Oración coherente ({provider}): {coherent_sentence}\n")
+                print(f"\n Oración cruda: {sentence}")
+                print(f" Oración coherente ({provider}): {coherent_sentence}\n")
 
-                spoke = speak_text(coherent_sentence)
-
-                if coherence.get("success"):
-                    if spoke:
-                        feedback = f"Final ({provider}) + voz"
+                if flow_mode == FLOW_MUSEUM:
+                    guide = ask_museum_guide(coherent_sentence, current_museum_node)
+                    if guide.get("success"):
+                        response_text = guide.get("response_text") or coherent_sentence
+                        spoke = speak_text(response_text)
+                        target_name = guide.get("target_name") or "seccion"
+                        current_museum_node = guide.get("next_node_key", current_museum_node)
+                        print(f" Guia museo: {response_text}")
+                        if spoke:
+                            feedback = f"Museo: {target_name} + voz"
+                        else:
+                            feedback = f"Museo: {response_text}"
                     else:
-                        feedback = f"Final ({provider}): {coherent_sentence}"
+                        guide_error = guide.get("error", "Guia museo no disponible")
+                        print(f" Guia museo fallback: {guide_error}")
+                        spoke = speak_text(coherent_sentence)
+                        if spoke:
+                            feedback = "Museo fallback + voz"
+                        else:
+                            feedback = f"Museo fallback: {coherent_sentence}"
                 else:
-                    gemini_error = coherence.get("error", "Gemini no disponible")
-                    print(f"⚠️ Gemini fallback: {gemini_error}")
-                    if spoke:
-                        feedback = "Final (fallback local) + voz"
+                    spoke = speak_text(coherent_sentence)
+
+                    if coherence.get("success"):
+                        if spoke:
+                            feedback = f"Final ({provider}) + voz"
+                        else:
+                            feedback = f"Final ({provider}): {coherent_sentence}"
                     else:
-                        feedback = f"Fallback local (Gemini): {coherent_sentence}"
+                        gemini_error = coherence.get("error", "Gemini no disponible")
+                        print(f" Gemini fallback: {gemini_error}")
+                        if spoke:
+                            feedback = "Final (fallback local) + voz"
+                        else:
+                            feedback = f"Fallback local (Gemini): {coherent_sentence}"
             else:
                 feedback = "Nada acumulado aún"
             builder.clear()
@@ -294,11 +419,15 @@ def main():
                 mode = MODE_WORD if mode == MODE_LETTER else MODE_LETTER
                 feedback = f"Modo cambiado a: {mode}"
 
+        elif key in (ord("m"), ord("M")):   # M → activar/desactivar flujo museo
+            flow_mode = FLOW_MUSEUM if flow_mode == FLOW_NORMAL else FLOW_NORMAL
+            feedback = f"Flujo cambiado a: {flow_mode}"
+
     cap.release()
     cv2.destroyAllWindows()
     final = builder.build()
     if final:
-        print(f"\n📝 Oración final: {final}")
+        print(f"\n Oración final: {final}")
     print("✓ Cámara cerrada")
 
 

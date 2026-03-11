@@ -6,6 +6,7 @@ import pool from "./database.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const OUTPUT_CSV_PATH = path.resolve(__dirname, "..", "dataset", "sign_dataset.csv")
+const EXPECTED_FEATURE_COUNT = 18
 
 const toNumberArray = (value) => {
     if (Array.isArray(value)) return value.map(Number)
@@ -29,6 +30,7 @@ async function exportLetterDatasetFromNeon() {
         INNER JOIN datasets d ON d.id = f.dataset_id
         INNER JOIN signs s ON s.id = d.sign_id
         WHERE s.type = 'letter'
+                    AND d.file_type = 'image'
         ORDER BY s.label, d.id
     `
 
@@ -47,6 +49,14 @@ async function exportLetterDatasetFromNeon() {
             console.warn(`Fila omitida por vector invalido para label ${row.label}`)
             continue
         }
+
+        if (vector.length !== EXPECTED_FEATURE_COUNT) {
+            console.warn(
+                `Fila omitida para label ${row.label}: se esperaban ${EXPECTED_FEATURE_COUNT} features y llegaron ${vector.length}`
+            )
+            continue
+        }
+
         parsedRows.push({ label: row.label, vector })
     }
 
@@ -55,8 +65,7 @@ async function exportLetterDatasetFromNeon() {
         return
     }
 
-    const featureCount = parsedRows[0].vector.length
-    const header = ["label", ...Array.from({ length: featureCount }, (_, i) => `f${i + 1}`)]
+    const header = ["label", ...Array.from({ length: EXPECTED_FEATURE_COUNT }, (_, i) => `f${i + 1}`)]
 
     const lines = [header.join(",")]
     for (const row of parsedRows) {

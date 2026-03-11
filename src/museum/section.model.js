@@ -21,18 +21,26 @@ const sectionSchema = mongoose.Schema(
     },
     ubicacion: {
       type: String,
-      required: [true, "La ubicación es requerida"],
+      required: false,
       trim: true,
       maxLength: [200, "La ubicación no puede exceder 200 caracteres"],
       // Ejemplo: "Dos salones a la derecha"
     },
+    nodeKey: {
+      type: String,
+      required: [true, "El nodeKey es requerido"],
+      trim: true,
+      lowercase: true,
+      maxLength: [100, "El nodeKey no puede exceder 100 caracteres"],
+      index: true,
+    },
+    aliases: {
+      type: [String],
+      default: [],
+    },
     areas: {
       type: [String],
-      required: true,
-      validate: [
-        arr => arr.length === 6,
-        "Debe haber exactamente 6 áreas en la sección"
-      ],
+      default: [],
     },
   },
   {
@@ -40,5 +48,8 @@ const sectionSchema = mongoose.Schema(
     versionKey: false,
   }
 );
+
+sectionSchema.index({ nombre: 1 }, { unique: true });
+sectionSchema.index({ nodeKey: 1 });
 
 export default mongoose.model("Section", sectionSchema);

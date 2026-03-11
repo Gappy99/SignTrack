@@ -1,48 +1,20 @@
 import argparse
 import json
+import sys
+from pathlib import Path
 
 import cv2
-import mediapipe as mp
-import numpy as np
 
+IA_ROOT = Path(__file__).resolve().parent.parent
+if str(IA_ROOT) not in sys.path:
+    sys.path.append(str(IA_ROOT))
 
-def distance(p1, p2):
-    return float(np.linalg.norm(np.array(p1) - np.array(p2)))
-
-
-def angle(a, b, c):
-    a = np.array(a)
-    b = np.array(b)
-    c = np.array(c)
-
-    ba = a - b
-    bc = c - b
-
-    denominator = np.linalg.norm(ba) * np.linalg.norm(bc)
-    if denominator == 0:
-        return 0.0
-
-    cosine = np.dot(ba, bc) / denominator
-    cosine = np.clip(cosine, -1.0, 1.0)
-
-    return float(np.arccos(cosine))
-
-
-def extract_features(points):
-    features = []
-
-    features.append(distance(points[4], points[8]))
-    features.append(distance(points[8], points[12]))
-    features.append(distance(points[12], points[16]))
-    features.append(distance(points[16], points[20]))
-    features.append(distance(points[4], points[20]))
-
-    features.append(angle(points[5], points[6], points[8]))
-    features.append(angle(points[9], points[10], points[12]))
-    features.append(angle(points[13], points[14], points[16]))
-    features.append(angle(points[17], points[18], points[20]))
-
-    return features
+from shared.hand_features import (
+    build_landmark_payload,
+    build_letter_feature_vector,
+    extract_ordered_hands,
+)
+from shared.mp_hands_compat import Hands as _MpHands
 
 
 def extract_from_image(image_path):
@@ -53,9 +25,9 @@ def extract_from_image(image_path):
             "error": "IMAGE_NOT_FOUND_OR_INVALID",
         }
 
-    hands = mp.solutions.hands.Hands(
+    hands = _MpHands(
         static_image_mode=True,
-        max_num_hands=1,
+        max_num_hands=2,
         min_detection_confidence=0.5,
     )
 
@@ -71,13 +43,12 @@ def extract_from_image(image_path):
             "error": "NO_HAND_DETECTED",
         }
 
-    hand_landmarks = results.multi_hand_landmarks[0]
-    points = [[float(lm.x), float(lm.y), float(lm.z)] for lm in hand_landmarks.landmark]
+    hands_data = extract_ordered_hands(results)
 
     return {
         "success": True,
-        "landmarks": points,
-        "features": extract_features(points),
+        "landmarks": build_landmark_payload(hands_data),
+        "features": build_letter_feature_vector(hands_data),
     }
 
 
