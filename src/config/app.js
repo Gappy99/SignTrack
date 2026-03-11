@@ -4,7 +4,6 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import { dbConnection } from './db.js';
 import { corsOptions } from './cors-configuration.js';
 import { helmetConfiguration } from './helmet-configuration.js';
 import { requestLimit } from '../middlewares/request-limit.js';
@@ -48,7 +47,6 @@ export const initServer = async () => {
     app.set('trus proxy', 1);
 
     try {
-        await dbConnection();
         middlewares(app);
         routes(app);
 

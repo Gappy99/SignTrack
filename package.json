@@ -7,18 +7,29 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "ia:process-dataset": "node src/IA/db/processDataset.js",
+    "ia:export-words": "node src/IA/db/exportWordDatasetFromNeon.js",
+    "ia:word-dataset": "python src/IA/words/build_word_dataset.py",
+    "ia:word-train": "python src/IA/words/train_word_model.py",
+    "ia:word-predict": "python src/IA/words/predict_word.py",
+    "ia:eval-letters": "python src/IA/model/evaluate_letters.py",
+    "ia:eval-words": "python src/IA/words/evaluate_words.py"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.883.0",
     "cors": "^2.8.6",
     "dotenv": "^16.0.0",
     "express": "^5.2.1",
     "express-rate-limit": "^8.3.0",
+    "fs-extra": "^11.3.4",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.0",
+    "mime-types": "^3.0.2",
     "mongoose": "^9.2.4",
     "morgan": "^1.10.1",
-    "multer": "^2.1.1"
+    "multer": "^2.1.1",
+    "pg": "^8.20.0"
   },
   "keywords": [],
   "author": "",

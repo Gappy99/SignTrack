@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AuthServiceSignTrack.Persistence")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0616138da80aecf7227252a52d743621fb31d7f7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b4802d00ee872dcdf99731ddf7aacaf7345d4a8")]
 [assembly: System.Reflection.AssemblyProductAttribute("AuthServiceSignTrack.Persistence")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AuthServiceSignTrack.Persistence")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

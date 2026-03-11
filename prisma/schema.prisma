@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("NEON_DATABASE_URL")
+}
+
+// IA Entities
+
+model Sign {
+  id        BigInt      @id @default(autoincrement())
+  label     String      @db.Text
+  type      SignType
+  createdAt DateTime    @default(now())
+  
+  datasets  Dataset[]
+  
+  @@unique([label, type])
+  @@index([label, type])
+}
+
+model Dataset {
+  id        BigInt      @id @default(autoincrement())
+  signId    BigInt      @map("sign_id")
+  fileUrl   String      @map("file_url") @db.Text
+  fileType  FileType    @map("file_type")
+  createdAt DateTime    @default(now())
+  
+  sign      Sign        @relation(fields: [signId], references: [id], onDelete: Cascade)
+  landmarks Landmark[]
+  features  Feature[]
+  
+  @@unique([signId, fileUrl])
+  @@index([signId])
+  @@map("datasets")
+}
+
+model Landmark {
+  id        BigInt      @id @default(autoincrement())
+  datasetId BigInt      @map("dataset_id")
+  points    Json        @db.JsonB
+  createdAt DateTime    @default(now())
+  
+  dataset   Dataset     @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  
+  @@index([datasetId])
+  @@map("landmarks")
+}
+
+model Feature {
+  id        BigInt      @id @default(autoincrement())
+  datasetId BigInt      @map("dataset_id")
+  vector    Json        @db.JsonB
+  createdAt DateTime    @default(now())
+  
+  dataset   Dataset     @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  
+  @@unique([datasetId])
+  @@index([datasetId])
+  @@map("features")
+}
+
+enum SignType {
+  letter
+  word
+}
+
+enum FileType {
+  image
+  video
+}
