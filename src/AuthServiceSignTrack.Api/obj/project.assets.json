@@ -7871,19 +7871,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\edy14\\.nuget\\packages\\": {}
+    "C:\\Users\\admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Api\\AuthServiceSignTrack.Api.csproj",
+      "projectUniqueName": "C:\\Propuesta\\SignTrack\\src\\AuthServiceSignTrack.Api\\AuthServiceSignTrack.Api.csproj",
       "projectName": "AuthServiceSignTrack.Api",
-      "projectPath": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Api\\AuthServiceSignTrack.Api.csproj",
-      "packagesPath": "C:\\Users\\edy14\\.nuget\\packages\\",
-      "outputPath": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Api\\obj\\",
+      "projectPath": "C:\\Propuesta\\SignTrack\\src\\AuthServiceSignTrack.Api\\AuthServiceSignTrack.Api.csproj",
+      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+      "outputPath": "C:\\Propuesta\\SignTrack\\src\\AuthServiceSignTrack.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\edy14\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -7895,11 +7895,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Application\\AuthServiceSignTrack.Application.csproj": {
-              "projectPath": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Application\\AuthServiceSignTrack.Application.csproj"
+            "C:\\Propuesta\\SignTrack\\src\\AuthServiceSignTrack.Application\\AuthServiceSignTrack.Application.csproj": {
+              "projectPath": "C:\\Propuesta\\SignTrack\\src\\AuthServiceSignTrack.Application\\AuthServiceSignTrack.Application.csproj"
             },
-            "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Persistence\\AuthServiceSignTrack.Persistence.csproj": {
-              "projectPath": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Persistence\\AuthServiceSignTrack.Persistence.csproj"
+            "C:\\Propuesta\\SignTrack\\src\\AuthServiceSignTrack.Persistence\\AuthServiceSignTrack.Persistence.csproj": {
+              "projectPath": "C:\\Propuesta\\SignTrack\\src\\AuthServiceSignTrack.Persistence\\AuthServiceSignTrack.Persistence.csproj"
             }
           }
         }
@@ -7913,7 +7913,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -7961,6 +7962,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.24, 8.0.24]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[8.0.24, 8.0.24]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.24, 8.0.24]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.24, 8.0.24]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -7969,7 +7988,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
