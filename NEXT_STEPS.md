@@ -1,52 +1,271 @@
-# SignTrack IA - Next Steps
+# SignTrack Backend - Implementation Roadmap
 
-## Current Status
-✅ Architecture: R2 (storage) → Python (extraction) → Neon (metadata) → Model (training)
-✅ All Python scripts ready (MediaPipe + sklearn)
-✅ All Node.js APIs ready
-✅ Database schema created
-⏳ **Blocker**: No training data in R2
+## 🎯 Current Status
 
-## What to Do Next
+✅ **Phase 1: Foundation** (COMPLETED)
+- Architecture designed (VIDEOCALL_ARCHITECTURE.md)
+- 4 microservices scaffolded (video-call, frame-processor, websocket, orchestrator)
+- Docker Compose configured with 4 new services
+- Shared utilities created (Redis, HTTP client, logging, errors)
+- Database models defined (Call, TranslationHistory)
+- WebSocket event handlers implemented
+- Dockerfiles created for all services
 
-### Step 1: Upload Training Data to R2
+⏳ **Phase 2: Controllers** (IN PROGRESS)
+- Route stubs created
+- Middleware implemented
+- Ready for business logic
 
-Create folders and upload sample images:
-- `dataset/A/` - letter A images
-- `dataset/B/` - letter B images
-- `dataset/C/` - letter C images
-- ... (repeat for all letters A-Z)
+❌ **Phase 3+: Advanced Features** (TODO)
+- Full controller implementation
+- Service-to-service communication
+- Error handling and resilience
+- Testing and deployment
 
-**Image Requirements:**
-- JPG format, at least 20 images per letter
-- Clear hand pose showing the letter
-- Well-lit, different angles/lighting conditions
-- 480x640 pixels or larger
+---
 
-### Step 2: Extract Landmarks from R2
+## 🚀 Immediate Next Steps
 
-Run the backfill process:
+### Priority 1: Implement Video Call Service Controller ⚡
+
+**File**: `microservices/video-call-service/src/controllers/callController.js`
+
+```javascript
+// Export these 5 functions:
+export async function initiateCall(req, res, next)
+export async function joinCall(req, res, next)
+export async function leaveCall(req, res, next)
+export async function getCallStatus(req, res, next)
+export async function endCall(req, res, next)
+
+// Each function:
+1. Validate JWT token (middleware should handle)
+2. Extract user from req.user
+3. Validate request body/params
+4. Perform MongoDB operations using Call model
+5. Return proper HTTP response
+```
+
+**Test Endpoints**:
 ```bash
-node src/IA/db/backfillFromR2.js
+# After implementation:
+curl -X POST http://localhost:3200/calls/initiate \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"metadata": {"topic": "Test"}}'
 ```
 
-This will:
-1. Download all images from R2
-2. Extract 21-point hand landmarks using MediaPipe
-3. Calculate 9-value feature vectors
-4. Save to Neon database
+### Priority 2: Implement Frame Processor Controller ⚡⚡
 
-**Expected Output:**
-```
-Processing: dataset/A/img1.jpg
-✓ Extracted landmarks
-✓ Saved to signs/datasets/landmarks/features tables
-Processing: dataset/B/img1.jpg
-...
-Backfill complete! Loaded X signs with Y datasets
+**File**: `microservices/frame-processor-service/src/controllers/processorController.js`
+
+Key logic:
+1. **processFrame()**: Extract frame → call feature-extraction → call inference → cache
+2. **processBatch()**: Queue frames → process sequentially → return results
+3. **getProcessingStatus()**: Check Redis/cache → return progress
+
+### Priority 3: Connect WebSocket Events 🔌
+
+Verify Socket.io handlers:
+```bash
+# Test WebSocket connection:
+node -e "
+const io = require('socket.io-client');
+const socket = io('http://localhost:3202', {
+  auth: { token: '<JWT_TOKEN>' }
+});
+socket.emit('call:initiate', { recipientId: 'user-2' });
+"
 ```
 
-### Step 3: Generate Training CSV
+### Priority 4: Implement Orchestrator Service 🎼
+
+Chain all IA services:
+```javascript
+// Feature → Inference → Translation pipeline
+const features = await featureExtractionService.call(frame);
+const inference = await inferenceService.call(features);
+const translation = await translationService.call(inference.signs);
+```
+
+---
+
+## 📦 Quick Setup Commands
+
+```bash
+# 1. Start all services with Docker
+docker-compose up -d
+
+# 2. Verify services are healthy
+for port in 3200 3201 3202 3203; do
+  echo "Port $port:"
+  curl http://localhost:$port/health 2>/dev/null | jq .
+done
+
+# 3. Watch logs
+docker-compose logs -f
+
+# 4. Stop all
+docker-compose down
+```
+
+---
+
+## 🔗 Service Connections
+
+```
+AuthService (5104)
+├─ validates JWT for all services
+└─ provides user info
+
+Video Call Service (3200)
+├─ manages call sessions
+├─ stores in MongoDB
+└─ notifies via WebSocket
+
+Frame Processor (3201)
+├─ calls IA services
+├─ extracts features + inference
+├─ caches in Redis
+└─ used by Orchestrator
+
+WebSocket Service (3202)
+├─ real-time communication
+├─ pub/sub via Redis
+├─ room management by callId
+└─ broadcasts events
+
+Orchestrator (3203)
+├─ chains Frame → IA → Translation
+├─ stores translation history
+├─ manages result caching
+└─ publishes to WebSocket
+
+IA Services (3100+)
+├─ Feature Extraction (3102)
+├─ Inference (3101)
+└─ Translation (3103)
+```
+
+---
+
+## 📋 Database Setup
+
+**MongoDB Collections**:
+```bash
+# Video Call Service
+db.createCollection("calls", {
+  validator: { /* Call schema */ }
+})
+
+# Orchestrator Service  
+db.createCollection("translation_history", {
+  validator: { /* TranslationHistory schema */ }
+})
+```
+
+**Redis Keys**:
+```
+frame:{frameId}         → Cached frame processing result (TTL: 3600s)
+call:{callId}:metadata  → Call metadata (TTL: 86400s)
+translation:{txnId}     → Translation result (TTL: 3600s)
+```
+
+---
+
+## 🧪 Testing Workflow
+
+### 1. Unit Test Controllers
+```bash
+cd microservices/video-call-service
+npm test
+```
+
+### 2. Integration Test Services
+```bash
+# Test service-to-service calls
+npm run test:integration
+```
+
+### 3. End-to-End Test
+```bash
+# Test complete call flow
+npm run test:e2e
+```
+
+---
+
+## 📝 Implementation Checklist
+
+### Video Call Service
+- [ ] `CallController.js` with 5 methods
+- [ ] Integrate with `Call.js` model
+- [ ] Add validation middleware
+- [ ] Connect routes in `callRoutes.js`
+- [ ] Test with Postman/curl
+
+### Frame Processor Service  
+- [ ] `ProcessorController.js` with 3 methods
+- [ ] `IAService.js` for service calls
+- [ ] Redis caching logic
+- [ ] Error handling & retries
+- [ ] Connect routes in `processorRoutes.js`
+
+### WebSocket Service
+- [ ] Connect Socket.io to handlers
+- [ ] Test room joining/leaving
+- [ ] Verify event emission
+- [ ] Test with WebSocket client
+
+### Orchestrator Service
+- [ ] `OrchestratorController.js`
+- [ ] `OrchestratorService.js` with pipeline
+- [ ] MongoDB history storage
+- [ ] Redis caching
+- [ ] Connect routes
+
+---
+
+## 🐛 Debugging Tips
+
+**Check service health**:
+```bash
+curl http://localhost:PORT/health
+```
+
+**View logs**:
+```bash
+docker-compose logs SERVICE_NAME
+```
+
+**Test MongoDB connection**:
+```bash
+mongodb://localhost:27017
+# Collections: calls, translation_history
+```
+
+**Test Redis connection**:
+```bash
+redis-cli ping
+redis-cli KEYS "*"
+```
+
+**Test IA services**:
+```bash
+curl http://localhost:3102/health  # feature-extraction
+curl http://localhost:3101/health  # inference
+curl http://localhost:3103/health  # translation
+```
+
+---
+
+## ✨ Architecture Overview
+
+See `VIDEOCALL_ARCHITECTURE.md` for complete design.
+
+See `MICROSERVICES_GUIDE.md` for deployment & testing.
+
+See `IMPLEMENTATION_PROGRESS.md` for detailed tracking.
 
 Export landmarks from Neon to CSV:
 ```bash

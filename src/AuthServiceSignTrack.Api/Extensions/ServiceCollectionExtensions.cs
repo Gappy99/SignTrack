@@ -29,11 +29,26 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddApiDocumentation(this IServiceCollection services)
+    public static IServiceCollection AddApiDocumentation(this IServiceCollection services, IWebHostEnvironment env)
     {
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+        
+        // Store environment for custom OpenAPI spec loading
+        var openApiPath = Path.Combine(env.ContentRootPath, "wwwroot", "openapi.json");
+        if (File.Exists(openApiPath))
+        {
+            services.AddSingleton(new OpenApiSpecPath { Path = openApiPath });
+        }
 
         return services;
     }
+}
+
+/// <summary>
+/// Clase auxiliar para almacenar la ruta del archivo OpenAPI personalizado
+/// </summary>
+public class OpenApiSpecPath
+{
+    public required string Path { get; set; }
 }

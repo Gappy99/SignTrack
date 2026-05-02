@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\openapi.json",
+      "PackagePath": "staticwebassets\\openapi.json"
+    },
+    {
       "Id": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\signs\\placeholder.mp4",
       "PackagePath": "staticwebassets\\signs\\placeholder.mp4"
     },

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "F1jy8I/WFlXxrRUAQoIqKmBhfsr8+LuCSAX/97c2UXM=",
+  "Hash": "QpaJqJZCJq0bEH0Nk4BvcVoZa6XUc3ogdUVHwDQmrD0=",
   "Source": "AuthServiceSignTrack.Api",
   "BasePath": "_content/AuthServiceSignTrack.Api",
   "Mode": "Default",
@@ -16,6 +16,25 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\openapi.json",
+      "SourceId": "AuthServiceSignTrack.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\",
+      "BasePath": "_content/AuthServiceSignTrack.Api",
+      "RelativePath": "openapi.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\openapi.json"
+    },
     {
       "Identity": "C:\\2024505\\SignTrack\\src\\AuthServiceSignTrack.Api\\wwwroot\\signs\\placeholder.mp4",
       "SourceId": "AuthServiceSignTrack.Api",

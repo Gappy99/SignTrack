@@ -26,7 +26,7 @@ builder.Services.AddControllers(options =>
 });
 
 builder.Services.AddApplicationServices(builder.Configuration);
-builder.Services.AddApiDocumentation();
+builder.Services.AddApiDocumentation(builder.Environment);
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddRateLimitingPolicies();
 
@@ -38,6 +38,23 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    // Middleware to serve custom OpenAPI spec from wwwroot
+    app.Use(async (context, next) =>
+    {
+        if (context.Request.Path == "/swagger/v1/swagger.json")
+        {
+            var openApiPath = Path.Combine(app.Environment.ContentRootPath, "wwwroot", "openapi.json");
+            if (File.Exists(openApiPath))
+            {
+                context.Response.ContentType = "application/json";
+                var json = await File.ReadAllTextAsync(openApiPath);
+                await context.Response.WriteAsync(json);
+                return;
+            }
+        }
+        await next();
+    });
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }

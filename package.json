@@ -8,6 +8,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "ia:gateway": "node src/IA/api/server.js",
+    "ia:service:inference": "node microservices/ia-inference/server.js",
+    "ia:service:features": "node microservices/ia-feature-extraction/server.js",
+    "ia:service:translation": "node microservices/ia-translation/server.js",
+    "ia:service:dataset": "node microservices/ia-dataset/server.js",
+    "ia:service:training": "node microservices/ia-training/server.js",
     "ia:process-dataset": "node src/IA/db/processDataset.js",
     "ia:export-words": "node src/IA/db/exportWordDatasetFromNeon.js",
     "ia:word-dataset": "python src/IA/words/build_word_dataset.py",
@@ -19,6 +25,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.883.0",
+    "axios": "^1.15.2",
     "cors": "^2.8.6",
     "dotenv": "^16.0.0",
     "express": "^5.2.1",
@@ -30,7 +37,8 @@
     "mongoose": "^9.2.4",
     "morgan": "^1.10.1",
     "multer": "^2.1.1",
-    "pg": "^8.20.0"
+    "pg": "^8.20.0",
+    "redis": "^5.12.1"
   },
   "keywords": [],
   "author": "",
