@@ -1,0 +1,252 @@
+version: '3.8'
+
+services:
+  # PostgreSQL - Database for AuthService
+  postgres:
+    image: postgres:16
+    container_name: authserviceSIGNTRACK_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: SignTrack
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: admin
+    ports:
+     - "5435:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - signtrack_network
+
+  # MongoDB - Database for video calls and orchestrator
+  mongo:
+    image: mongo:7
+    container_name: signtrack_mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - signtrack_network
+
+  # Redis - Cache and Pub/Sub for microservices
+  redis:
+    image: redis:7-alpine
+    container_name: signtrack_redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - signtrack_network
+
+  # IA Services (Existing)
+  ia-feature-extraction:
+    build:
+      context: .
+      dockerfile: docker/ia-runtime.Dockerfile
+    container_name: signtrack_ia_feature_extraction
+    restart: unless-stopped
+    env_file:
+      - ./microservices/env/ia-feature-extraction.env.dev
+    command: ["node", "microservices/ia-feature-extraction/server.js"]
+    ports:
+      - "3102:3102"
+    networks:
+      - signtrack_network
+    depends_on:
+      - postgres
+      - redis
+
+  ia-inference:
+    build:
+      context: .
+      dockerfile: docker/ia-runtime.Dockerfile
+    container_name: signtrack_ia_inference
+    restart: unless-stopped
+    env_file:
+      - ./microservices/env/ia-inference.env.dev
+    command: ["node", "microservices/ia-inference/server.js"]
+    ports:
+      - "3101:3101"
+    networks:
+      - signtrack_network
+    depends_on:
+      - ia-feature-extraction
+      - redis
+
+  ia-translation:
+    build:
+      context: .
+      dockerfile: docker/ia-runtime.Dockerfile
+    container_name: signtrack_ia_translation
+    restart: unless-stopped
+    env_file:
+      - ./microservices/env/ia-translation.env.dev
+    command: ["node", "microservices/ia-translation/server.js"]
+    ports:
+      - "3103:3103"
+    networks:
+      - signtrack_network
+    depends_on:
+      - redis
+
+  ia-dataset:
+    build:
+      context: .
+      dockerfile: docker/ia-runtime.Dockerfile
+    container_name: signtrack_ia_dataset
+    restart: unless-stopped
+    env_file:
+      - ./microservices/env/ia-dataset.env.dev
+    command: ["node", "microservices/ia-dataset/server.js"]
+    ports:
+      - "3104:3104"
+    networks:
+      - signtrack_network
+    depends_on:
+      - postgres
+      - redis
+
+  ia-training:
+    build:
+      context: .
+      dockerfile: docker/ia-runtime.Dockerfile
+    container_name: signtrack_ia_training
+    restart: unless-stopped
+    env_file:
+      - ./microservices/env/ia-training.env.dev
+    command: ["node", "microservices/ia-training/server.js"]
+    ports:
+      - "3105:3105"
+    networks:
+      - signtrack_network
+    depends_on:
+      - redis
+
+  ia-gateway:
+    build:
+      context: .
+      dockerfile: docker/ia-runtime.Dockerfile
+    container_name: signtrack_ia_gateway
+    restart: unless-stopped
+    env_file:
+      - ./microservices/env/ia-gateway.env.dev
+    command: ["node", "src/IA/api/server.js"]
+    ports:
+      - "3000:3000"
+    networks:
+      - signtrack_network
+    depends_on:
+      - ia-inference
+      - ia-translation
+      - redis
+
+  # New Video Call Microservices
+  video-call-service:
+    build:
+      context: ./microservices/video-call-service
+      dockerfile: Dockerfile
+    container_name: video_call_service
+    restart: unless-stopped
+    environment:
+      PORT: 3200
+      NODE_ENV: development
+      MONGO_URI: mongodb://mongo:27017/signtrack_videocalls
+      AUTH_SERVICE_URL: http://host.docker.internal:5104
+      JWT_SECRET: ${JWT_SECRET:-your-secret-key}
+      CORS_ORIGIN: "*"
+    ports:
+      - "3200:3200"
+    networks:
+      - signtrack_network
+    depends_on:
+      - mongo
+
+  frame-processor-service:
+    build:
+      context: ./microservices/frame-processor-service
+      dockerfile: Dockerfile
+    container_name: frame_processor_service
+    restart: unless-stopped
+    environment:
+      PORT: 3201
+      NODE_ENV: development
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      IA_FEATURE_EXTRACTION_URL: http://ia-feature-extraction:3102
+      IA_INFERENCE_URL: http://ia-inference:3101
+      FEATURE_EXTRACTION_TIMEOUT: 15000
+      INFERENCE_TIMEOUT: 10000
+      CACHE_TTL: 3600
+    ports:
+      - "3201:3201"
+    networks:
+      - signtrack_network
+    depends_on:
+      - redis
+      - ia-feature-extraction
+      - ia-inference
+
+  websocket-service:
+    build:
+      context: ./microservices/websocket-service
+      dockerfile: Dockerfile
+    container_name: websocket_service
+    restart: unless-stopped
+    environment:
+      PORT: 3202
+      NODE_ENV: development
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      AUTH_SERVICE_URL: http://host.docker.internal:5104
+      JWT_SECRET: ${JWT_SECRET:-your-secret-key}
+      CORS_ORIGIN: "*"
+    ports:
+      - "3202:3202"
+    networks:
+      - signtrack_network
+    depends_on:
+      - redis
+
+  sign-translation-orchestrator:
+    build:
+      context: ./microservices/sign-translation-orchestrator
+      dockerfile: Dockerfile
+    container_name: sign_translation_orchestrator
+    restart: unless-stopped
+    environment:
+      PORT: 3203
+      NODE_ENV: development
+      MONGO_URI: mongodb://mongo:27017/signtrack_orchestrator
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      FRAME_PROCESSOR_URL: http://frame-processor-service:3201
+      IA_FEATURE_EXTRACTION_URL: http://ia-feature-extraction:3102
+      IA_INFERENCE_URL: http://ia-inference:3101
+      IA_TRANSLATION_URL: http://ia-translation:3103
+      WEBSOCKET_SERVICE_URL: http://websocket-service:3202
+      FEATURE_EXTRACTION_TIMEOUT: 15000
+      INFERENCE_TIMEOUT: 10000
+      TRANSLATION_TIMEOUT: 5000
+      CACHE_TTL: 3600
+    ports:
+      - "3203:3203"
+    networks:
+      - signtrack_network
+    depends_on:
+      - mongo
+      - redis
+      - ia-feature-extraction
+      - ia-inference
+      - ia-translation
+
+networks:
+  signtrack_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  mongo_data:
+  redis_data:
