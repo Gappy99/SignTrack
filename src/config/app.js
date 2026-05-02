@@ -10,8 +10,6 @@ import { requestLimit } from '../middlewares/request-limit.js';
 import { errorHandler } from '../middlewares/handle-errors.js';
 import { dbConnection } from './db.js';
 import fieldRoutes from '../fields/field.routes.js';
-import sectionRoutes from '../museum/section.routes.js';
-import guideRoutes from '../museum/guide.routes.js';
 
 const BASE_PATH = '/kinalSportsAdmin/v1';
 
@@ -27,8 +25,6 @@ const middlewares = (app) => {
 const routes = (app) => {
 
     app.use(`${BASE_PATH}/fields`, fieldRoutes);
-    app.use(`${BASE_PATH}/sections`, sectionRoutes);
-    app.use(`${BASE_PATH}/guide`, guideRoutes);
 
     app.get(`${BASE_PATH}/Health`, (request, response) => {
         response.status(200).json({

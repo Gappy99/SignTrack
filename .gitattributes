@@ -1,0 +1,3 @@
+# Prevent Git from normalizing line endings inside node_modules
+# This avoids "LF will be replaced by CRLF the next time Git touches it" warnings
+node_modules/** -text
