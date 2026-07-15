@@ -1,42 +1,32 @@
 {
   "name": "SignTrack",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "SignTrack backend monorepo — microservicios C# + reconocimiento de señas (MediaPipe)",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "ia:process-dataset": "node src/IA/db/processDataset.js",
-    "ia:export-words": "node src/IA/db/exportWordDatasetFromNeon.js",
-    "ia:word-dataset": "python src/IA/words/build_word_dataset.py",
-    "ia:word-train": "python src/IA/words/train_word_model.py",
-    "ia:word-predict": "python src/IA/words/predict_word.py",
-    "ia:eval-letters": "python src/IA/model/evaluate_letters.py",
-    "ia:eval-words": "python src/IA/words/evaluate_words.py",
-    "ia:backfill-r2": "node src/IA/db/backfillFromR2.js"
+    "recognition:api": "node services/recognition/src/api/server.js",
+    "recognition:init-schema": "node services/recognition/src/db/initSchema.js",
+    "recognition:backfill-r2": "node services/recognition/src/db/backfillFromR2.js",
+    "recognition:export-letters": "node services/recognition/src/db/exportLetterDatasetFromNeon.js",
+    "recognition:export-words": "node services/recognition/src/db/exportWordDatasetFromNeon.js",
+    "recognition:process-dataset": "node services/recognition/src/db/processDataset.js",
+    "recognition:letter-dataset": "python services/recognition/src/recognition/build_letter_dataset.py",
+    "recognition:letter-train": "python services/recognition/src/model/train_model.py",
+    "recognition:word-dataset": "python services/recognition/src/words/build_word_dataset.py",
+    "recognition:word-train": "python services/recognition/src/words/train_word_model.py",
+    "recognition:word-predict": "python services/recognition/src/words/predict_word.py",
+    "recognition:eval-letters": "python services/recognition/src/model/evaluate_letters.py",
+    "recognition:eval-words": "python services/recognition/src/words/evaluate_words.py",
+    "recognition:camera": "python services/recognition/src/recognition/camera.py"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.883.0",
-    "cors": "^2.8.6",
     "dotenv": "^16.0.0",
     "express": "^5.2.1",
-    "express-rate-limit": "^8.3.0",
     "fs-extra": "^11.3.4",
-    "helmet": "^8.1.0",
-    "jsonwebtoken": "^9.0.0",
-    "mime-types": "^3.0.2",
-    "mongoose": "^9.2.4",
-    "morgan": "^1.10.1",
-    "multer": "^2.1.1",
     "pg": "^8.20.0"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["signtrack", "sign-language", "microservices"],
   "license": "ISC",
-  "packageManager": "pnpm@10.29.3",
-  "devDependencies": {
-    "nodemon": "^3.1.14"
-  }
+  "packageManager": "pnpm@10.29.3"
 }

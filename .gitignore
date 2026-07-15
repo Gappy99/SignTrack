@@ -3,12 +3,18 @@
 .env.local
 .env.*.local
 .env.*
+!.env.example
 *.pem
 *.key
 *.p12
 *.pfx
 secrets/
 *.secret
+
+# User Secrets / keys locales
+**/keys/
+appsettings.Local.json
+appsettings.*.Local.json
 
 # GEMINI (credenciales locales)
 gemini*.json
@@ -21,7 +27,7 @@ npm-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# .NET — build artifacts
+# .NET — build artifacts (nunca commitear)
 **/bin/
 **/obj/
 obj/
@@ -30,6 +36,12 @@ obj/
 .vs/
 *.nupkg
 *.snupkg
+*.dll
+*.exe
+*.pdb
+*.deps.json
+*.runtimeconfig.json
+*.staticwebassets.runtime.json
 
 # PYTHON
 __pycache__/
@@ -43,17 +55,20 @@ dist/
 build/
 
 # MODELOS ENTRENADOS (archivos grandes)
-src/IA/model/sign_model.pkl
-src/IA/words/word_model.pkl
+services/recognition/src/model/sign_model.pkl
+services/recognition/src/model/hand_landmarker.task
+services/recognition/src/words/word_model.pkl
 
 # DATASETS GENERADOS
-src/IA/dataset/sign_dataset.csv
-src/IA/words/word_dataset.csv
+services/recognition/src/dataset/sign_dataset.csv
+services/recognition/src/dataset/letter_training.csv
+services/recognition/src/dataset/word_dataset.csv
+services/recognition/src/words/word_dataset.csv
 
 # LOGS
 *.log
 logs/
-src/AuthServiceSignTrack.Api/logs/
+services/identity/**/logs/
 
 # UPLOADS / ARCHIVOS LOCALES
 uploads/

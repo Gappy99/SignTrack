@@ -1,0 +1,6 @@
+@SignTrack.Messaging.Api_HostAddress = http://localhost:5120
+
+GET {{SignTrack.Messaging.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

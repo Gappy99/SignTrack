@@ -1,0 +1,81 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{2DC59C59-FA7E-4BE5-96A7-E5F3640FCD8C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "identity", "identity", "{1B809C25-9008-4B98-A3F9-83F3AD55E531}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignTrack.Identity.Api", "services\identity\SignTrack.Identity.Api\SignTrack.Identity.Api.csproj", "{6181FEF1-26B7-4533-A08A-3252B6135447}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignTrack.Identity.Application", "services\identity\SignTrack.Identity.Application\SignTrack.Identity.Application.csproj", "{0112136F-18EA-4E18-B2D6-222649D62A12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignTrack.Identity.Domain", "services\identity\SignTrack.Identity.Domain\SignTrack.Identity.Domain.csproj", "{6FAB6B4E-38C0-4B93-93D9-6D9E6EE1AFB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignTrack.Identity.Persistence", "services\identity\SignTrack.Identity.Persistence\SignTrack.Identity.Persistence.csproj", "{687616AA-6073-4CB1-9F28-AE4577E97970}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "calls", "calls", "{7975D43A-0335-4554-BFF1-3BEB78577308}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignTrack.Calls.Api", "services\calls\SignTrack.Calls.Api\SignTrack.Calls.Api.csproj", "{B872F888-DAA3-45A5-B068-6171F5279F0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "messaging", "messaging", "{172B4663-5ED5-4A0E-8751-CDCD1518863E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignTrack.Messaging.Api", "services\messaging\SignTrack.Messaging.Api\SignTrack.Messaging.Api.csproj", "{89B17EE3-7B1A-4D0C-ACF7-01DB2BD50C78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gateway", "gateway", "{E28388F1-0825-46F6-8CF1-9CDB647D34E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignTrack.Gateway.Api", "services\gateway\SignTrack.Gateway.Api\SignTrack.Gateway.Api.csproj", "{E008565B-9EA9-4C09-9299-7E391CF70143}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6181FEF1-26B7-4533-A08A-3252B6135447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6181FEF1-26B7-4533-A08A-3252B6135447}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6181FEF1-26B7-4533-A08A-3252B6135447}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6181FEF1-26B7-4533-A08A-3252B6135447}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0112136F-18EA-4E18-B2D6-222649D62A12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0112136F-18EA-4E18-B2D6-222649D62A12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0112136F-18EA-4E18-B2D6-222649D62A12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0112136F-18EA-4E18-B2D6-222649D62A12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FAB6B4E-38C0-4B93-93D9-6D9E6EE1AFB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FAB6B4E-38C0-4B93-93D9-6D9E6EE1AFB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FAB6B4E-38C0-4B93-93D9-6D9E6EE1AFB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FAB6B4E-38C0-4B93-93D9-6D9E6EE1AFB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{687616AA-6073-4CB1-9F28-AE4577E97970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{687616AA-6073-4CB1-9F28-AE4577E97970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{687616AA-6073-4CB1-9F28-AE4577E97970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{687616AA-6073-4CB1-9F28-AE4577E97970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B872F888-DAA3-45A5-B068-6171F5279F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B872F888-DAA3-45A5-B068-6171F5279F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B872F888-DAA3-45A5-B068-6171F5279F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B872F888-DAA3-45A5-B068-6171F5279F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89B17EE3-7B1A-4D0C-ACF7-01DB2BD50C78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89B17EE3-7B1A-4D0C-ACF7-01DB2BD50C78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89B17EE3-7B1A-4D0C-ACF7-01DB2BD50C78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89B17EE3-7B1A-4D0C-ACF7-01DB2BD50C78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E008565B-9EA9-4C09-9299-7E391CF70143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E008565B-9EA9-4C09-9299-7E391CF70143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E008565B-9EA9-4C09-9299-7E391CF70143}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E008565B-9EA9-4C09-9299-7E391CF70143}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1B809C25-9008-4B98-A3F9-83F3AD55E531} = {2DC59C59-FA7E-4BE5-96A7-E5F3640FCD8C}
+		{6181FEF1-26B7-4533-A08A-3252B6135447} = {1B809C25-9008-4B98-A3F9-83F3AD55E531}
+		{0112136F-18EA-4E18-B2D6-222649D62A12} = {1B809C25-9008-4B98-A3F9-83F3AD55E531}
+		{6FAB6B4E-38C0-4B93-93D9-6D9E6EE1AFB3} = {1B809C25-9008-4B98-A3F9-83F3AD55E531}
+		{687616AA-6073-4CB1-9F28-AE4577E97970} = {1B809C25-9008-4B98-A3F9-83F3AD55E531}
+		{7975D43A-0335-4554-BFF1-3BEB78577308} = {2DC59C59-FA7E-4BE5-96A7-E5F3640FCD8C}
+		{B872F888-DAA3-45A5-B068-6171F5279F0B} = {7975D43A-0335-4554-BFF1-3BEB78577308}
+		{172B4663-5ED5-4A0E-8751-CDCD1518863E} = {2DC59C59-FA7E-4BE5-96A7-E5F3640FCD8C}
+		{89B17EE3-7B1A-4D0C-ACF7-01DB2BD50C78} = {172B4663-5ED5-4A0E-8751-CDCD1518863E}
+		{E28388F1-0825-46F6-8CF1-9CDB647D34E5} = {2DC59C59-FA7E-4BE5-96A7-E5F3640FCD8C}
+		{E008565B-9EA9-4C09-9299-7E391CF70143} = {E28388F1-0825-46F6-8CF1-9CDB647D34E5}
+	EndGlobalSection
+EndGlobal

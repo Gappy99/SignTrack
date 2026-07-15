@@ -1,0 +1,35 @@
+---
+description: Sandbox SignTrack — solo rama ft/sajche, sin tocar IA/Recognition
+alwaysApply: true
+---
+
+# SignTrack Sandbox (chat dedicado)
+
+## Rama obligatoria
+
+- **Siempre** trabajar en `ft/sajche`. Nunca commitear en `main` u otras ramas desde este contexto.
+- Todo el backend Teams vive en este monorepo; el frontend es repo aparte.
+
+## Zona prohibida (no modificar)
+
+- `services/recognition/**` — core IA, MediaPipe, modelos, scripts Python, API de detección.
+- No renombrar, refactorizar ni “mejorar” el pipeline de señas salvo petición explícita del usuario.
+
+## Alcance permitido (estructura app)
+
+- `services/identity/`, `services/gateway/`, `services/calls/`, `services/messaging/`
+- `docs/`, `shared/contracts/`, `SignTrack.sln`, `docker-compose.yml`
+- `.gitignore`, `.env.example` (sin secretos reales)
+
+## Commits
+
+- Autor **obligatorio**: `jsajche-2024380 <jsajche-2024380@kinal.edu.gt>`
+- Usar `-c user.name` y `-c user.email` en cada commit (no cambiar git config global).
+- **Nunca** añadir `Co-authored-by: Cursor` ni trailers de herramientas.
+- Verificar: `git log -1 --format="%an <%ae>"` debe mostrar jsajche.
+
+## Comando commit estándar
+
+```bash
+git -c user.name="jsajche-2024380" -c user.email="jsajche-2024380@kinal.edu.gt" commit -m "mensaje"
+```
