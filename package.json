@@ -4,6 +4,11 @@
   "description": "SignTrack backend monorepo — microservicios C# + reconocimiento de señas (MediaPipe)",
   "type": "module",
   "scripts": {
+    "docker:up": "docker compose up -d",
+    "start:identity": "node scripts/start-identity.mjs",
+    "start:frontend": "pnpm --dir ../SignTrack-frontend dev",
+    "start:backend": "pnpm docker:up && pnpm start:identity",
+    "start:all": "node scripts/start-all.mjs",
     "recognition:api": "node services/recognition/src/api/server.js",
     "recognition:init-schema": "node services/recognition/src/db/initSchema.js",
     "recognition:backfill-r2": "node services/recognition/src/db/backfillFromR2.js",
