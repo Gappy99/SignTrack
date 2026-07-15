@@ -70,7 +70,7 @@ Este documento organiza el trabajo en **dos grupos**:
 | A3-5 | `DELETE /api/v1/groups/{id}/members/{userId}` | Quitar miembro | UI admin grupo | Media |
 | A3-6 | Lista de contactos / usuarios disponibles | Reutilizar users | Panel “Contactos” | Media |
 
-**DoD A3:** Crear grupo, ver mis grupos, añadir/quitar miembros vía REST.
+**DoD A3:** Crear grupo, ver mis grupos, añadir/quitar miembros vía REST. ✅ *(SA-2, backend `1c34597`, frontend `6de1245`)*
 
 ---
 
@@ -83,7 +83,7 @@ Este documento organiza el trabajo en **dos grupos**:
 | A4-3 | `GET /api/v1/requests/inbox` — bandeja entrante | Filtrar por destinatario | Vista notificaciones/solicitudes | Alta |
 | A4-4 | `PATCH /api/v1/requests/{id}` — aceptar/rechazar | Actualizar estado + side effects | Botones Aceptar / Rechazar | Alta |
 
-**DoD A4:** Usuario A invita a B a un grupo; B ve solicitud y acepta/rechaza.
+**DoD A4:** Usuario A invita a B a un grupo; B ve solicitud y acepta/rechaza. ✅ *(SA-2)*
 
 ---
 
