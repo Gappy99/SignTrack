@@ -42,7 +42,7 @@ Este documento organiza el trabajo en **dos grupos**:
 | A1-4 | Buscar usuario por nombre/email | Query en Identity | Input búsqueda admin | Media |
 | A1-5 | Pantallas forgot / reset password | Endpoints ya existen | `/forgot-password`, `/reset-password` | Media |
 
-**DoD A1:** Admin gestiona usuarios; cualquier usuario edita su perfil.
+**DoD A1:** Admin gestiona usuarios; cualquier usuario edita su perfil. ✅ *(SA-1, commits backend `5529b1d`, frontend `d8ed29d`)*
 
 ---
 
@@ -55,7 +55,7 @@ Este documento organiza el trabajo en **dos grupos**:
 | A2-3 | Dashboard con accesos rápidos | — | Cards con links reales | Media |
 | A2-4 | Limpiar código legacy (restaurant, reservations) | — | Borrar services/stores no usados | Alta |
 
-**DoD A2:** Navegación clara tipo Teams; sin archivos muertos de otro proyecto.
+**DoD A2:** Navegación clara tipo Teams; sin archivos muertos de otro proyecto. ✅ *(SA-1, commit frontend `5e4e0ee`)*
 
 ---
 
