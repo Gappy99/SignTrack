@@ -52,7 +52,7 @@ const devEnv = {
 
 console.log('\nServicios (Ctrl+C detiene todo):')
 console.log('  Identity  → http://localhost:5104/swagger')
-console.log('  Frontend  → http://localhost:5173\n')
+console.log('  Frontend  → http://localhost:5180/signtrack/\n')
 
 const children = [
   runBackground(

@@ -5,7 +5,7 @@ Repositorios separados:
 | Repo | Rama | Puerto dev |
 |------|------|------------|
 | [SignTrack](https://github.com/Gappy99/SignTrack) | `ft/sajche` | Identity `:5104` |
-| [SignTrack-frontend](https://github.com/EddyCode1/SignTrack-frontend) | `ft/sajche` | Vite `:5173` |
+| [SignTrack-frontend](https://github.com/EddyCode1/SignTrack-frontend) | `ft/sajche` | Vite `:5180` (`/signtrack/*`) |
 
 ## 1. Levantar backend
 
@@ -19,7 +19,7 @@ git checkout ft/sajche
 pnpm start:all
 ```
 
-Levanta Docker, Identity (`:5104`) y Vite (`:5173`). Ctrl+C detiene Identity y frontend.
+Levanta Docker, Identity (`:5104`) y Vite (`:5180`). App en `http://localhost:5180/signtrack/`. Ctrl+C detiene Identity y frontend.
 
 ### Opción manual (solo backend)
 
@@ -45,6 +45,8 @@ pnpm dev
 ```
 
 El proxy de Vite redirige `/api/*` → `http://localhost:5104`.
+
+URL local: **`http://localhost:5180/signtrack/`** (prefijo `/signtrack` evita conflicto con otros frontends en `:5173`).
 
 ## 3. Endpoints usados por el frontend
 
@@ -72,7 +74,7 @@ El proxy de Vite redirige `/api/*` → `http://localhost:5104`.
 
 ## 5. CORS
 
-Identity permite `http://localhost:5173` en desarrollo.
+Identity permite `http://localhost:5180` en desarrollo.
 
 ## 6. Usuario admin seed
 
