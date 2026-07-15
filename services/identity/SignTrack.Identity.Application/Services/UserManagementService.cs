@@ -133,7 +133,18 @@ public class UserManagementService(IUserRepository users, IRoleRepository roles,
     {
         roleName = roleName?.Trim().ToUpperInvariant() ?? string.Empty;
         var usersInRole = await roles.GetUsersByRoleAsync(roleName);
-        return usersInRole.Select(u => new UserResponseDto
+        return usersInRole.Select(u => MapToUserResponseDto(u, roleName)).ToList();
+    }
+
+    public async Task<IReadOnlyList<UserResponseDto>> GetAllUsersAsync()
+    {
+        var allUsers = await users.GetAllAsync();
+        return allUsers.Select(u => MapToUserResponseDto(u)).ToList();
+    }
+
+    private UserResponseDto MapToUserResponseDto(User u, string? roleOverride = null)
+    {
+        return new UserResponseDto
         {
             Id = u.Id,
             Name = u.Name,
@@ -142,11 +153,11 @@ public class UserManagementService(IUserRepository users, IRoleRepository roles,
             Email = u.Email,
             ProfilePicture = cloudinary.GetFullImageUrl(u.UserProfile?.ProfilePicture ?? string.Empty),
             Phone = u.UserProfile?.Phone ?? string.Empty,
-            Role = roleName,
+            Role = roleOverride ?? u.UserRoles.FirstOrDefault()?.Role?.Name ?? string.Empty,
             Status = u.Status,
             IsEmailVerified = u.UserEmail?.EmailVerified ?? false,
             CreatedAt = u.CreatedAt,
             UpdatedAt = u.UpdatedAt
-        }).ToList();
+        };
     }
 }

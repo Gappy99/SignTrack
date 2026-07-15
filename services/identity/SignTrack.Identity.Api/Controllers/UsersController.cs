@@ -65,6 +65,20 @@ public class UsersController(IUserManagementService userManagementService) : Con
         return Ok(updated);
     }
 
+    [HttpGet]
+    [Authorize]
+    [EnableRateLimiting("ApiPolicy")]
+    public async Task<ActionResult<IReadOnlyList<UserResponseDto>>> GetAllUsers()
+    {
+        if (!await CurrentUserIsAdmin())
+        {
+            return StatusCode(403, new { success = false, message = "Forbidden" });
+        }
+
+        var users = await userManagementService.GetAllUsersAsync();
+        return Ok(users);
+    }
+
     [HttpGet("by-role/{roleName}")]
     [Authorize]
     [EnableRateLimiting("ApiPolicy")]

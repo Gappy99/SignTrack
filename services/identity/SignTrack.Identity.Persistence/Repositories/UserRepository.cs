@@ -102,6 +102,17 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
             .AnyAsync(u => EF.Functions.ILike(u.Username, username));
     }
 
+    public async Task<IReadOnlyList<User>> GetAllAsync()
+    {
+        return await context.Users
+            .Include(u => u.UserProfile)
+            .Include(u => u.UserEmail)
+            .Include(u => u.UserRoles)
+                .ThenInclude(ur => ur.Role)
+            .OrderBy(u => u.Username)
+            .ToListAsync();
+    }
+
     public async Task UpdateUserRoleAsync(string userId, string roleId)
     {
         var existingRoles = await context.UserRoles
