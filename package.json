@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "docker:up": "docker compose up -d",
+    "install:all": "pnpm install && pnpm setup:frontend && dotnet restore SignTrack.sln",
     "setup:frontend": "pnpm --dir ../SignTrack-frontend install",
     "start:identity": "node scripts/start-identity.mjs",
     "start:frontend": "pnpm --dir ../SignTrack-frontend dev",
