@@ -32,6 +32,21 @@ public static class UuidGenerator
         return $"rol_{GenerateShortUUID()}";
     }
 
+    public static string GenerateGroupId()
+    {
+        return $"grp_{GenerateShortUUID()}";
+    }
+
+    public static string GenerateMemberId()
+    {
+        return $"mbr_{GenerateShortUUID()}";
+    }
+
+    public static string GenerateRequestId()
+    {
+        return $"req_{GenerateShortUUID()}";
+    }
+
     public static bool IsValidUserId(string? id)
     {
         if(string.IsNullOrEmpty(id))
