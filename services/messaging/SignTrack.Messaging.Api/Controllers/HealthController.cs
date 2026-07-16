@@ -3,19 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 namespace SignTrack.Messaging.Api.Controllers;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("api/v1")]
 public class HealthController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult GetHealth()
-    {
-        var response = new
+    [HttpGet("health")]
+    public IActionResult Health() =>
+        Ok(new
         {
             status = "Healthy",
-            timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"),
-            service = "SignTrack.Messaging"
-        };
-
-        return Ok(response);
-    }
+            service = "SignTrack.Messaging.Api",
+            timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+        });
 }

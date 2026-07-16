@@ -10,6 +10,8 @@ public class UserRequestResponseDto
     public string Status { get; set; } = string.Empty;
     public string? GroupId { get; set; }
     public string? GroupName { get; set; }
+    public string? AppointmentId { get; set; }
+    public string? AppointmentTitle { get; set; }
     public string? Message { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? RespondedAt { get; set; }

@@ -27,6 +27,9 @@ public class UserRequest
     [MaxLength(16)]
     public string? GroupId { get; set; }
 
+    [MaxLength(16)]
+    public string? AppointmentId { get; set; }
+
     [MaxLength(500)]
     public string? Message { get; set; }
 
@@ -38,4 +41,5 @@ public class UserRequest
     public User FromUser { get; set; } = null!;
     public User ToUser { get; set; } = null!;
     public TeamGroup? Group { get; set; }
+    public Appointment? Appointment { get; set; }
 }

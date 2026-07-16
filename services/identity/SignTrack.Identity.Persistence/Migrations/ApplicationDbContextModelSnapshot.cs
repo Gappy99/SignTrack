@@ -22,6 +22,96 @@ namespace SignTrack.Identity.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("SignTrack.Identity.Domain.Entities.Appointment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTime>("EndUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("end_utc");
+
+                    b.Property<string>("HostUserId")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("host_user_id");
+
+                    b.Property<string>("RoomId")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("room_id");
+
+                    b.Property<DateTime>("StartUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("start_utc");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)")
+                        .HasColumnName("title");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("pk_appointments");
+
+                    b.ToTable("appointments", (string)null);
+                });
+
+            modelBuilder.Entity("SignTrack.Identity.Domain.Entities.AppointmentParticipant", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("id");
+
+                    b.Property<string>("AppointmentId")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("appointment_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("status");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_appointment_participants");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_appointment_participants_user_id");
+
+                    b.HasIndex("AppointmentId", "UserId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_appointment_participants_appointment_id_user_id");
+
+                    b.ToTable("appointment_participants", (string)null);
+                });
+
             modelBuilder.Entity("SignTrack.Identity.Domain.Entities.Role", b =>
                 {
                     b.Property<string>("Id")
@@ -48,6 +138,65 @@ namespace SignTrack.Identity.Persistence.Migrations
                         .HasName("pk_roles");
 
                     b.ToTable("roles", (string)null);
+                });
+
+            modelBuilder.Entity("SignTrack.Identity.Domain.Entities.TaskItem", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("id");
+
+                    b.Property<string>("AssigneeId")
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("assignee_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("CreatedByUserId")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("created_by_user_id");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("description");
+
+                    b.Property<DateTime?>("DueDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("due_date");
+
+                    b.Property<string>("GroupId")
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("group_id");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("status");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)")
+                        .HasColumnName("title");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("pk_task_items");
+
+                    b.ToTable("task_items", (string)null);
                 });
 
             modelBuilder.Entity("SignTrack.Identity.Domain.Entities.TeamGroup", b =>
@@ -314,6 +463,11 @@ namespace SignTrack.Identity.Persistence.Migrations
                         .HasColumnType("character varying(16)")
                         .HasColumnName("id");
 
+                    b.Property<string>("AppointmentId")
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("appointment_id");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
@@ -358,6 +512,9 @@ namespace SignTrack.Identity.Persistence.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_user_requests");
+
+                    b.HasIndex("AppointmentId")
+                        .HasDatabaseName("ix_user_requests_appointment_id");
 
                     b.HasIndex("FromUserId")
                         .HasDatabaseName("ix_user_requests_from_user_id");
@@ -409,6 +566,27 @@ namespace SignTrack.Identity.Persistence.Migrations
                         .HasDatabaseName("ix_user_roles_user_id");
 
                     b.ToTable("user_roles", (string)null);
+                });
+
+            modelBuilder.Entity("SignTrack.Identity.Domain.Entities.AppointmentParticipant", b =>
+                {
+                    b.HasOne("SignTrack.Identity.Domain.Entities.Appointment", "Appointment")
+                        .WithMany("Participants")
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_appointment_participants_appointments_appointment_id");
+
+                    b.HasOne("SignTrack.Identity.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_appointment_participants_users_user_id");
+
+                    b.Navigation("Appointment");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SignTrack.Identity.Domain.Entities.TeamGroup", b =>
@@ -482,6 +660,12 @@ namespace SignTrack.Identity.Persistence.Migrations
 
             modelBuilder.Entity("SignTrack.Identity.Domain.Entities.UserRequest", b =>
                 {
+                    b.HasOne("SignTrack.Identity.Domain.Entities.Appointment", "Appointment")
+                        .WithMany()
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasConstraintName("fk_user_requests_appointments_appointment_id");
+
                     b.HasOne("SignTrack.Identity.Domain.Entities.User", "FromUser")
                         .WithMany()
                         .HasForeignKey("FromUserId")
@@ -501,6 +685,8 @@ namespace SignTrack.Identity.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("fk_user_requests_users_to_user_id");
+
+                    b.Navigation("Appointment");
 
                     b.Navigation("FromUser");
 
@@ -528,6 +714,11 @@ namespace SignTrack.Identity.Persistence.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SignTrack.Identity.Domain.Entities.Appointment", b =>
+                {
+                    b.Navigation("Participants");
                 });
 
             modelBuilder.Entity("SignTrack.Identity.Domain.Entities.Role", b =>

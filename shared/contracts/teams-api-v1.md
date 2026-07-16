@@ -1,6 +1,6 @@
 # SignTrack Teams API v1 — Contrato REST
 
-> Versión: `v1` · Base URL (Gateway): `http://localhost:5000`  
+> Versión: `v1` · Base URL (Gateway): `http://localhost:5050`  
 > Autenticación: `Authorization: Bearer <JWT>` (emitido por Identity). Ver `jwt-contract.md`.
 
 ---
@@ -114,7 +114,44 @@ Obtiene el estado de una sala.
 
 ---
 
-## Messaging — Chat en sala
+## Conversations — Chat REST (Grupo A / SA-3)
+
+**Servicio:** `SignTrack.Messaging` · Puerto directo: `5300`  
+**Frontend proxy:** `/messaging-api/*` → `5300/api/v1/*`
+
+### `POST /api/v1/conversations`
+
+Crea o reutiliza conversación DM o de grupo.
+
+**Request DM**
+
+```json
+{ "targetUserId": "usr_abc123" }
+```
+
+**Request grupo**
+
+```json
+{ "groupId": "grp_xyz789", "title": "Chat del equipo" }
+```
+
+### `GET /api/v1/conversations`
+
+Lista conversaciones del usuario con preview del último mensaje.
+
+### `GET /api/v1/conversations/{id}/messages?cursor=&limit=50`
+
+Historial paginado (REST, sin tiempo real).
+
+### `POST /api/v1/conversations/{id}/messages`
+
+```json
+{ "content": "Hola", "type": "text" }
+```
+
+---
+
+## Messaging — Chat en sala (legacy / salas Calls)
 
 **Servicio:** `SignTrack.Messaging` · Puerto directo: `5300`  
 **Gateway:** `/api/v1/rooms/{id}/messages`

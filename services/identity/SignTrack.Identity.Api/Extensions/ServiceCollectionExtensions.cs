@@ -20,10 +20,14 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IGroupRepository, GroupRepository>();
         services.AddScoped<IUserRequestRepository, UserRequestRepository>();
+        services.AddScoped<ITaskRepository, TaskRepository>();
+        services.AddScoped<IAppointmentRepository, AppointmentRepository>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUserManagementService, UserManagementService>();
         services.AddScoped<IGroupService, GroupService>();
         services.AddScoped<IUserRequestService, UserRequestService>();
+        services.AddScoped<ITaskService, TaskService>();
+        services.AddScoped<IAppointmentService, AppointmentService>();
         services.AddScoped<IPasswordHashService, PasswordHashService>();
         services.AddScoped<IJwtTokenService, JwtTokenService>();
         services.AddScoped<ICloudinaryService, CloudinaryService>();

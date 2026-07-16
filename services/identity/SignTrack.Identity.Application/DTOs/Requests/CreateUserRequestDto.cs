@@ -15,6 +15,9 @@ public class CreateUserRequestDto
     [MaxLength(16)]
     public string? GroupId { get; set; }
 
+    [MaxLength(16)]
+    public string? AppointmentId { get; set; }
+
     [MaxLength(500)]
     public string? Message { get; set; }
 }

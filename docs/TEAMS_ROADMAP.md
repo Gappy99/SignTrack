@@ -16,14 +16,18 @@ Este documento organiza el trabajo en **dos grupos**:
 
 | Área | Hecho | Falta |
 |------|-------|-------|
-| Auth (login, registro, JWT) | ✅ | forgot/reset password UI |
-| Perfil | Lectura ✅ | Edición |
-| Usuarios admin | Lista parcial ✅ | Todos los roles, cambiar rol |
-| Dashboard | Placeholder ✅ | Navegación y widgets |
-| Gateway | Scaffold | YARP proxy |
-| Calls / Messaging | Scaffold | Todo |
-| Chat / grupos / calendario | — | Todo Grupo A |
-| Tiempo real / video | — | Todo Grupo B |
+| Auth (login, registro, JWT, forgot/reset) | ✅ | — |
+| Perfil | Lectura + edición ✅ | — |
+| Usuarios admin | Lista, roles, búsqueda ✅ | — |
+| Dashboard + layout Teams | ✅ widgets con datos en vivo | — |
+| Grupos + solicitudes + contactos | ✅ | — |
+| Chat REST (A5) | ✅ | Tiempo real (Grupo B) |
+| Llamadas mock (A6) | ✅ | WebRTC real (Grupo B) |
+| Tareas (A7) | ✅ CRUD + por grupo + asignación | — |
+| Calendario (A8) | ✅ vista mes/semana + invitaciones | — |
+| Gateway YARP (A9) | ✅ `:5050` | — |
+| Frontend vía Gateway (A9-3) | ✅ proxy único `/api` → `:5050` | — |
+| Tiempo real / video / IA | — | Todo Grupo B |
 
 ---
 
@@ -100,7 +104,7 @@ Este documento organiza el trabajo en **dos grupos**:
 
 > **Nota Grupo A:** el otro usuario **no ve el mensaje al instante** hasta refrescar o polling. Eso es Grupo B.
 
-**DoD A5:** Chat 1:1 y de grupo con historial guardado; enviar y recargar página muestra mensajes.
+**DoD A5:** Chat 1:1 y de grupo con historial guardado; enviar y recargar página muestra mensajes. ✅
 
 ---
 
@@ -115,7 +119,7 @@ Este documento organiza el trabajo en **dos grupos**:
 | A6-5 | UI sala de llamada (mock) | — | Grid placeholders cámara/mic (sin WebRTC) | Media |
 | A6-6 | Enlace compartible ` /signtrack/calls/{roomId}` | — | Copiar enlace | Media |
 
-**DoD A6:** Crear reunión, ver lista, entrar a pantalla de sala; **sin video/audio real**.
+**DoD A6:** Crear reunión, ver lista, entrar a pantalla de sala; **sin video/audio real**. ✅
 
 ---
 
@@ -128,7 +132,7 @@ Este documento organiza el trabajo en **dos grupos**:
 | A7-3 | Tareas por grupo | Filtrar por groupId | Tab en detalle de grupo | Baja |
 | A7-4 | Asignar tarea a usuario del grupo | Validar membresía | Dropdown miembros | Baja |
 
-**DoD A7:** CRUD tareas básico en UI.
+**DoD A7:** CRUD tareas básico en UI. ✅ *(incl. tab por grupo y asignación a miembros)*
 
 ---
 
@@ -142,7 +146,7 @@ Este documento organiza el trabajo en **dos grupos**:
 | A8-4 | Agendar cita con usuarios invitados | Crear + UserRequest tipo `meeting` | Modal agendar | Media |
 | A8-5 | Vincular cita → CallRoom al iniciar | Crear room al click “Iniciar” | Botón en evento | Baja |
 
-**DoD A8:** Ver calendario, crear cita, invitar participantes (REST).
+**DoD A8:** Ver calendario, crear cita, invitar participantes (REST). ✅ *(vista mes/semana + solicitudes `meeting`)*
 
 ---
 
@@ -150,13 +154,13 @@ Este documento organiza el trabajo en **dos grupos**:
 
 | ID | Tarea | Backend | Frontend | Prioridad |
 |----|-------|---------|----------|-----------|
-| A9-1 | YARP proxy Identity | Gateway `:5000` | — | Media |
+| A9-1 | YARP proxy Identity | Gateway `:5050` | — | Media |
 | A9-2 | Proxy Groups, Messages, Tasks, Appointments | Según servicio | — | Media |
-| A9-3 | Frontend apunta a `:5000` | — | `.env` + vite proxy | Media |
+| A9-3 | Frontend apunta a `:5050` | — | `.env` + vite proxy | Media |
 
-**DoD A9:** Un solo puerto API en local.
+**DoD A9:** Un solo puerto API en local. ✅ *(Gateway `:5050` + frontend proxy único)*
 
----
+**DoD A3-6 / A2-3:** Panel contactos + widgets dashboard con métricas en vivo. ✅
 
 ### Orden sugerido Grupo A
 

@@ -142,6 +142,12 @@ public class UserManagementService(IUserRepository users, IRoleRepository roles,
         return allUsers.Select(u => MapToUserResponseDto(u)).ToList();
     }
 
+    public async Task<IReadOnlyList<UserResponseDto>> GetContactsAsync(string currentUserId, string? query)
+    {
+        var directory = await users.SearchDirectoryAsync(currentUserId, query);
+        return directory.Select(u => MapToUserResponseDto(u)).ToList();
+    }
+
     private UserResponseDto MapToUserResponseDto(User u, string? roleOverride = null)
     {
         return new UserResponseDto

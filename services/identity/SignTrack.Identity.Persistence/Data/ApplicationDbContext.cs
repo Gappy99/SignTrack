@@ -16,6 +16,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<TeamGroup> TeamGroups { get; set; }
     public DbSet<TeamGroupMember> TeamGroupMembers { get; set; }
     public DbSet<UserRequest> UserRequests { get; set; }
+    public DbSet<TaskItem> TaskItems { get; set; }
+    public DbSet<Appointment> Appointments { get; set; }
+    public DbSet<AppointmentParticipant> AppointmentParticipants { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -233,6 +236,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                 .IsRequired()
                 .HasMaxLength(10);
             entity.Property(e => e.GroupId).HasMaxLength(16);
+            entity.Property(e => e.AppointmentId).HasMaxLength(16);
             entity.Property(e => e.Message).HasMaxLength(500);
             entity.Property(e => e.CreatedAt).IsRequired();
             entity.HasOne(e => e.FromUser)
@@ -247,6 +251,56 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                 .WithMany()
                 .HasForeignKey(e => e.GroupId)
                 .OnDelete(DeleteBehavior.SetNull);
+            entity.HasOne(e => e.Appointment)
+                .WithMany()
+                .HasForeignKey(e => e.AppointmentId)
+                .OnDelete(DeleteBehavior.SetNull);
+        });
+
+        modelBuilder.Entity<TaskItem>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id).HasMaxLength(16).ValueGeneratedOnAdd();
+            entity.Property(e => e.Title).IsRequired().HasMaxLength(120);
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.CreatedByUserId).IsRequired().HasMaxLength(16);
+            entity.Property(e => e.AssigneeId).HasMaxLength(16);
+            entity.Property(e => e.GroupId).HasMaxLength(16);
+            entity.Property(e => e.Status).IsRequired().HasMaxLength(20);
+            entity.Property(e => e.CreatedAt).IsRequired();
+            entity.Property(e => e.UpdatedAt).IsRequired();
+        });
+
+        modelBuilder.Entity<Appointment>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id).HasMaxLength(16).ValueGeneratedOnAdd();
+            entity.Property(e => e.Title).IsRequired().HasMaxLength(120);
+            entity.Property(e => e.HostUserId).IsRequired().HasMaxLength(16);
+            entity.Property(e => e.RoomId).HasMaxLength(20);
+            entity.Property(e => e.StartUtc).IsRequired();
+            entity.Property(e => e.EndUtc).IsRequired();
+            entity.Property(e => e.CreatedAt).IsRequired();
+            entity.Property(e => e.UpdatedAt).IsRequired();
+            entity.HasMany(e => e.Participants)
+                .WithOne(p => p.Appointment)
+                .HasForeignKey(p => p.AppointmentId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<AppointmentParticipant>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id).HasMaxLength(16).ValueGeneratedOnAdd();
+            entity.Property(e => e.AppointmentId).IsRequired().HasMaxLength(16);
+            entity.Property(e => e.UserId).IsRequired().HasMaxLength(16);
+            entity.Property(e => e.Status).IsRequired().HasMaxLength(20);
+            entity.Property(e => e.CreatedAt).IsRequired();
+            entity.HasIndex(e => new { e.AppointmentId, e.UserId }).IsUnique();
+            entity.HasOne(e => e.User)
+                .WithMany()
+                .HasForeignKey(e => e.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
     }
 
@@ -265,7 +319,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     private void UpdateTimestamps()
     {
         var entries = ChangeTracker.Entries()
-            .Where(e => (e.Entity is User || e.Entity is Role || e.Entity is UserRole || e.Entity is TeamGroup)
+            .Where(e => (e.Entity is User || e.Entity is Role || e.Entity is UserRole || e.Entity is TeamGroup || e.Entity is TaskItem || e.Entity is Appointment)
                         && (e.State == EntityState.Added || e.State == EntityState.Modified));
         
         foreach(var entry in entries)
@@ -301,6 +355,22 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                     group.CreatedAt = DateTime.UtcNow;
                 }
                 group.UpdatedAt = DateTime.UtcNow;
+            }
+            else if(entry.Entity is TaskItem task)
+            {
+                if(entry.State == EntityState.Added)
+                {
+                    task.CreatedAt = DateTime.UtcNow;
+                }
+                task.UpdatedAt = DateTime.UtcNow;
+            }
+            else if(entry.Entity is Appointment appointment)
+            {
+                if(entry.State == EntityState.Added)
+                {
+                    appointment.CreatedAt = DateTime.UtcNow;
+                }
+                appointment.UpdatedAt = DateTime.UtcNow;
             }
         }
     }

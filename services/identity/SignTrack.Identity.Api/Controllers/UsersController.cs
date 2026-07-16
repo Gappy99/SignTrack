@@ -65,6 +65,18 @@ public class UsersController(IUserManagementService userManagementService) : Con
         return Ok(updated);
     }
 
+    [HttpGet("contacts")]
+    [Authorize]
+    [EnableRateLimiting("ApiPolicy")]
+    public async Task<ActionResult<IReadOnlyList<UserResponseDto>>> GetContacts([FromQuery] string? q)
+    {
+        var userId = User.Claims.FirstOrDefault(c => c.Type == "sub" || c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+        if (string.IsNullOrEmpty(userId)) return Unauthorized(new { success = false, message = "Usuario no autenticado" });
+
+        var contacts = await userManagementService.GetContactsAsync(userId, q);
+        return Ok(contacts);
+    }
+
     [HttpGet]
     [Authorize]
     [EnableRateLimiting("ApiPolicy")]

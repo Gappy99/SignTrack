@@ -11,6 +11,7 @@ namespace SignTrack.Identity.Application.Services;
 public class UserRequestService(
     IUserRequestRepository requests,
     IGroupRepository groups,
+    IAppointmentRepository appointments,
     IUserRepository users) : IUserRequestService
 {
     public async Task<UserRequestResponseDto> SendRequestAsync(string fromUserId, CreateUserRequestDto dto)
@@ -29,6 +30,8 @@ public class UserRequestService(
         await users.GetByIdAsync(fromUserId);
         await users.GetByIdAsync(dto.ToUserId);
 
+        Appointment? meetingAppointment = null;
+
         if (type == UserRequestTypes.GroupInvite)
         {
             if (string.IsNullOrWhiteSpace(dto.GroupId))
@@ -45,6 +48,20 @@ public class UserRequestService(
             if (await requests.ExistsPendingGroupInviteAsync(fromUserId, dto.ToUserId, dto.GroupId))
                 throw new BusinessException(ErrorCodes.REQUEST_ALREADY_PENDING, "A pending invite already exists for this user and group");
         }
+        else if (type == UserRequestTypes.Meeting)
+        {
+            if (string.IsNullOrWhiteSpace(dto.AppointmentId))
+                throw new ArgumentException("AppointmentId is required for meeting requests");
+
+            meetingAppointment = await appointments.GetByIdAsync(dto.AppointmentId)
+                ?? throw new KeyNotFoundException("Cita no encontrada");
+
+            if (meetingAppointment.HostUserId != fromUserId)
+                throw new UnauthorizedAccessException("Solo el anfitrión puede invitar a la cita");
+
+            if (meetingAppointment.Participants.Any(p => p.UserId == dto.ToUserId && p.Status == "accepted"))
+                throw new BusinessException(ErrorCodes.INVALID_REQUEST, "El usuario ya aceptó la cita");
+        }
 
         var request = new UserRequest
         {
@@ -54,12 +71,13 @@ public class UserRequestService(
             Type = type,
             Status = UserRequestStatuses.Pending,
             GroupId = dto.GroupId,
+            AppointmentId = dto.AppointmentId,
             Message = string.IsNullOrWhiteSpace(dto.Message) ? null : dto.Message.Trim(),
             CreatedAt = DateTime.UtcNow
         };
 
         var created = await requests.CreateAsync(request);
-        return MapToResponseDto(created);
+        return MapToResponseDto(created, meetingAppointment);
     }
 
     public async Task<IReadOnlyList<UserRequestResponseDto>> GetInboxAsync(string toUserId)
@@ -68,7 +86,7 @@ public class UserRequestService(
             throw new ArgumentException("Invalid toUserId", nameof(toUserId));
 
         var inbox = await requests.GetInboxAsync(toUserId);
-        return inbox.Select(MapToResponseDto).ToList();
+        return inbox.Select(r => MapToResponseDto(r)).ToList();
     }
 
     public async Task<UserRequestResponseDto> RespondAsync(string requestId, string toUserId, UpdateUserRequestDto dto)
@@ -112,13 +130,41 @@ public class UserRequestService(
                 await groups.AddMemberAsync(member);
             }
         }
+        else if (status == UserRequestStatuses.Accepted && request.Type == UserRequestTypes.Meeting)
+        {
+            if (string.IsNullOrWhiteSpace(request.AppointmentId))
+                throw new InvalidOperationException("Meeting request is missing appointmentId");
+
+            var appointment = await appointments.GetByIdAsync(request.AppointmentId)
+                ?? throw new KeyNotFoundException("Cita no encontrada");
+
+            var participant = appointment.Participants.FirstOrDefault(p => p.UserId == toUserId);
+            if (participant != null)
+            {
+                participant.Status = "accepted";
+            }
+            else
+            {
+                appointment.Participants.Add(new AppointmentParticipant
+                {
+                    Id = UuidGenerator.GenerateAppointmentParticipantId(),
+                    AppointmentId = appointment.Id,
+                    UserId = toUserId,
+                    Status = "accepted",
+                    CreatedAt = DateTime.UtcNow
+                });
+            }
+
+            await appointments.UpdateAsync(appointment);
+        }
 
         var updated = await requests.UpdateAsync(request);
         return MapToResponseDto(updated);
     }
 
-    private static UserRequestResponseDto MapToResponseDto(UserRequest request)
+    private static UserRequestResponseDto MapToResponseDto(UserRequest request, Appointment? appointmentOverride = null)
     {
+        var appointment = appointmentOverride ?? request.Appointment;
         return new UserRequestResponseDto
         {
             Id = request.Id,
@@ -129,6 +175,8 @@ public class UserRequestService(
             Status = request.Status,
             GroupId = request.GroupId,
             GroupName = request.Group?.Name,
+            AppointmentId = request.AppointmentId,
+            AppointmentTitle = appointment?.Title,
             Message = request.Message,
             CreatedAt = request.CreatedAt,
             RespondedAt = request.RespondedAt

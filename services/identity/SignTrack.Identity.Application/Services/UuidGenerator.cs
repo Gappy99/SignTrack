@@ -47,6 +47,21 @@ public static class UuidGenerator
         return $"req_{GenerateShortUUID()}";
     }
 
+    public static string GenerateTaskId()
+    {
+        return $"tsk_{GenerateShortUUID()}";
+    }
+
+    public static string GenerateAppointmentId()
+    {
+        return $"apt_{GenerateShortUUID()}";
+    }
+
+    public static string GenerateAppointmentParticipantId()
+    {
+        return $"ap_{GenerateShortUUID()}";
+    }
+
     public static bool IsValidUserId(string? id)
     {
         if(string.IsNullOrEmpty(id))

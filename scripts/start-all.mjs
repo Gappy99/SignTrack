@@ -1,5 +1,6 @@
 /**
- * Levanta stack local SignTrack: Docker → Identity (:5104) → Frontend (:5180)
+ * Levanta stack local SignTrack (Grupo A):
+ * Docker → Identity (:5104) → Messaging (:5300) → Calls (:5200) → Gateway (:5050) → Frontend (:5180)
  * Uso: pnpm start:all  (desde repo SignTrack)
  */
 import { spawn, execSync } from 'node:child_process'
@@ -10,13 +11,44 @@ import { existsSync } from 'node:fs'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const backendRoot = join(__dirname, '..')
 const frontendRoot = join(backendRoot, '..', 'SignTrack-frontend')
-const identityProject = join(
-  backendRoot,
-  'services/identity/SignTrack.Identity.Api/SignTrack.Identity.Api.csproj',
-)
 const isWin = process.platform === 'win32'
-const IDENTITY_URL = 'http://localhost:5104/api/v1/health'
 const FRONTEND_URL = 'http://localhost:5180/signtrack/'
+
+const devEnv = {
+  ...process.env,
+  ASPNETCORE_ENVIRONMENT: 'Development',
+  JwtSettings__SecretKey:
+    process.env.JwtSettings__SecretKey ?? 'SignTrackDevSecretKeyMin32Chars!!',
+}
+
+const SERVICES = [
+  {
+    name: 'Identity',
+    port: 5104,
+    healthUrl: 'http://localhost:5104/api/v1/health',
+    project: join(backendRoot, 'services/identity/SignTrack.Identity.Api/SignTrack.Identity.Api.csproj'),
+    swagger: 'http://localhost:5104/swagger',
+  },
+  {
+    name: 'Messaging',
+    port: 5300,
+    healthUrl: 'http://localhost:5300/api/v1/health',
+    project: join(backendRoot, 'services/messaging/SignTrack.Messaging.Api/SignTrack.Messaging.Api.csproj'),
+  },
+  {
+    name: 'Calls',
+    port: 5200,
+    healthUrl: 'http://localhost:5200/api/v1/health',
+    project: join(backendRoot, 'services/calls/SignTrack.Calls.Api/SignTrack.Calls.Api.csproj'),
+  },
+  {
+    name: 'Gateway',
+    port: 5050,
+    healthUrl: 'http://localhost:5050/health',
+    project: join(backendRoot, 'services/gateway/SignTrack.Gateway.Api/SignTrack.Gateway.Api.csproj'),
+    swagger: 'http://localhost:5050/',
+  },
+]
 
 if (!existsSync(frontendRoot)) {
   console.error(`No se encontró el frontend en: ${frontendRoot}`)
@@ -94,29 +126,22 @@ async function ensureFrontendDeps() {
   await run('pnpm', ['install'], { cwd: frontendRoot })
 }
 
-async function ensureIdentityReady() {
-  if (await isHealthy(IDENTITY_URL)) {
-    console.log('Identity ya está activo en :5104 (se reutiliza, no se inicia otro).')
+async function ensureServiceReady(service) {
+  if (await isHealthy(service.healthUrl)) {
+    console.log(`${service.name} ya está activo en :${service.port} (se reutiliza).`)
     return null
   }
 
-  const stalePids = getPidsOnPort(5104)
+  const stalePids = getPidsOnPort(service.port)
   if (stalePids.length > 0) {
-    console.log(`Puerto 5104 ocupado por PID(s) ${stalePids.join(', ')} — liberando...`)
+    console.log(`Puerto ${service.port} ocupado por PID(s) ${stalePids.join(', ')} — liberando...`)
     for (const pid of stalePids) killProcessTree(pid)
     await new Promise((r) => setTimeout(r, 1500))
   }
 
-  const devEnv = {
-    ...process.env,
-    ASPNETCORE_ENVIRONMENT: 'Development',
-    JwtSettings__SecretKey:
-      process.env.JwtSettings__SecretKey ?? 'SignTrackDevSecretKeyMin32Chars!!',
-  }
-
   return runBackground(
     'dotnet',
-    ['run', '--project', identityProject, '--launch-profile', 'http', '--no-build'],
+    ['run', '--project', service.project, '--launch-profile', 'http', '--no-build'],
     { cwd: backendRoot, env: devEnv },
   )
 }
@@ -126,16 +151,22 @@ await run('docker', ['compose', 'up', '-d'], { cwd: backendRoot })
 
 await ensureFrontendDeps()
 
-console.log('\nCompilando Identity (solo si hace falta)...')
-await run('dotnet', ['build', identityProject, '-v', 'q'], { cwd: backendRoot })
+console.log('\nCompilando solución .NET...')
+await run('dotnet', ['build', join(backendRoot, 'SignTrack.sln'), '-v', 'q'], { cwd: backendRoot })
 
 console.log('\nServicios (Ctrl+C detiene lo iniciado por este script):')
-console.log(`  Identity  → http://localhost:5104/swagger`)
-console.log(`  Frontend  → ${FRONTEND_URL}\n`)
+for (const svc of SERVICES) {
+  const url = svc.swagger ?? svc.healthUrl
+  console.log(`  ${svc.name.padEnd(10)} → ${url}`)
+}
+console.log(`  Frontend   → ${FRONTEND_URL}\n`)
 
 const children = []
-const identityChild = await ensureIdentityReady()
-if (identityChild) children.push(identityChild)
+
+for (const svc of SERVICES) {
+  const child = await ensureServiceReady(svc)
+  if (child) children.push(child)
+}
 
 children.push(runBackground('pnpm', ['dev'], { cwd: frontendRoot }))
 

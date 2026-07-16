@@ -21,6 +21,7 @@ public class UserRequestRepository(ApplicationDbContext context) : IUserRequestR
             .Include(r => r.FromUser)
             .Include(r => r.ToUser)
             .Include(r => r.Group)
+            .Include(r => r.Appointment)
             .FirstOrDefaultAsync(r => r.Id == id);
 
         return request ?? throw new InvalidOperationException($"Request with id {id} not found.");
@@ -34,6 +35,7 @@ public class UserRequestRepository(ApplicationDbContext context) : IUserRequestR
             .Include(r => r.FromUser)
             .Include(r => r.ToUser)
             .Include(r => r.Group)
+            .Include(r => r.Appointment)
             .Where(r => r.ToUserId == toUserId &&
                         (r.Status == UserRequestStatuses.Pending ||
                          (r.RespondedAt != null && r.RespondedAt >= recentCutoff)))

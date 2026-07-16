@@ -113,6 +113,32 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
             .ToListAsync();
     }
 
+    public async Task<IReadOnlyList<User>> SearchDirectoryAsync(string currentUserId, string? query, int limit = 50)
+    {
+        var q = context.Users
+            .Include(u => u.UserProfile)
+            .Include(u => u.UserRoles)
+                .ThenInclude(ur => ur.Role)
+            .Where(u => u.Id != currentUserId)
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(query))
+        {
+            var term = query.Trim();
+            q = q.Where(u =>
+                EF.Functions.ILike(u.Username, $"%{term}%") ||
+                EF.Functions.ILike(u.Name, $"%{term}%") ||
+                EF.Functions.ILike(u.Surname, $"%{term}%") ||
+                EF.Functions.ILike(u.Email, $"%{term}%"));
+        }
+
+        return await q
+            .OrderBy(u => u.Name)
+            .ThenBy(u => u.Surname)
+            .Take(limit)
+            .ToListAsync();
+    }
+
     public async Task UpdateUserRoleAsync(string userId, string roleId)
     {
         var existingRoles = await context.UserRoles
