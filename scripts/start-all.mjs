@@ -1,6 +1,6 @@
 /**
- * Levanta stack local SignTrack (Grupo A):
- * Docker → Identity (:5104) → Messaging (:5300) → Calls (:5200) → Gateway (:5050) → Frontend (:5180)
+ * Levanta stack local SignTrack (Grupo A + B1):
+ * Docker → Identity → Messaging → Calls → Gateway → Recognition → Frontend
  * Uso: pnpm start:all  (desde repo SignTrack)
  */
 import { spawn, execSync } from 'node:child_process'
@@ -11,6 +11,7 @@ import { existsSync } from 'node:fs'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const backendRoot = join(__dirname, '..')
 const frontendRoot = join(backendRoot, '..', 'SignTrack-frontend')
+const recognitionVenvPython = join(backendRoot, 'services/recognition/.venv/bin/python3')
 const isWin = process.platform === 'win32'
 const FRONTEND_URL = 'http://localhost:5180/signtrack/'
 
@@ -19,6 +20,9 @@ const devEnv = {
   ASPNETCORE_ENVIRONMENT: 'Development',
   JwtSettings__SecretKey:
     process.env.JwtSettings__SecretKey ?? 'SignTrackDevSecretKeyMin32Chars!!',
+  PYTHON_EXECUTABLE:
+    process.env.PYTHON_EXECUTABLE ??
+    (existsSync(recognitionVenvPython) ? recognitionVenvPython : 'python3'),
 }
 
 const SERVICES = [
@@ -47,6 +51,13 @@ const SERVICES = [
     healthUrl: 'http://localhost:5050/health',
     project: join(backendRoot, 'services/gateway/SignTrack.Gateway.Api/SignTrack.Gateway.Api.csproj'),
     swagger: 'http://localhost:5050/',
+  },
+  {
+    name: 'Recognition',
+    port: 3000,
+    healthUrl: 'http://localhost:3000/health',
+    type: 'node',
+    script: 'recognition:api',
   },
 ]
 
@@ -127,6 +138,11 @@ async function ensureFrontendDeps() {
 }
 
 async function ensureServiceReady(service) {
+  // Recognition cae con frecuencia; siempre lo gestionamos con watchdog aparte.
+  if (service.name === 'Recognition') {
+    return null
+  }
+
   if (await isHealthy(service.healthUrl)) {
     console.log(`${service.name} ya está activo en :${service.port} (se reutiliza).`)
     return null
@@ -139,6 +155,10 @@ async function ensureServiceReady(service) {
     await new Promise((r) => setTimeout(r, 1500))
   }
 
+  if (service.type === 'node') {
+    return runBackground('pnpm', [service.script], { cwd: backendRoot, env: devEnv })
+  }
+
   return runBackground(
     'dotnet',
     ['run', '--project', service.project, '--launch-profile', 'http', '--no-build'],
@@ -147,7 +167,20 @@ async function ensureServiceReady(service) {
 }
 
 console.log('Docker: Postgres + Redis...')
-await run('docker', ['compose', 'up', '-d'], { cwd: backendRoot })
+try {
+  await Promise.race([
+    run('docker', ['compose', 'up', '-d'], { cwd: backendRoot }),
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('Docker no respondió en 20s')), 20000),
+    ),
+  ])
+} catch (err) {
+  console.warn(
+    '⚠ Docker compose no levantó infra (¿Docker Desktop apagado?).',
+    'Enciende Docker y ejecuta: docker compose up -d',
+  )
+  console.warn(String(err.message || err))
+}
 
 await ensureFrontendDeps()
 
@@ -162,15 +195,67 @@ for (const svc of SERVICES) {
 console.log(`  Frontend   → ${FRONTEND_URL}\n`)
 
 const children = []
+let shuttingDown = false
+let recognitionRestarting = false
+
+const recognitionService = SERVICES.find((svc) => svc.name === 'Recognition')
+
+async function startRecognitionService() {
+  const stalePids = getPidsOnPort(recognitionService.port)
+  if (stalePids.length > 0) {
+    console.log(
+      `Recognition: liberando puerto ${recognitionService.port} (PID ${stalePids.join(', ')})…`,
+    )
+    for (const pid of stalePids) killProcessTree(pid)
+    await new Promise((r) => setTimeout(r, 800))
+  }
+
+  const child = runBackground('pnpm', [recognitionService.script], {
+    cwd: backendRoot,
+    env: devEnv,
+  })
+
+  child.on('exit', (code) => {
+    if (!shuttingDown && code !== 0 && code !== null) {
+      console.warn(`Recognition terminó (código ${code}). El watchdog lo reiniciará…`)
+    }
+  })
+
+  return child
+}
+
+async function ensureRecognitionAlive() {
+  if (shuttingDown || recognitionRestarting) return
+  if (await isHealthy(recognitionService.healthUrl)) return
+
+  recognitionRestarting = true
+  console.warn('Recognition offline — reiniciando…')
+  try {
+    await startRecognitionService()
+    for (let attempt = 0; attempt < 15; attempt += 1) {
+      if (await isHealthy(recognitionService.healthUrl)) {
+        console.log('Recognition OK')
+        return
+      }
+      await new Promise((r) => setTimeout(r, 1000))
+    }
+    console.error('Recognition no respondió tras reinicio. Revisa: pnpm setup:recognition')
+  } finally {
+    recognitionRestarting = false
+  }
+}
 
 for (const svc of SERVICES) {
   const child = await ensureServiceReady(svc)
   if (child) children.push(child)
 }
 
-children.push(runBackground('pnpm', ['dev'], { cwd: frontendRoot }))
+await ensureRecognitionAlive()
+setInterval(() => {
+  ensureRecognitionAlive().catch((err) => console.error('Watchdog Recognition:', err.message))
+}, 10000)
 
-let shuttingDown = false
+children.push(runBackground('pnpm', ['dev'], { cwd: frontendRoot }))
 
 const shutdown = (signal) => {
   if (shuttingDown) return

@@ -48,6 +48,55 @@ public class ConversationsController(ConversationService conversations) : Contro
         return Ok(items);
     }
 
+    [HttpGet("unread-total")]
+    public async Task<ActionResult<object>> UnreadTotal()
+    {
+        var userId = GetUserId();
+        if (string.IsNullOrEmpty(userId))
+            return Unauthorized(new { success = false, message = "Usuario no autenticado" });
+
+        return Ok(new { total = await conversations.GetTotalUnreadAsync(userId) });
+    }
+
+    [HttpPost("call-room/{roomId}")]
+    public async Task<ActionResult<ConversationListItemDto>> CallRoomChat(string roomId)
+    {
+        var userId = GetUserId();
+        if (string.IsNullOrEmpty(userId))
+            return Unauthorized(new { success = false, message = "Usuario no autenticado" });
+
+        try
+        {
+            return Ok(await conversations.GetOrCreateCallRoomConversationAsync(userId, roomId));
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            return StatusCode(403, new { success = false, message = ex.Message });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { success = false, message = "No se pudo abrir el chat de reunión", error = ex.Message });
+        }
+    }
+
+    [HttpPost("{id}/read")]
+    public async Task<IActionResult> MarkRead(string id)
+    {
+        var userId = GetUserId();
+        if (string.IsNullOrEmpty(userId))
+            return Unauthorized(new { success = false, message = "Usuario no autenticado" });
+
+        try
+        {
+            await conversations.MarkReadAsync(userId, id);
+            return Ok(new { success = true });
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            return StatusCode(403, new { success = false, message = ex.Message });
+        }
+    }
+
     [HttpGet("{id}/messages")]
     public async Task<ActionResult<MessagesPageDto>> GetMessages(
         string id,
@@ -61,6 +110,7 @@ public class ConversationsController(ConversationService conversations) : Contro
         try
         {
             var page = await conversations.GetMessagesAsync(userId, id, cursor, limit);
+            await conversations.MarkReadAsync(userId, id);
             return Ok(page);
         }
         catch (UnauthorizedAccessException ex)

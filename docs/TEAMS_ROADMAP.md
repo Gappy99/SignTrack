@@ -189,29 +189,42 @@ A1 (usuarios) → A2 (layout) → A3 (grupos) → A4 (solicitudes)
 
 ## B0. Infraestructura
 
-| ID | Tarea | Detalle |
-|----|-------|---------|
-| B0-1 | VPS (4 GB RAM mínimo) | Hetzner / DO / Azure student |
-| B0-2 | Dominio + HTTPS | Nginx/Caddy + Let's Encrypt |
-| B0-3 | `docker-compose.prod.yml` | Postgres, Redis, servicios C#, coturn |
-| B0-4 | Variables entorno producción | JWT, connection strings, CORS `:5180` + dominio |
-| B0-5 | CI/CD básico | Build + deploy rama `develop` / tags |
+| ID | Tarea | Detalle | Estado |
+|----|-------|---------|--------|
+| B0-1 | VPS (4 GB RAM mínimo) | Hetzner / DO / Azure student | 📋 guía |
+| B0-2 | Dominio + HTTPS | Caddy + Let's Encrypt | ✅ `deploy/Caddyfile` |
+| B0-3 | `docker-compose.prod.yml` | Postgres, Redis, servicios C#, coturn, LiveKit | ✅ |
+| B0-4 | Variables entorno producción | `.env.prod.example` | ✅ |
+| B0-5 | CI/CD básico | `.github/workflows/ci.yml` | ✅ |
 
-**DoD B0:** App accesible por URL pública con HTTPS.
+**DoD B0:** App accesible por URL pública con HTTPS — ver `docs/DEPLOYMENT.md`.
 
 ---
 
 ## B1. Mensajes en vivo
 
-| ID | Tarea | Backend | Frontend |
-|----|-------|---------|----------|
-| B1-1 | SignalR hub en Messaging | `ReceiveMessage`, `UserTyping` | Conectar hub con JWT |
-| B1-2 | Redis backplane SignalR | Escalar instancias | — |
-| B1-3 | Tras `POST /messages` → broadcast hub | Integrar persist + push | Actualizar UI sin refresh |
-| B1-4 | Indicador “escribiendo…” | Evento typing | UI burbuja |
-| B1-5 | Presencia online/offline | Redis + hub | Punto verde en contactos |
+| ID | Tarea | Backend | Frontend | Estado |
+|----|-------|---------|----------|--------|
+| B1-1 | SignalR hub en Messaging | `ReceiveMessage`, `UserTyping` | Conectar hub con JWT | ✅ |
+| B1-2 | Redis backplane SignalR | Escalar instancias | — | ✅ |
+| B1-3 | Tras `POST /messages` → broadcast hub | Integrar persist + push | Actualizar UI sin refresh | ✅ |
+| B1-4 | Indicador “escribiendo…” | Evento typing | UI burbuja | ✅ |
+| B1-5 | Presencia online/offline | Redis + hub | Punto verde en contactos | 🔄 parcial (`UserOnline` en hub) |
 
-**DoD B1:** Dos usuarios en distintas redes ven mensajes al instante.
+**DoD B1:** Dos usuarios en distintas redes ven mensajes al instante. ✅ *(local vía Gateway `:5050` + hub `/hubs/chat`)*
+
+---
+
+## B1.5. Modo señas en chat (Recognition + Messaging)
+
+| ID | Tarea | Servicio | Estado |
+|----|-------|----------|--------|
+| B1.5-1 | Gateway proxy `/recognition-api` → `:3000` | Gateway | ✅ |
+| B1.5-2 | `POST /predict-letter` con `imageBase64` | Recognition | ✅ |
+| B1.5-3 | Panel cámara en chat + acumular letras | Frontend | ✅ |
+| B1.5-4 | Enviar mensaje `type: translation` vía Messaging | Messaging + SignalR | ✅ |
+
+**DoD B1.5:** Usuario firma frente a cámara → texto aparece en chat para el otro participante en vivo.
 
 ---
 
@@ -219,34 +232,37 @@ A1 (usuarios) → A2 (layout) → A3 (grupos) → A4 (solicitudes)
 
 | ID | Tarea | Backend | Frontend |
 |----|-------|---------|----------|
-| B2-1 | SignalR hub en Calls | Offer, Answer, IceCandidate | RTCPeerConnection |
-| B2-2 | Devolver `iceServers` al join | Config STUN/TURN | `RTCPeerConnection` config |
+| B2-1 | SignalR hub en Calls | Offer, Answer, IceCandidate ✅ | RTCPeerConnection ✅ |
+| B2-2 | Devolver `iceServers` al join | Config STUN/TURN ✅ | `RTCPeerConnection` config ✅ |
 | B2-3 | coturn en Docker prod | STUN + TURN credentials | — |
-| B2-4 | UI cámara/mic real | — | getUserMedia, mute, colgar |
-| B2-5 | JWT en hub Calls | Validar en connect | Token en SignalR |
+| B2-4 | UI cámara/mic real | — | getUserMedia, mute, colgar ✅ |
+| B2-5 | JWT en hub Calls | Validar en connect ✅ | Token en SignalR ✅ |
+| B2-6 | Gateway `/hubs/calls` | YARP → Calls ✅ | Proxy Vite `/hubs` ✅ |
 
-**DoD B2:** Dos usuarios en internet se ven y oyen.
+**DoD B2:** Dos usuarios en internet se ven y oyen (local: STUN Google; prod: pendiente coturn B0).
 
 ---
 
 ## B3. Videollamada grupal
 
-| ID | Tarea | Backend | Frontend |
-|----|-------|---------|----------|
-| B3-1 | Integrar LiveKit server (Docker) | Token API desde Calls | `@livekit/components-react` |
-| B3-2 | Grid N participantes | — | UI sala grupal |
-| B3-3 | Chat lateral en reunión | Reutilizar B1 en room | Panel mensajes en call |
+| ID | Tarea | Backend | Frontend | Estado |
+|----|-------|---------|----------|--------|
+| B3-1 | Integrar LiveKit server (Docker) | Token API desde Calls ✅ | `livekit-client` ✅ | ✅ |
+| B3-2 | Grid N participantes | — | `VideoConference` ✅ | ✅ |
+| B3-3 | Chat lateral en reunión | `POST /conversations/call-room/{id}` ✅ | `CallSideChat` ✅ | ✅ |
 
-**DoD B3:** Reunión estable de 4–8 personas.
+**DoD B3:** Reunión estable de 4–8 personas (crear reunión tipo Grupo + `docker compose up livekit -d`).
 
 ---
 
 ## B4. Notificaciones push (opcional)
 
-| ID | Tarea | Detalle |
-|----|-------|---------|
-| B4-1 | Web Push o email SMTP real | Solicitudes, mensajes offline |
-| B4-2 | Badge contador inbox | Frontend service worker |
+| ID | Tarea | Detalle | Estado |
+|----|-------|---------|--------|
+| B4-1 | Web Push | VAPID + suscripción Messaging ✅ | ✅ |
+| B4-2 | Badge contador inbox | Service worker + `unread-total` ✅ | ✅ |
+
+**DoD B4:** Mensaje nuevo → notificación del navegador + badge en icono Chats.
 
 ---
 
@@ -324,4 +340,4 @@ flowchart TB
 
 ---
 
-*Última actualización: 2026-07-15 · Rama `ft/sajche`*
+*Última actualización: 2026-07-16 · Rama `ft/sajche` · B0–B4 implementados · **Grupo C (E2E + IA en llamadas):** ver `docs/E2E_COMPLETION_PLAN.md`*

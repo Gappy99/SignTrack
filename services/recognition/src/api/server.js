@@ -1,5 +1,8 @@
 import express from "express"
 import path from "path"
+import fs from "node:fs"
+import os from "node:os"
+import { randomUUID } from "node:crypto"
 import { spawn } from "node:child_process"
 import { fileURLToPath } from "url"
 import dotenv from "dotenv"
@@ -14,7 +17,7 @@ const PREDICT_SCRIPT = path.resolve(__dirname, "..", "recognition", "predict_let
 const WORD_PREDICT_SCRIPT = path.resolve(__dirname, "..", "words", "predict_word.py")
 const PYTHON_EXECUTABLE = process.env.PYTHON_EXECUTABLE || "python"
 
-app.use(express.json())
+app.use(express.json({ limit: "3mb" }))
 
 const runPythonPrediction = ({ features, imagePath }) =>
     new Promise((resolve, reject) => {
@@ -99,16 +102,25 @@ const runPythonWordPrediction = ({ features, videoPath }) =>
     })
 
 app.post("/predict-letter", async (req, res) => {
-    const { features, imagePath } = req.body
+    let { features, imagePath, imageBase64 } = req.body
+    let tempFile = null
 
-    if (!Array.isArray(features) && (!imagePath || typeof imagePath !== "string")) {
+    if (!Array.isArray(features) && !imagePath && !imageBase64) {
         return res.status(400).json({
             success: false,
-            message: "Provide either features (array) or imagePath (string)"
+            message: "Provide features (array), imagePath (string) or imageBase64 (string)"
         })
     }
 
     try {
+        if (typeof imageBase64 === "string" && imageBase64.trim().length > 0) {
+            const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, "")
+            const buffer = Buffer.from(base64Data, "base64")
+            tempFile = path.join(os.tmpdir(), `signtrack-${randomUUID()}.jpg`)
+            fs.writeFileSync(tempFile, buffer)
+            imagePath = tempFile
+        }
+
         const result = await runPythonPrediction({ features, imagePath })
 
         if (!result.success) {
@@ -122,6 +134,14 @@ app.post("/predict-letter", async (req, res) => {
             message: "Prediction failed",
             error: error.message
         })
+    } finally {
+        if (tempFile && fs.existsSync(tempFile)) {
+            try {
+                fs.unlinkSync(tempFile)
+            } catch {
+                /* ignore */
+            }
+        }
     }
 })
 

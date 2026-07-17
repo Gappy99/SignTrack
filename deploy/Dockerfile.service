@@ -1,0 +1,17 @@
+# Build genérico para microservicios SignTrack (.NET 8)
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG PROJECT_PATH
+WORKDIR /src
+COPY SignTrack.sln ./
+COPY services/ ./services/
+RUN dotnet restore SignTrack.sln
+RUN dotnet publish "$PROJECT_PATH" -c Release -o /app/publish --no-restore
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+ARG ASSEMBLY_NAME
+WORKDIR /app
+COPY --from=build /app/publish .
+ENV ASPNETCORE_URLS=http://+:8080
+ENV ASSEMBLY_NAME=${ASSEMBLY_NAME}
+EXPOSE 8080
+ENTRYPOINT dotnet ${ASSEMBLY_NAME}.dll

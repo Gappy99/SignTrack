@@ -57,6 +57,34 @@ public class AppointmentsController(IAppointmentService appointments) : Controll
             return StatusCode(403, new { success = false, message = ex.Message });
         }
     }
+
+    [HttpPost("{id}/start")]
+    public async Task<ActionResult<AppointmentResponseDto>> Start(string id)
+    {
+        var userId = GetUserId();
+        if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+        var auth = Request.Headers.Authorization.ToString();
+        if (string.IsNullOrWhiteSpace(auth))
+            return Unauthorized(new { success = false, message = "Token requerido" });
+
+        try
+        {
+            return Ok(await appointments.StartAsync(userId, id, auth));
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { success = false, message = ex.Message });
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            return StatusCode(403, new { success = false, message = ex.Message });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { success = false, message = ex.Message });
+        }
+    }
 }
 
 public class LinkRoomDto

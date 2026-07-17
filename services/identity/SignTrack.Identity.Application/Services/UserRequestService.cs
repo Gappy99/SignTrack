@@ -12,7 +12,8 @@ public class UserRequestService(
     IUserRequestRepository requests,
     IGroupRepository groups,
     IAppointmentRepository appointments,
-    IUserRepository users) : IUserRequestService
+    IUserRepository users,
+    IPushNotifier pushNotifier) : IUserRequestService
 {
     public async Task<UserRequestResponseDto> SendRequestAsync(string fromUserId, CreateUserRequestDto dto)
     {
@@ -27,7 +28,7 @@ public class UserRequestService(
         if (!UserRequestTypes.All.Contains(type))
             throw new ArgumentException($"Invalid request type. Use {string.Join(", ", UserRequestTypes.All)}");
 
-        await users.GetByIdAsync(fromUserId);
+        var fromUser = await users.GetByIdAsync(fromUserId);
         await users.GetByIdAsync(dto.ToUserId);
 
         Appointment? meetingAppointment = null;
@@ -77,6 +78,19 @@ public class UserRequestService(
         };
 
         var created = await requests.CreateAsync(request);
+
+        var requestLabel = type switch
+        {
+            UserRequestTypes.GroupInvite => "invitación a grupo",
+            UserRequestTypes.Meeting => "invitación a cita",
+            _ => "solicitud de contacto"
+        };
+        await pushNotifier.NotifyUserAsync(
+            dto.ToUserId,
+            "Nueva solicitud",
+            $"{fromUser.Username} te envió una {requestLabel}",
+            "/signtrack/dashboard/requests");
+
         return MapToResponseDto(created, meetingAppointment);
     }
 

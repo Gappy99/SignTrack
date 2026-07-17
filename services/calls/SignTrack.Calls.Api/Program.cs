@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using SignTrack.Calls.Api.Configuration;
 using SignTrack.Calls.Api.Data;
 using SignTrack.Calls.Api.Extensions;
+using SignTrack.Calls.Api.Hubs;
 using SignTrack.Calls.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,8 +20,18 @@ builder.Services.AddDbContext<CallsDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
         .UseSnakeCaseNamingConvention());
 
+builder.Services.Configure<LiveKitSettings>(builder.Configuration.GetSection("LiveKit"));
+builder.Services.AddSingleton<ICallHubNotifier, CallHubNotifier>();
+builder.Services.AddSingleton<LiveKitTokenService>();
 builder.Services.AddScoped<RoomService>();
 builder.Services.AddJwtAuthentication(builder.Configuration);
+
+var redisConnection = builder.Configuration.GetConnectionString("Redis") ?? "localhost:6379";
+builder.Services.AddSignalR()
+    .AddStackExchangeRedis(redisConnection, options =>
+    {
+        options.Configuration.ChannelPrefix = StackExchange.Redis.RedisChannel.Literal("SignTrack:Calls:");
+    });
 
 builder.Services.AddCors(options =>
 {
@@ -44,6 +56,7 @@ app.UseCors("DefaultCorsPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+app.MapHub<CallHub>("/hubs/calls");
 
 using (var scope = app.Services.CreateScope())
 {
@@ -54,8 +67,9 @@ using (var scope = app.Services.CreateScope())
 app.MapGet("/", () => Results.Ok(new
 {
     service = "SignTrack.Calls.Api",
-    version = "0.2.0",
-    status = "ready"
+    version = "0.3.0",
+    status = "ready",
+    hubs = new[] { "/hubs/calls" }
 }));
 
 app.Run();

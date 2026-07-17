@@ -6,7 +6,10 @@ using SignTrack.Identity.Domain.Interfaces;
 
 namespace SignTrack.Identity.Application.Services;
 
-public class AppointmentService(IAppointmentRepository appointments, IUserRepository users) : IAppointmentService
+public class AppointmentService(
+    IAppointmentRepository appointments,
+    IUserRepository users,
+    ICallsRoomClient callsRoomClient) : IAppointmentService
 {
     public async Task<AppointmentResponseDto> CreateAsync(string userId, CreateAppointmentDto dto)
     {
@@ -69,6 +72,30 @@ public class AppointmentService(IAppointmentRepository appointments, IUserReposi
 
         if (appointment.HostUserId != userId)
             throw new UnauthorizedAccessException("Solo el anfitrión puede vincular una sala");
+
+        appointment.RoomId = roomId;
+        await appointments.UpdateAsync(appointment);
+        return Map(appointment);
+    }
+
+    public async Task<AppointmentResponseDto> StartAsync(
+        string userId,
+        string appointmentId,
+        string authorizationHeader)
+    {
+        var appointment = await appointments.GetByIdAsync(appointmentId)
+            ?? throw new KeyNotFoundException("Cita no encontrada");
+
+        if (appointment.HostUserId != userId)
+            throw new UnauthorizedAccessException("Solo el anfitrión puede iniciar la reunión");
+
+        if (!string.IsNullOrWhiteSpace(appointment.RoomId))
+            return Map(appointment);
+
+        var roomId = await callsRoomClient.CreateRoomAsync(
+            authorizationHeader,
+            $"Cita: {appointment.Title}",
+            8);
 
         appointment.RoomId = roomId;
         await appointments.UpdateAsync(appointment);

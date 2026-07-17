@@ -28,5 +28,7 @@ public record RoomDetailDto(
 public record JoinRoomResponseDto(
     string RoomId,
     string ParticipantId,
-    string? SignalingUrl,
-    IReadOnlyList<object> IceServers);
+    string SignalingUrl,
+    IReadOnlyList<IceServerDto> IceServers,
+    bool UseLiveKit,
+    string? LiveKitUrl);

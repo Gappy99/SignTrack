@@ -1,16 +1,20 @@
 version: "3.8"
 
+# Infraestructura local extendida (Grupo B)
+# Uso: docker compose up -d
+# LiveKit en modo dev: claves devkey / secret
+
 services:
   postgres:
     image: postgres:16
     container_name: signtrack_postgres
     restart: always
     environment:
-      POSTGRES_DB: SignTrack
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: ${POSTGRES_DB:-SignTrack}
+      POSTGRES_USER: ${POSTGRES_USER:-root}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
     ports:
-      - "5435:5432"
+      - "${POSTGRES_PORT:-5435}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -19,9 +23,19 @@ services:
     container_name: signtrack_redis
     restart: always
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT:-6379}:6379"
     volumes:
       - redis_data:/data
+
+  livekit:
+    image: livekit/livekit-server:v1.8.0
+    container_name: signtrack_livekit
+    restart: unless-stopped
+    command: --dev --bind 0.0.0.0
+    ports:
+      - "7880:7880"
+      - "7881:7881"
+      - "7882:7882/udp"
 
 volumes:
   postgres_data:

@@ -3,6 +3,7 @@ var downstream = builder.Configuration.GetSection("DownstreamUrls");
 var identity = downstream["Identity"] ?? "http://localhost:5104";
 var calls = downstream["Calls"] ?? "http://localhost:5200";
 var messaging = downstream["Messaging"] ?? "http://localhost:5300";
+var recognition = downstream["Recognition"] ?? "http://localhost:3000";
 
 builder.Services.AddCors(options =>
 {
@@ -66,9 +67,55 @@ builder.Services.AddReverseProxy()
         },
         new Yarp.ReverseProxy.Configuration.RouteConfig
         {
+            RouteId = "calls-hub",
+            ClusterId = "calls",
+            Match = new Yarp.ReverseProxy.Configuration.RouteMatch { Path = "/hubs/calls/{**catch-all}" }
+        },
+        new Yarp.ReverseProxy.Configuration.RouteConfig
+        {
+            RouteId = "calls-hub-root",
+            ClusterId = "calls",
+            Match = new Yarp.ReverseProxy.Configuration.RouteMatch { Path = "/hubs/calls" }
+        },
+        new Yarp.ReverseProxy.Configuration.RouteConfig
+        {
+            RouteId = "messaging-hub",
+            ClusterId = "messaging",
+            Match = new Yarp.ReverseProxy.Configuration.RouteMatch { Path = "/hubs/chat/{**catch-all}" }
+        },
+        new Yarp.ReverseProxy.Configuration.RouteConfig
+        {
+            RouteId = "messaging-hub-root",
+            ClusterId = "messaging",
+            Match = new Yarp.ReverseProxy.Configuration.RouteMatch { Path = "/hubs/chat" }
+        },
+        new Yarp.ReverseProxy.Configuration.RouteConfig
+        {
+            RouteId = "messaging-notifications",
+            ClusterId = "messaging",
+            Match = new Yarp.ReverseProxy.Configuration.RouteMatch { Path = "/api/v1/notifications/{**catch-all}" }
+        },
+        new Yarp.ReverseProxy.Configuration.RouteConfig
+        {
             RouteId = "messaging-conversations",
             ClusterId = "messaging",
             Match = new Yarp.ReverseProxy.Configuration.RouteMatch { Path = "/api/v1/conversations/{**catch-all}" }
+        },
+        new Yarp.ReverseProxy.Configuration.RouteConfig
+        {
+            RouteId = "messaging-presence",
+            ClusterId = "messaging",
+            Match = new Yarp.ReverseProxy.Configuration.RouteMatch { Path = "/api/v1/presence/{**catch-all}" }
+        },
+        new Yarp.ReverseProxy.Configuration.RouteConfig
+        {
+            RouteId = "recognition-api",
+            ClusterId = "recognition",
+            Match = new Yarp.ReverseProxy.Configuration.RouteMatch { Path = "/recognition-api/{**catch-all}" },
+            Transforms =
+            [
+                new Dictionary<string, string> { ["PathRemovePrefix"] = "/recognition-api" }
+            ]
         }
     ],
     [
@@ -95,6 +142,14 @@ builder.Services.AddReverseProxy()
             {
                 ["d1"] = new() { Address = messaging }
             }
+        },
+        new Yarp.ReverseProxy.Configuration.ClusterConfig
+        {
+            ClusterId = "recognition",
+            Destinations = new Dictionary<string, Yarp.ReverseProxy.Configuration.DestinationConfig>
+            {
+                ["d1"] = new() { Address = recognition }
+            }
         }
     ]);
 
@@ -110,7 +165,8 @@ app.MapGet("/api/v1/services", () =>
         {
             new { name = "Identity", healthUrl = $"{identity}/api/v1/health" },
             new { name = "Calls", healthUrl = $"{calls}/api/v1/health" },
-            new { name = "Messaging", healthUrl = $"{messaging}/api/v1/health" }
+            new { name = "Messaging", healthUrl = $"{messaging}/api/v1/health" },
+            new { name = "Recognition", healthUrl = $"{recognition}/health" }
         },
         timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
     });

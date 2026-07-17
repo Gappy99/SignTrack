@@ -1,0 +1,30 @@
+# Caddy — HTTPS + reverse proxy SignTrack (B0)
+# Sustituir {$DOMAIN} en .env.prod o export DOMAIN=app.tudominio.com
+
+{$DOMAIN} {
+	encode gzip
+
+	# Frontend estático (vite build → dist/)
+	handle /signtrack/* {
+		root * /srv/frontend
+		try_files {path} /index.html
+		file_server
+	}
+
+	# API BFF + SignalR + Recognition proxy
+	handle /api/* {
+		reverse_proxy gateway:8080
+	}
+	handle /hubs/* {
+		reverse_proxy gateway:8080
+	}
+	handle /recognition-api/* {
+		reverse_proxy gateway:8080
+	}
+
+	# LiveKit WebSocket (grupos B3)
+	handle /livekit/* {
+		uri strip_prefix /livekit
+		reverse_proxy livekit:7880
+	}
+}

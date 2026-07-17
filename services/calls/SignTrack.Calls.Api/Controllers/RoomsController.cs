@@ -85,6 +85,31 @@ public class RoomsController(RoomService rooms) : ControllerBase
         }
     }
 
+    [HttpPost("{id}/livekit-token")]
+    public async Task<ActionResult<LiveKitTokenDto>> LiveKitToken(string id)
+    {
+        var userId = GetUserId();
+        if (string.IsNullOrEmpty(userId))
+            return Unauthorized(new { success = false, message = "Usuario no autenticado" });
+
+        try
+        {
+            return Ok(rooms.GetLiveKitToken(userId, id));
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { success = false, message = ex.Message });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { success = false, message = ex.Message });
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            return StatusCode(403, new { success = false, message = ex.Message });
+        }
+    }
+
     [HttpPost("{id}/end")]
     public async Task<IActionResult> End(string id)
     {

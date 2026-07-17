@@ -10,6 +10,7 @@ public static class IdGenerator
     public static string ConversationId() => $"conv_{ShortId()}";
     public static string ParticipantId() => $"prt_{ShortId()}";
     public static string MessageId() => $"msg_{ShortId()}";
+    public static string PushSubscriptionId() => $"psh_{ShortId()}";
 
     private static string ShortId()
     {

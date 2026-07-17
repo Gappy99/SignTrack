@@ -5,7 +5,7 @@ using SignTrack.Messaging.Api.Entities;
 
 namespace SignTrack.Messaging.Api.Services;
 
-public class ConversationService(MessagingDbContext db)
+public class ConversationService(MessagingDbContext db, IChatHubNotifier chatHub, NotificationService notifications)
 {
     public async Task<ConversationListItemDto> CreateConversationAsync(string userId, CreateConversationDto dto)
     {
@@ -16,7 +16,7 @@ public class ConversationService(MessagingDbContext db)
 
             var existing = await FindDirectConversationAsync(userId, dto.TargetUserId);
             if (existing != null)
-                return await MapListItemAsync(existing);
+                return await MapListItemAsync(existing, userId);
 
             var conversation = new Conversation
             {
@@ -33,7 +33,7 @@ public class ConversationService(MessagingDbContext db)
             };
             db.Conversations.Add(conversation);
             await db.SaveChangesAsync();
-            return await MapListItemAsync(conversation);
+            return await MapListItemAsync(conversation, userId);
         }
 
         if (!string.IsNullOrWhiteSpace(dto.GroupId))
@@ -47,7 +47,7 @@ public class ConversationService(MessagingDbContext db)
                 .FirstOrDefaultAsync(c => c.Type == "group" && c.GroupId == dto.GroupId);
 
             if (existingGroup != null)
-                return await MapListItemAsync(existingGroup);
+                return await MapListItemAsync(existingGroup, userId);
 
             var groupMembers = await GetGroupMemberIdsAsync(dto.GroupId);
             var conversation = new Conversation
@@ -62,7 +62,7 @@ public class ConversationService(MessagingDbContext db)
             };
             db.Conversations.Add(conversation);
             await db.SaveChangesAsync();
-            return await MapListItemAsync(conversation);
+            return await MapListItemAsync(conversation, userId);
         }
 
         throw new ArgumentException("Debes enviar targetUserId o groupId");
@@ -79,7 +79,7 @@ public class ConversationService(MessagingDbContext db)
 
         var result = new List<ConversationListItemDto>();
         foreach (var c in conversations)
-            result.Add(await MapListItemAsync(c));
+            result.Add(await MapListItemAsync(c, userId));
         return result;
     }
 
@@ -138,7 +138,16 @@ public class ConversationService(MessagingDbContext db)
 
         db.Messages.Add(message);
         await db.SaveChangesAsync();
-        return MapMessage(message);
+        var messageDto = MapMessage(message);
+        await chatHub.NotifyMessageAsync(conversationId, messageDto);
+        await notifications.NotifyNewMessageAsync(conversationId, userId, message.Content);
+        return messageDto;
+    }
+
+    public async Task<bool> IsParticipantAsync(string userId, string conversationId)
+    {
+        return await db.ConversationParticipants
+            .AnyAsync(p => p.ConversationId == conversationId && p.UserId == userId);
     }
 
     private async Task EnsureParticipantAsync(string userId, string conversationId)
@@ -214,7 +223,95 @@ public class ConversationService(MessagingDbContext db)
         JoinedAt = DateTime.UtcNow
     };
 
-    private async Task<ConversationListItemDto> MapListItemAsync(Conversation c)
+    public async Task<int> GetTotalUnreadAsync(string userId)
+    {
+        var participations = await db.ConversationParticipants
+            .Where(p => p.UserId == userId)
+            .ToListAsync();
+
+        var total = 0;
+        foreach (var p in participations)
+            total += await CountUnreadAsync(userId, p.ConversationId, p);
+        return total;
+    }
+
+    public async Task MarkReadAsync(string userId, string conversationId)
+    {
+        var participant = await db.ConversationParticipants
+            .FirstOrDefaultAsync(p => p.ConversationId == conversationId && p.UserId == userId)
+            ?? throw new UnauthorizedAccessException("No tienes acceso a esta conversación");
+
+        participant.LastReadAt = DateTime.UtcNow;
+        await db.SaveChangesAsync();
+    }
+
+    public async Task<ConversationListItemDto> GetOrCreateCallRoomConversationAsync(string userId, string roomId)
+    {
+        var existing = await db.Conversations
+            .Include(c => c.Participants)
+            .Include(c => c.Messages.OrderByDescending(m => m.SentAt).Take(1))
+            .FirstOrDefaultAsync(c => c.Type == "call" && c.GroupId == roomId);
+
+        if (existing != null)
+        {
+            await EnsureParticipantAsync(userId, existing.Id);
+            return await MapListItemAsync(existing, userId);
+        }
+
+        var memberIds = await GetCallRoomMemberIdsAsync(roomId);
+        if (!memberIds.Contains(userId))
+            throw new UnauthorizedAccessException("No perteneces a esta reunión");
+
+        var conversation = new Conversation
+        {
+            Id = IdGenerator.ConversationId(),
+            Type = "call",
+            GroupId = roomId,
+            Title = "Chat de reunión",
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow,
+            Participants = memberIds.Select(NewParticipant).ToList()
+        };
+
+        db.Conversations.Add(conversation);
+        await db.SaveChangesAsync();
+        return await MapListItemAsync(conversation, userId);
+    }
+
+    private async Task<List<string>> GetCallRoomMemberIdsAsync(string roomId)
+    {
+        var ids = new List<string>();
+        var connection = db.Database.GetDbConnection();
+        if (connection.State != System.Data.ConnectionState.Open)
+            await connection.OpenAsync();
+
+        await using var cmd = connection.CreateCommand();
+        cmd.CommandText = "SELECT user_id FROM room_participants WHERE room_id = @roomId";
+        var p = cmd.CreateParameter();
+        p.ParameterName = "roomId";
+        p.Value = roomId;
+        cmd.Parameters.Add(p);
+
+        await using var reader = await cmd.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+            ids.Add(reader.GetString(0));
+        return ids;
+    }
+
+    private async Task<int> CountUnreadAsync(string userId, string conversationId, ConversationParticipant? participant = null)
+    {
+        participant ??= await db.ConversationParticipants
+            .FirstOrDefaultAsync(p => p.ConversationId == conversationId && p.UserId == userId);
+        if (participant == null) return 0;
+
+        var since = participant.LastReadAt ?? participant.JoinedAt;
+        return await db.Messages.CountAsync(m =>
+            m.ConversationId == conversationId &&
+            m.SenderUserId != userId &&
+            m.SentAt > since);
+    }
+
+    private async Task<ConversationListItemDto> MapListItemAsync(Conversation c, string userId)
     {
         var last = c.Messages.OrderByDescending(m => m.SentAt).FirstOrDefault();
         if (last == null)
@@ -232,7 +329,8 @@ public class ConversationService(MessagingDbContext db)
             c.Title,
             last?.Content,
             last?.SentAt,
-            c.UpdatedAt);
+            c.UpdatedAt,
+            await CountUnreadAsync(userId, c.Id));
     }
 
     private static MessageDto MapMessage(Message m) => new(

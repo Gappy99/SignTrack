@@ -11,7 +11,12 @@ public record ConversationListItemDto(
     string? Title,
     string? LastMessagePreview,
     DateTime? LastMessageAt,
-    DateTime UpdatedAt);
+    DateTime UpdatedAt,
+    int UnreadCount);
+
+public record PushSubscribeDto(string Endpoint, PushKeysDto Keys);
+
+public record PushKeysDto(string P256dh, string Auth);
 
 public record MessageDto(
     string Id,

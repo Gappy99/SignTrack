@@ -88,10 +88,32 @@ El usuario autenticado se une a una sala existente.
 {
   "roomId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "participantId": "part_xyz789",
-  "signalingUrl": "ws://localhost:5200/hubs/calls",
-  "iceServers": []
+  "signalingUrl": "/hubs/calls",
+  "iceServers": [
+    { "urls": "stun:stun.l.google.com:19302" },
+    { "urls": "stun:stun1.l.google.com:19302" }
+  ]
 }
 ```
+
+**Hub SignalR (vía Gateway `:5050`):** `/hubs/calls`
+
+| Método cliente | Descripción |
+|----------------|-------------|
+| `JoinCallRoom(roomId)` | Entrar al grupo de señalización |
+| `LeaveCallRoom(roomId)` | Salir del grupo |
+| `SendOffer(roomId, targetUserId, sdp)` | Oferta WebRTC |
+| `SendAnswer(roomId, targetUserId, sdp)` | Respuesta WebRTC |
+| `SendIceCandidate(roomId, targetUserId, candidate)` | Candidato ICE |
+
+| Evento servidor | Descripción |
+|-----------------|-------------|
+| `ExistingParticipants` | `{ roomId, userIds[] }` al unirse |
+| `ParticipantJoined` | `{ roomId, userId }` |
+| `ParticipantLeft` | `{ roomId, userId }` |
+| `ReceiveOffer` | `{ roomId, fromUserId, targetUserId, sdp }` |
+| `ReceiveAnswer` | `{ roomId, fromUserId, targetUserId, sdp }` |
+| `ReceiveIceCandidate` | `{ roomId, fromUserId, targetUserId, candidate }` |
 
 ### `GET /api/v1/rooms/{id}`
 
@@ -148,6 +170,29 @@ Historial paginado (REST, sin tiempo real).
 ```json
 { "content": "Hola", "type": "text" }
 ```
+
+Tras persistir, el servidor emite **`ReceiveMessage`** por SignalR a los clientes en la conversación.
+
+---
+
+## Messaging — SignalR (Grupo B / B1)
+
+**Hub:** `SignTrack.Messaging` · URL Gateway: `ws://localhost:5050/hubs/chat`  
+**Auth:** JWT en header `Authorization` o query `?access_token=<JWT>`
+
+| Evento (cliente → servidor) | Payload | Descripción |
+|----------------------------|---------|-------------|
+| `JoinConversation` | `conversationId` | Unirse al grupo SignalR de la conversación |
+| `LeaveConversation` | `conversationId` | Salir del grupo |
+| `SendTyping` | `conversationId`, `isTyping` | Indicador escribiendo |
+
+| Evento (servidor → cliente) | Payload | Descripción |
+|----------------------------|---------|-------------|
+| `ReceiveMessage` | `MessageDto` | Nuevo mensaje |
+| `UserTyping` | `{ conversationId, userId, isTyping }` | Otro usuario escribiendo |
+| `UserOnline` / `UserOffline` | `{ conversationId, userId }` | Presencia en sala |
+
+**Backplane:** Redis (`localhost:6379`).
 
 ---
 
@@ -280,12 +325,12 @@ Lista servicios downstream y sus URLs de health.
 
 ### Endpoints Recognition (existentes / proxy vía Gateway)
 
-| Método | Ruta directa | Ruta Gateway (plan) | Descripción |
-|--------|--------------|---------------------|-------------|
-| `POST` | `/predict-letter` | `/api/v1/predict-letter` | Predice letra desde features o imagen |
-| `POST` | `/predict-word` | `/api/v1/predict-word` | Predice palabra desde features o video |
-| `POST` | `/translate` | `/api/v1/translate` | Passthrough texto (stub) |
-| `GET` | `/health` | — | Health del servicio IA |
+| Método | Ruta directa | Ruta Gateway | Descripción |
+|--------|--------------|--------------|-------------|
+| `POST` | `/predict-letter` | `/recognition-api/predict-letter` | Predice letra (features, imagePath o imageBase64) |
+| `POST` | `/predict-word` | `/recognition-api/predict-word` | Predice palabra |
+| `POST` | `/translate` | `/recognition-api/translate` | Passthrough texto (stub) |
+| `GET` | `/health` | `/recognition-api/health` | Health del servicio IA |
 
 ### `POST /predict-letter` (frame → letra)
 
@@ -305,13 +350,21 @@ Lista servicios downstream y sus URLs de health.
 }
 ```
 
+**Request (opción C — frame JPEG base64 desde navegador, B1.5)**
+
+```json
+{
+  "imageBase64": "data:image/jpeg;base64,/9j/4AAQ..."
+}
+```
+
 **Response `200`**
 
 ```json
 {
   "success": true,
-  "letter": "A",
-  "confidence": 0.92
+  "label": "A",
+  "features": []
 }
 ```
 
