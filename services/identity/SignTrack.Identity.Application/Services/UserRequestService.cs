@@ -13,6 +13,7 @@ public class UserRequestService(
     IGroupRepository groups,
     IAppointmentRepository appointments,
     IUserRepository users,
+    IContactRepository contacts,
     IPushNotifier pushNotifier) : IUserRequestService
 {
     public async Task<UserRequestResponseDto> SendRequestAsync(string fromUserId, CreateUserRequestDto dto)
@@ -48,6 +49,14 @@ public class UserRequestService(
 
             if (await requests.ExistsPendingGroupInviteAsync(fromUserId, dto.ToUserId, dto.GroupId))
                 throw new BusinessException(ErrorCodes.REQUEST_ALREADY_PENDING, "A pending invite already exists for this user and group");
+        }
+        else if (type == UserRequestTypes.Contact)
+        {
+            if (await contacts.ExistsAsync(fromUserId, dto.ToUserId))
+                throw new BusinessException(ErrorCodes.MEMBER_ALREADY_EXISTS, "Este usuario ya es tu contacto");
+
+            if (await requests.ExistsPendingContactRequestAsync(fromUserId, dto.ToUserId))
+                throw new BusinessException(ErrorCodes.REQUEST_ALREADY_PENDING, "Ya existe una solicitud de contacto pendiente entre estos usuarios");
         }
         else if (type == UserRequestTypes.Meeting)
         {
@@ -143,6 +152,10 @@ public class UserRequestService(
 
                 await groups.AddMemberAsync(member);
             }
+        }
+        else if (status == UserRequestStatuses.Accepted && request.Type == UserRequestTypes.Contact)
+        {
+            await contacts.CreateBidirectionalAsync(request.FromUserId, request.ToUserId);
         }
         else if (status == UserRequestStatuses.Accepted && request.Type == UserRequestTypes.Meeting)
         {

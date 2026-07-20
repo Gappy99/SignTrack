@@ -15,8 +15,11 @@
     "smoke:e2e": "node scripts/smoke-e2e.mjs",
     "recognition:api": "node services/recognition/src/api/server.js",
     "setup:recognition": "node scripts/setup-recognition.mjs",
+    "setup:r2": "node scripts/setup-r2.mjs",
+    "setup:neon": "node scripts/setup-neon.mjs",
     "recognition:init-schema": "node services/recognition/src/db/initSchema.js",
     "recognition:backfill-r2": "node services/recognition/src/db/backfillFromR2.js",
+    "recognition:sync-r2-local": "node services/recognition/src/db/syncR2ToLocalDataset.js",
     "recognition:export-letters": "node services/recognition/src/db/exportLetterDatasetFromNeon.js",
     "recognition:export-words": "node services/recognition/src/db/exportWordDatasetFromNeon.js",
     "recognition:process-dataset": "node services/recognition/src/db/processDataset.js",
@@ -36,7 +39,14 @@
     "fs-extra": "^11.3.4",
     "pg": "^8.20.0"
   },
-  "keywords": ["signtrack", "sign-language", "microservices"],
+  "keywords": [
+    "signtrack",
+    "sign-language",
+    "microservices"
+  ],
   "license": "ISC",
-  "packageManager": "pnpm@10.29.3"
+  "packageManager": "pnpm@10.29.3",
+  "devDependencies": {
+    "wrangler": "^4.111.0"
+  }
 }

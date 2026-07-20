@@ -6,7 +6,7 @@ using SignTrack.Identity.Domain.Interfaces;
 
 namespace SignTrack.Identity.Application.Services;
 
-public class UserManagementService(IUserRepository users, IRoleRepository roles, ICloudinaryService cloudinary) : IUserManagementService
+public class UserManagementService(IUserRepository users, IRoleRepository roles, IContactRepository contactRepository, ICloudinaryService cloudinary) : IUserManagementService
 {
     public async Task<UserResponseDto?> GetUserProfileAsync(string userId)
     {
@@ -143,6 +143,12 @@ public class UserManagementService(IUserRepository users, IRoleRepository roles,
     }
 
     public async Task<IReadOnlyList<UserResponseDto>> GetContactsAsync(string currentUserId, string? query)
+    {
+        var contacts = await contactRepository.GetContactsAsync(currentUserId, query);
+        return contacts.Select(u => MapToUserResponseDto(u)).ToList();
+    }
+
+    public async Task<IReadOnlyList<UserResponseDto>> GetDirectoryAsync(string currentUserId, string? query)
     {
         var directory = await users.SearchDirectoryAsync(currentUserId, query);
         return directory.Select(u => MapToUserResponseDto(u)).ToList();

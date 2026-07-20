@@ -8,5 +8,6 @@ public interface IUserRequestRepository
     Task<UserRequest> GetByIdAsync(string id);
     Task<IReadOnlyList<UserRequest>> GetInboxAsync(string toUserId);
     Task<bool> ExistsPendingGroupInviteAsync(string fromUserId, string toUserId, string groupId);
+    Task<bool> ExistsPendingContactRequestAsync(string fromUserId, string toUserId);
     Task<UserRequest> UpdateAsync(UserRequest request);
 }

@@ -47,6 +47,11 @@ public static class UuidGenerator
         return $"req_{GenerateShortUUID()}";
     }
 
+    public static string GenerateContactId()
+    {
+        return $"cnt_{GenerateShortUUID()}";
+    }
+
     public static string GenerateTaskId()
     {
         return $"tsk_{GenerateShortUUID()}";

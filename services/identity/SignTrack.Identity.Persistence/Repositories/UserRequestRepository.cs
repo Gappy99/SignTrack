@@ -54,6 +54,15 @@ public class UserRequestRepository(ApplicationDbContext context) : IUserRequestR
             r.Status == UserRequestStatuses.Pending);
     }
 
+    public async Task<bool> ExistsPendingContactRequestAsync(string fromUserId, string toUserId)
+    {
+        return await context.UserRequests.AnyAsync(r =>
+            ((r.FromUserId == fromUserId && r.ToUserId == toUserId) ||
+             (r.FromUserId == toUserId && r.ToUserId == fromUserId)) &&
+            r.Type == UserRequestTypes.Contact &&
+            r.Status == UserRequestStatuses.Pending);
+    }
+
     public async Task<UserRequest> UpdateAsync(UserRequest request)
     {
         await context.SaveChangesAsync();

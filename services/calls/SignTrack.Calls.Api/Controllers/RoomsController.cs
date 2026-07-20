@@ -43,6 +43,16 @@ public class RoomsController(RoomService rooms) : ControllerBase
         return Ok(await rooms.GetMyRoomsAsync(userId));
     }
 
+    [HttpGet("history")]
+    public async Task<ActionResult<IReadOnlyList<CallHistoryItemDto>>> History()
+    {
+        var userId = GetUserId();
+        if (string.IsNullOrEmpty(userId))
+            return Unauthorized(new { success = false, message = "Usuario no autenticado" });
+
+        return Ok(await rooms.GetHistoryAsync(userId));
+    }
+
     [HttpGet("{id}")]
     public async Task<ActionResult<RoomDetailDto>> Get(string id)
     {

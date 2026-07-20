@@ -17,6 +17,20 @@ public class RoomService(CallsDbContext db, IConfiguration configuration, LiveKi
     public async Task<bool> IsParticipantAsync(string userId, string roomId) =>
         await db.RoomParticipants.AnyAsync(p => p.RoomId == roomId && p.UserId == userId);
 
+    /// <summary>Título de una sala no terminada, sin cargar participantes (consulta ligera para invitaciones).</summary>
+    public async Task<string?> GetRoomTitleAsync(string roomId) =>
+        await db.CallRooms
+            .Where(r => r.Id == roomId && r.Status != "ended")
+            .Select(r => r.Title)
+            .FirstOrDefaultAsync();
+
+    /// <summary>Nombre visible con el que un usuario figura en una sala (consulta ligera).</summary>
+    public async Task<string?> GetParticipantDisplayNameAsync(string userId, string roomId) =>
+        await db.RoomParticipants
+            .Where(p => p.RoomId == roomId && p.UserId == userId)
+            .Select(p => p.DisplayName)
+            .FirstOrDefaultAsync();
+
     public async Task<IReadOnlyList<string>> GetOtherParticipantUserIdsAsync(string userId, string roomId) =>
         await db.RoomParticipants
             .Where(p => p.RoomId == roomId && p.UserId != userId)
@@ -73,7 +87,7 @@ public class RoomService(CallsDbContext db, IConfiguration configuration, LiveKi
                 {
                     Id = IdGenerator.ParticipantId(),
                     UserId = userId,
-                    DisplayName = "Anfitrión",
+                    DisplayName = string.IsNullOrWhiteSpace(dto.DisplayName) ? "Anfitrión" : dto.DisplayName.Trim(),
                     JoinedAt = now
                 }
             ]
@@ -142,9 +156,35 @@ public class RoomService(CallsDbContext db, IConfiguration configuration, LiveKi
             throw new UnauthorizedAccessException("Solo el anfitrión puede terminar la reunión");
 
         room.Status = "ended";
+        room.EndedAt = DateTime.UtcNow;
         room.UpdatedAt = DateTime.UtcNow;
         await db.SaveChangesAsync();
         await callHub.NotifyRoomEndedAsync(roomId);
+    }
+
+    public async Task<IReadOnlyList<CallHistoryItemDto>> GetHistoryAsync(string userId)
+    {
+        var ended = await db.CallRooms
+            .Include(r => r.Participants)
+            .Where(r => r.Status == "ended" && r.Participants.Any(p => p.UserId == userId))
+            .OrderByDescending(r => r.EndedAt ?? r.UpdatedAt)
+            .ToListAsync();
+
+        return ended.Select(r =>
+        {
+            // Salas terminadas antes de esta feature no tienen EndedAt: UpdatedAt
+            // se escribía al terminar, así que sirve de aproximación.
+            var endedAt = r.EndedAt ?? r.UpdatedAt;
+            var durationSeconds = (int)Math.Max(0, (endedAt - r.CreatedAt).TotalSeconds);
+            return new CallHistoryItemDto(
+                r.Id,
+                r.Title,
+                r.HostUserId,
+                r.Participants.Count,
+                r.CreatedAt,
+                endedAt,
+                durationSeconds);
+        }).ToList();
     }
 
     private async Task<CallRoom> GetRoomWithParticipantsAsync(string roomId)

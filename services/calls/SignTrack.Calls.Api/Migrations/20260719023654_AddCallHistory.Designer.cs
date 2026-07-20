@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SignTrack.Calls.Api.Data;
@@ -11,9 +12,11 @@ using SignTrack.Calls.Api.Data;
 namespace SignTrack.Calls.Api.Migrations
 {
     [DbContext(typeof(CallsDbContext))]
-    partial class CallsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260719023654_AddCallHistory")]
+    partial class AddCallHistory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

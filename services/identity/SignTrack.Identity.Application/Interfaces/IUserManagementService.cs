@@ -9,6 +9,7 @@ public interface IUserManagementService
     Task<IReadOnlyList<UserResponseDto>> GetUsersByRoleAsync(string roleName);
     Task<IReadOnlyList<UserResponseDto>> GetAllUsersAsync();
     Task<IReadOnlyList<UserResponseDto>> GetContactsAsync(string currentUserId, string? query);
+    Task<IReadOnlyList<UserResponseDto>> GetDirectoryAsync(string currentUserId, string? query);
     Task<UserResponseDto?> GetUserProfileAsync(string userId);
     Task<UserResponseDto> UpdateUserProfileAsync(string userId, UpdateUserProfileDto dto);
 }

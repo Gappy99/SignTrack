@@ -19,6 +19,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<TaskItem> TaskItems { get; set; }
     public DbSet<Appointment> Appointments { get; set; }
     public DbSet<AppointmentParticipant> AppointmentParticipants { get; set; }
+    public DbSet<Contact> Contacts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -255,6 +256,30 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
                 .WithMany()
                 .HasForeignKey(e => e.AppointmentId)
                 .OnDelete(DeleteBehavior.SetNull);
+        });
+
+        modelBuilder.Entity<Contact>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id)
+                .HasMaxLength(16)
+                .ValueGeneratedOnAdd();
+            entity.Property(e => e.UserId)
+                .IsRequired()
+                .HasMaxLength(16);
+            entity.Property(e => e.ContactUserId)
+                .IsRequired()
+                .HasMaxLength(16);
+            entity.Property(e => e.CreatedAt).IsRequired();
+            entity.HasIndex(e => new { e.UserId, e.ContactUserId }).IsUnique();
+            entity.HasOne(e => e.User)
+                .WithMany()
+                .HasForeignKey(e => e.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            entity.HasOne(e => e.ContactUser)
+                .WithMany()
+                .HasForeignKey(e => e.ContactUserId)
+                .OnDelete(DeleteBehavior.Restrict);
         });
 
         modelBuilder.Entity<TaskItem>(entity =>

@@ -9,6 +9,7 @@ public class CallRoom
     public int MaxParticipants { get; set; } = 8;
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+    public DateTime? EndedAt { get; set; }
 
     public ICollection<RoomParticipant> Participants { get; set; } = [];
 }

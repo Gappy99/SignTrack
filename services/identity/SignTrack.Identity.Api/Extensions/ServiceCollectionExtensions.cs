@@ -22,6 +22,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IUserRequestRepository, UserRequestRepository>();
         services.AddScoped<ITaskRepository, TaskRepository>();
         services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+        services.AddScoped<IContactRepository, ContactRepository>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUserManagementService, UserManagementService>();
         services.AddScoped<IGroupService, GroupService>();

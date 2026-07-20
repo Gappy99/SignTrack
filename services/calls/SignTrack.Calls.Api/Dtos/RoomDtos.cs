@@ -1,6 +1,6 @@
 namespace SignTrack.Calls.Api.Dtos;
 
-public record CreateRoomDto(string Title, int? MaxParticipants);
+public record CreateRoomDto(string Title, int? MaxParticipants, string? DisplayName = null);
 
 public record JoinRoomDto(string? DisplayName);
 
@@ -24,6 +24,15 @@ public record RoomDetailDto(
     int ParticipantCount,
     IReadOnlyList<RoomParticipantDto> Participants,
     DateTime CreatedAt);
+
+public record CallHistoryItemDto(
+    string Id,
+    string Title,
+    string HostUserId,
+    int ParticipantCount,
+    DateTime CreatedAt,
+    DateTime EndedAt,
+    int DurationSeconds);
 
 public record JoinRoomResponseDto(
     string RoomId,
