@@ -1,11 +1,15 @@
 # Caddy — HTTPS + reverse proxy SignTrack (B0)
-# Sustituir {$DOMAIN} en .env.prod o export DOMAIN=app.tudominio.com
+# Requiere variable de entorno DOMAIN (ej. app.signtrack.gt)
 
 {$DOMAIN} {
 	encode gzip
 
-	# Frontend estático (vite build → dist/)
+	# Raíz → app
+	redir / /signtrack/ permanent
+
+	# Frontend estático (vite build copiado a deploy/frontend-dist/)
 	handle /signtrack/* {
+		uri strip_prefix /signtrack
 		root * /srv/frontend
 		try_files {path} /index.html
 		file_server

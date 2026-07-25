@@ -62,6 +62,10 @@ services:
     depends_on:
       - postgres
       - redis
+      - identity
+      - messaging
+      - calls
+      - recognition
     networks:
       - signtrack
 
@@ -110,19 +114,33 @@ services:
     networks:
       - signtrack
 
+  recognition:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.recognition
+    restart: unless-stopped
+    env_file: .env.prod
+    environment:
+      PORT: 3000
+    networks:
+      - signtrack
+
   caddy:
     image: caddy:2-alpine
     restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN}
     volumes:
       - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
       - caddy_config:/config
-      - ./SignTrack-frontend/dist:/srv/frontend:ro
+      - ./deploy/frontend-dist:/srv/frontend:ro
     depends_on:
       - gateway
+      - livekit
     networks:
       - signtrack
 

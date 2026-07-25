@@ -1,3 +1,5 @@
+using SignTrack.Gateway.Api.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 var downstream = builder.Configuration.GetSection("DownstreamUrls");
 var identity = downstream["Identity"] ?? "http://localhost:5104";
@@ -5,14 +7,7 @@ var calls = downstream["Calls"] ?? "http://localhost:5200";
 var messaging = downstream["Messaging"] ?? "http://localhost:5300";
 var recognition = downstream["Recognition"] ?? "http://localhost:3000";
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("FrontendCors", policy =>
-        policy.WithOrigins("http://localhost:5180", "http://localhost:5173", "http://localhost:3000")
-            .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials());
-});
+builder.Services.AddGatewayCors(builder.Configuration);
 
 builder.Services.AddReverseProxy()
     .LoadFromMemory(

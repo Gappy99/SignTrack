@@ -1,0 +1,47 @@
+# Recognition API — Node + Python (MediaPipe). Incluye modelo demo si falta sign_model.pkl.
+FROM node:20-bookworm-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 python3-pip python3-venv \
+    libgl1 libglib2.0-0 libsm6 libxext6 libxrender1 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY package.json ./
+RUN npm install --omit=dev express dotenv
+
+COPY services/recognition ./services/recognition
+
+WORKDIR /app/services/recognition
+
+RUN python3 -m venv .venv \
+    && .venv/bin/pip install --no-cache-dir -r requirements.txt
+
+RUN .venv/bin/python3 - <<'PY'
+import joblib
+import numpy as np
+from pathlib import Path
+from sklearn.ensemble import RandomForestClassifier
+
+model_path = Path("src/model/sign_model.pkl")
+if not model_path.exists():
+    labels = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    rng = np.random.default_rng(42)
+    X, y = [], []
+    for label in labels:
+        center = rng.random(18)
+        for _ in range(40):
+            X.append(center + rng.normal(0, 0.02, 18))
+            y.append(label)
+    clf = RandomForestClassifier(n_estimators=120, random_state=42)
+    clf.fit(X, y)
+    joblib.dump(clf, model_path)
+    print("Demo sign_model.pkl generated")
+PY
+
+ENV PYTHON_EXECUTABLE=/app/services/recognition/.venv/bin/python3
+ENV PORT=3000
+EXPOSE 3000
+
+CMD ["node", "src/api/server.js"]

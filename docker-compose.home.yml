@@ -1,0 +1,80 @@
+# SignTrack — PC de casa como servidor (Caddy + infra Docker, APIs en el host)
+# Uso: pnpm start:home
+
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-SignTrack}
+      POSTGRES_USER: ${POSTGRES_USER:-signtrack}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-SignTrackHome2026!}
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_home_data:/var/lib/postgresql/data
+    networks:
+      - signtrack-home
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - signtrack-home
+
+  livekit:
+    image: livekit/livekit-server:v1.8.0
+    restart: unless-stopped
+    command: --config /etc/livekit.yaml
+    volumes:
+      - ./deploy/livekit.prod.yaml:/etc/livekit.yaml:ro
+    ports:
+      - "7880:7880"
+      - "7881:7881"
+      - "7882:7882/udp"
+    networks:
+      - signtrack-home
+
+  coturn:
+    image: coturn/coturn:4.6.2
+    restart: unless-stopped
+    volumes:
+      - ./deploy/coturn/turnserver.conf:/etc/coturn/turnserver.conf:ro
+    ports:
+      - "3478:3478/tcp"
+      - "3478:3478/udp"
+      - "5349:5349/tcp"
+      - "5349:5349/udp"
+    networks:
+      - signtrack-home
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:-signtrack-kinal.duckdns.org}
+    volumes:
+      - ./deploy/Caddyfile.home:/etc/caddy/Caddyfile:ro
+      - ./deploy/frontend-dist:/srv/frontend:ro
+      - caddy_home_data:/data
+      - caddy_home_config:/config
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - livekit
+    networks:
+      - signtrack-home
+
+networks:
+  signtrack-home:
+    driver: bridge
+
+volumes:
+  postgres_home_data:
+  caddy_home_data:
+  caddy_home_config:

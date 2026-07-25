@@ -78,6 +78,17 @@ docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
 - Video grupal: LiveKit (`maxParticipants≥3`)
 - Push: permiso navegador + `GET /api/v1/notifications/vapid-public-key`
 
+**Plan paso a paso Kinal (Petén + amigo en otra red):** ver `docs/DEPLOY_PLAN_KINAL.md`
+
+**Deploy $0 sin comprar dominio:** ver `docs/DEPLOY_GRATIS.md` → DuckDNS + Oracle Free VPS
+
+**Deploy automatizado:**
+
+```bash
+cp .env.prod.example .env.prod   # editar DOMAIN, JWT, LiveKit, TURN
+pnpm deploy:prod
+```
+
 ## Local (desarrollo)
 
 ```bash

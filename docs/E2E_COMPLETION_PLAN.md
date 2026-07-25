@@ -238,9 +238,10 @@ flowchart LR
 
 **Grupo C implementado en `ft/sajche`.** Pendiente:
 
-1. Levantar stack (`pnpm start:all`) y ejecutar `pnpm smoke:e2e`
-2. Prueba manual con 2–4 cuentas demo (ver `docs/DEMO_SCRIPT.md`)
-3. Despliegue prod (C7) cuando haya VPS
+1. **Deploy VPS** — `docs/DEPLOY_PLAN_KINAL.md` + `pnpm deploy:prod`
+2. Probar videollamada 1:1 entre **Petén y otra red** (coturn + puertos UDP)
+3. Checklist manual demo (`docs/DEMO_SCRIPT.md`)
+4. IA / precisión señas — post-deploy (no bloquea)
 
 **Rama:** solo `ft/sajche` — `develop` no se modifica.
 
