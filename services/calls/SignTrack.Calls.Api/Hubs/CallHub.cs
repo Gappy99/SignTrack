@@ -107,6 +107,8 @@ public class CallHub(RoomService rooms) : Hub
             if (SigningStatusByRoom.TryGetValue(roomId, out var roomState))
                 roomState.TryRemove(userId, out _);
 
+            await rooms.LeaveRoomAsync(userId, roomId);
+
             await Clients.OthersInGroup(CallGroup(roomId))
                 .SendAsync("ParticipantLeft", new { roomId, userId });
         }
