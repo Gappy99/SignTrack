@@ -24,6 +24,12 @@ public class AuthService(
     ILogger<AuthService> logger) : IAuthService
 {
     private readonly ICloudinaryService _cloudinaryService = cloudinaryService;
+
+    private bool IsDevAutoActivate() =>
+        string.Equals(
+            configuration["ASPNETCORE_ENVIRONMENT"] ?? configuration["Environment"],
+            "Development",
+            StringComparison.OrdinalIgnoreCase);
     public async Task<RegisterResponseDto> RegisterAsync(RegisterDto registerDto)
     {
         // Verificar si el email ya existe
@@ -125,6 +131,12 @@ public class AuthService(
             },
         };
 
+        if (IsDevAutoActivate())
+        {
+            user.Status = true;
+            user.UserEmail.EmailVerified = true;
+        }
+
         // Guardar usuario y entidades relacionadas
         var createdUser = await userRepository.CreateAsync(user);
 
@@ -149,8 +161,10 @@ public class AuthService(
         {
             Success = true,
             User = MapToUserResponseDto(createdUser),
-            Message = "Usuario registrado exitosamente. Por favor, verifica tu email para activar la cuenta.",
-            EmailVerificationRequired = true
+            Message = IsDevAutoActivate()
+                ? "Usuario registrado y activado (modo desarrollo)."
+                : "Usuario registrado exitosamente. Por favor, verifica tu email para activar la cuenta.",
+            EmailVerificationRequired = !IsDevAutoActivate()
         };
     }
 

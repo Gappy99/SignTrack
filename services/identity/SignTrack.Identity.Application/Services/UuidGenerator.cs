@@ -32,6 +32,41 @@ public static class UuidGenerator
         return $"rol_{GenerateShortUUID()}";
     }
 
+    public static string GenerateGroupId()
+    {
+        return $"grp_{GenerateShortUUID()}";
+    }
+
+    public static string GenerateMemberId()
+    {
+        return $"mbr_{GenerateShortUUID()}";
+    }
+
+    public static string GenerateRequestId()
+    {
+        return $"req_{GenerateShortUUID()}";
+    }
+
+    public static string GenerateContactId()
+    {
+        return $"cnt_{GenerateShortUUID()}";
+    }
+
+    public static string GenerateTaskId()
+    {
+        return $"tsk_{GenerateShortUUID()}";
+    }
+
+    public static string GenerateAppointmentId()
+    {
+        return $"apt_{GenerateShortUUID()}";
+    }
+
+    public static string GenerateAppointmentParticipantId()
+    {
+        return $"ap_{GenerateShortUUID()}";
+    }
+
     public static bool IsValidUserId(string? id)
     {
         if(string.IsNullOrEmpty(id))

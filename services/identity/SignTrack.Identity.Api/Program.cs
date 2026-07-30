@@ -3,6 +3,7 @@ using SignTrack.Identity.Persistence.Data;
 using SignTrack.Identity.Api.Middlewares;
 using SignTrack.Identity.Api.Extensions;
 using SignTrack.Identity.Api.ModelBinders;
+using SignTrack.Identity.Api.Services;
 using SignTrack.Identity.Application.Interfaces;
 using SignTrack.Identity.Application.Services;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +41,13 @@ builder.Services.AddControllers(options =>
 });
 
 builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddHttpContextAccessor();
+var messagingUrl = builder.Configuration["DownstreamUrls:Messaging"] ?? "http://localhost:5300";
+var callsUrl = builder.Configuration["DownstreamUrls:Calls"] ?? "http://localhost:5200";
+builder.Services.AddHttpClient("Messaging", client => client.BaseAddress = new Uri(messagingUrl));
+builder.Services.AddHttpClient("Calls", client => client.BaseAddress = new Uri(callsUrl));
+builder.Services.AddScoped<IPushNotifier, MessagingPushNotifier>();
+builder.Services.AddScoped<ICallsRoomClient, CallsRoomClient>();
 builder.Services.AddApiDocumentation();
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddRateLimitingPolicies();

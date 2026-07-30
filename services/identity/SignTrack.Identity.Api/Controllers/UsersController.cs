@@ -65,6 +65,44 @@ public class UsersController(IUserManagementService userManagementService) : Con
         return Ok(updated);
     }
 
+    [HttpGet("contacts")]
+    [Authorize]
+    [EnableRateLimiting("ApiPolicy")]
+    public async Task<ActionResult<IReadOnlyList<UserResponseDto>>> GetContacts([FromQuery] string? q)
+    {
+        var userId = User.Claims.FirstOrDefault(c => c.Type == "sub" || c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+        if (string.IsNullOrEmpty(userId)) return Unauthorized(new { success = false, message = "Usuario no autenticado" });
+
+        var contacts = await userManagementService.GetContactsAsync(userId, q);
+        return Ok(contacts);
+    }
+
+    [HttpGet("directory")]
+    [Authorize]
+    [EnableRateLimiting("ApiPolicy")]
+    public async Task<ActionResult<IReadOnlyList<UserResponseDto>>> GetDirectory([FromQuery] string? q)
+    {
+        var userId = User.Claims.FirstOrDefault(c => c.Type == "sub" || c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+        if (string.IsNullOrEmpty(userId)) return Unauthorized(new { success = false, message = "Usuario no autenticado" });
+
+        var directory = await userManagementService.GetDirectoryAsync(userId, q);
+        return Ok(directory);
+    }
+
+    [HttpGet]
+    [Authorize]
+    [EnableRateLimiting("ApiPolicy")]
+    public async Task<ActionResult<IReadOnlyList<UserResponseDto>>> GetAllUsers()
+    {
+        if (!await CurrentUserIsAdmin())
+        {
+            return StatusCode(403, new { success = false, message = "Forbidden" });
+        }
+
+        var users = await userManagementService.GetAllUsersAsync();
+        return Ok(users);
+    }
+
     [HttpGet("by-role/{roleName}")]
     [Authorize]
     [EnableRateLimiting("ApiPolicy")]

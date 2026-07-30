@@ -16,4 +16,6 @@ public interface IUserRepository
     Task<User> UpdateAsync(User user);
     Task<bool> DeleteAsync(string id);
     Task UpdateUserRoleAsync(string userId, string roleId);
+    Task<IReadOnlyList<User>> GetAllAsync();
+    Task<IReadOnlyList<User>> SearchDirectoryAsync(string currentUserId, string? query, int limit = 50);
 }

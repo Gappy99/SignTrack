@@ -4,9 +4,28 @@
   "description": "SignTrack backend monorepo — microservicios C# + reconocimiento de señas (MediaPipe)",
   "type": "module",
   "scripts": {
+    "docker:up": "docker compose up -d",
+    "install:all": "pnpm install && pnpm setup:frontend && dotnet restore SignTrack.sln",
+    "setup:frontend": "pnpm --dir ../SignTrack-frontend install",
+    "start:identity": "node scripts/start-identity.mjs",
+    "start:frontend": "pnpm --dir ../SignTrack-frontend dev",
+    "start:backend": "pnpm docker:up && pnpm start:identity",
+    "start:all": "node scripts/start-all.mjs",
+    "start:home": "node scripts/start-home.mjs",
+    "stop:all": "node scripts/stop-all.mjs",
+    "seed:demo": "node scripts/seed-demo-users.mjs",
+    "smoke:e2e": "node scripts/smoke-e2e.mjs",
     "recognition:api": "node services/recognition/src/api/server.js",
+    "setup:recognition": "node scripts/setup-recognition.mjs",
+    "setup:r2": "node scripts/setup-r2.mjs",
+    "setup:neon": "node scripts/setup-neon.mjs",
     "recognition:init-schema": "node services/recognition/src/db/initSchema.js",
     "recognition:backfill-r2": "node services/recognition/src/db/backfillFromR2.js",
+    "recognition:sync-r2-local": "node services/recognition/src/db/syncR2ToLocalDataset.js",
+    "deploy:prod": "node scripts/deploy-prod.mjs",
+    "deploy:init-free": "node scripts/init-free-env.mjs",
+    "deploy:duckdns": "node scripts/update-duckdns.mjs",
+    "deploy:free": "node scripts/deploy-free.mjs",
     "recognition:export-letters": "node services/recognition/src/db/exportLetterDatasetFromNeon.js",
     "recognition:export-words": "node services/recognition/src/db/exportWordDatasetFromNeon.js",
     "recognition:process-dataset": "node services/recognition/src/db/processDataset.js",
@@ -26,7 +45,14 @@
     "fs-extra": "^11.3.4",
     "pg": "^8.20.0"
   },
-  "keywords": ["signtrack", "sign-language", "microservices"],
+  "keywords": [
+    "signtrack",
+    "sign-language",
+    "microservices"
+  ],
   "license": "ISC",
-  "packageManager": "pnpm@10.29.3"
+  "packageManager": "pnpm@10.29.3",
+  "devDependencies": {
+    "wrangler": "^4.111.0"
+  }
 }

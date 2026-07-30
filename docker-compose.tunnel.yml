@@ -1,0 +1,11 @@
+# Override: expone Caddy en HTTP plano para Cloudflare Tunnel, sin depender de coturn/livekit propios.
+# Uso: docker compose -f docker-compose.home.yml -f docker-compose.tunnel.yml up -d postgres redis caddy
+
+services:
+  caddy:
+    volumes:
+      - ./deploy/Caddyfile.tunnel:/etc/caddy/Caddyfile:ro
+      - ./deploy/frontend-dist:/srv/frontend:ro
+      - caddy_home_data:/data
+      - caddy_home_config:/config
+    depends_on: []

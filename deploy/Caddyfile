@@ -1,0 +1,34 @@
+# Caddy — HTTPS + reverse proxy SignTrack (B0)
+# Requiere variable de entorno DOMAIN (ej. app.signtrack.gt)
+
+{$DOMAIN} {
+	encode gzip
+
+	# Raíz → app
+	redir / /signtrack/ permanent
+
+	# Frontend estático (vite build copiado a deploy/frontend-dist/)
+	handle /signtrack/* {
+		uri strip_prefix /signtrack
+		root * /srv/frontend
+		try_files {path} /index.html
+		file_server
+	}
+
+	# API BFF + SignalR + Recognition proxy
+	handle /api/* {
+		reverse_proxy gateway:8080
+	}
+	handle /hubs/* {
+		reverse_proxy gateway:8080
+	}
+	handle /recognition-api/* {
+		reverse_proxy gateway:8080
+	}
+
+	# LiveKit WebSocket (grupos B3)
+	handle /livekit/* {
+		uri strip_prefix /livekit
+		reverse_proxy livekit:7880
+	}
+}

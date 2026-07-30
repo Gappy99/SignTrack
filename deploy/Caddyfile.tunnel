@@ -1,0 +1,32 @@
+# Caddy — detrás de Cloudflare Tunnel (sin puertos abiertos en el router)
+# Cloudflare ya termina HTTPS en su borde; aquí Caddy solo sirve HTTP plano en :80.
+# Backend corre en el host (pnpm start-home); Caddy proxy + frontend estático.
+
+:80 {
+	encode gzip
+	redir / /signtrack/ permanent
+
+	route /signtrack/* {
+		uri strip_prefix /signtrack
+		root * /srv/frontend
+		@html path /index.html /
+		header @html Cache-Control "no-cache, no-store, must-revalidate"
+		try_files {path} /index.html
+		file_server
+	}
+
+	handle /api/* {
+		reverse_proxy host.docker.internal:5050
+	}
+	handle /hubs/* {
+		reverse_proxy host.docker.internal:5050
+	}
+	handle /recognition-api/* {
+		reverse_proxy host.docker.internal:5050
+	}
+
+	handle /livekit/* {
+		uri strip_prefix /livekit
+		reverse_proxy host.docker.internal:7880
+	}
+}

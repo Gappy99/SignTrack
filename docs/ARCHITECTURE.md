@@ -23,30 +23,27 @@ SignTrack es una plataforma tipo **Microsoft Teams inclusiva** para personas que
 
 ```
                     ┌─────────────────────┐
-                    │  SignTrack.Gateway  │  :5000  (BFF / enrutamiento)
+                    │  SignTrack.Gateway  │  :5050  (BFF / enrutamiento)
                     └──────────┬──────────┘
-           ┌───────────────────┼───────────────────┐
+           ┌───────────────────┼───────────────────┬──────────────────┐
+           │                   │                   │                  │
+  ┌────────▼────────┐ ┌────────▼────────┐ ┌────────▼────────┐ ┌───────▼───────────────┐
+  │ SignTrack.        │ │ SignTrack.      │ │ SignTrack.      │ │ SignTrack.Recognition │
+  │ Identity          │ │ Calls           │ │ Messaging       │ │ (Node + Python) :3000 │
+  │ (C#) :5104        │ │ (C#) :5200      │ │ (C#) :5300      │ │ predict-letter/word   │
+  └────────┬──────────┘ └────────┬────────┘ └────────┬────────┘ └───────────────────────┘
            │                   │                   │
-  ┌────────▼────────┐ ┌────────▼────────┐ ┌────────▼──────────────┐
-  │ SignTrack.      │ │ SignTrack.      │ │ SignTrack.            │
-  │ Identity        │ │ Calls           │ │ Messaging             │
-  │ (C#) :5104      │ │ (C#) :5200      │ │ (C#) :5300            │
-  └────────┬────────┘ └────────┬────────┘ └───────────────────────┘
-           │                   │
-           │            WebRTC / salas (futuro)
+           │            WebRTC / SignalR (Grupo B)
            │
-  ┌────────▼────────────────────────────────────────┐
-  │ SignTrack.Recognition (Node + Python) :3000     │
-  │ MediaPipe · RandomForest · predict-letter/word  │
-  └─────────────────────────────────────────────────┘
+  Postgres (:5435) + Redis (:6379) vía Docker
 ```
 
 | Servicio | Puerto | Stack | Estado |
 |----------|--------|-------|--------|
-| **Gateway** | 5000 | C# .NET 8 | Scaffold |
+| **Gateway** | 5050 | C# .NET 8 | YARP BFF (REST + SignalR + Recognition proxy) |
 | **Identity** | 5104 | C# .NET 8 | Funcional (auth existente) |
-| **Calls** | 5200 | C# .NET 8 | Scaffold |
-| **Messaging** | 5300 | C# .NET 8 | Scaffold |
+| **Calls** | 5200 | C# .NET 8 | WebRTC 1:1 + LiveKit grupal (token API) |
+| **Messaging** | 5300 | C# .NET 8 | Chat REST + SignalR + Web Push |
 | **Recognition** | 3000 | Node + Python | Funcional (detector señas) |
 
 ---
@@ -56,7 +53,9 @@ SignTrack es una plataforma tipo **Microsoft Teams inclusiva** para personas que
 ```
 SignTrack/
 ├── SignTrack.sln                 # Solución .NET principal
-├── docker-compose.yml            # Postgres + Redis
+├── docker-compose.yml            # Postgres + Redis + LiveKit (dev)
+├── docker-compose.prod.yml       # Stack producción (B0)
+├── deploy/                       # Caddy, coturn, Dockerfiles
 ├── docs/                         # Planificación Scrum + arquitectura
 ├── shared/contracts/             # Contratos JWT, eventos, etc.
 ├── services/

@@ -1,0 +1,155 @@
+version: "3.8"
+
+# SignTrack — stack producción (B0)
+# Requiere: .env.prod con dominio, JWT, contraseñas y claves LiveKit/TURN/VAPID
+#
+# Uso:
+#   docker compose -f docker-compose.prod.yml --env-file .env.prod up -d
+#
+# Los microservicios C# se publican con deploy/Dockerfile.service
+# o se ejecutan en el host apuntando a esta infra.
+
+services:
+  postgres:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - signtrack
+
+  redis:
+    image: redis:7-alpine
+    restart: always
+    volumes:
+      - redis_data:/data
+    networks:
+      - signtrack
+
+  coturn:
+    image: coturn/coturn:4.6.2
+    restart: unless-stopped
+    volumes:
+      - ./deploy/coturn/turnserver.conf:/etc/coturn/turnserver.conf:ro
+    network_mode: host
+
+  livekit:
+    image: livekit/livekit-server:v1.8.0
+    restart: unless-stopped
+    command: --config /etc/livekit.yaml
+    volumes:
+      - ./deploy/livekit.prod.yaml:/etc/livekit.yaml:ro
+    ports:
+      - "7880:7880"
+      - "7881:7881"
+      - "7882:7882/udp"
+    networks:
+      - signtrack
+
+  gateway:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.service
+      args:
+        PROJECT_PATH: services/gateway/SignTrack.Gateway.Api/SignTrack.Gateway.Api.csproj
+        ASSEMBLY_NAME: SignTrack.Gateway.Api
+    restart: unless-stopped
+    env_file: .env.prod
+    depends_on:
+      - postgres
+      - redis
+      - identity
+      - messaging
+      - calls
+      - recognition
+    networks:
+      - signtrack
+
+  identity:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.service
+      args:
+        PROJECT_PATH: services/identity/SignTrack.Identity.Api/SignTrack.Identity.Api.csproj
+        ASSEMBLY_NAME: SignTrack.Identity.Api
+    restart: unless-stopped
+    env_file: .env.prod
+    depends_on:
+      - postgres
+    networks:
+      - signtrack
+
+  messaging:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.service
+      args:
+        PROJECT_PATH: services/messaging/SignTrack.Messaging.Api/SignTrack.Messaging.Api.csproj
+        ASSEMBLY_NAME: SignTrack.Messaging.Api
+    restart: unless-stopped
+    env_file: .env.prod
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - signtrack
+
+  calls:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.service
+      args:
+        PROJECT_PATH: services/calls/SignTrack.Calls.Api/SignTrack.Calls.Api.csproj
+        ASSEMBLY_NAME: SignTrack.Calls.Api
+    restart: unless-stopped
+    env_file: .env.prod
+    depends_on:
+      - postgres
+      - redis
+      - livekit
+    networks:
+      - signtrack
+
+  recognition:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.recognition
+    restart: unless-stopped
+    env_file: .env.prod
+    environment:
+      PORT: 3000
+    networks:
+      - signtrack
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+      - ./deploy/frontend-dist:/srv/frontend:ro
+    depends_on:
+      - gateway
+      - livekit
+    networks:
+      - signtrack
+
+networks:
+  signtrack:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  caddy_data:
+  caddy_config:
