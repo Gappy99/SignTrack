@@ -1,0 +1,106 @@
+# Blueprint de Render — deploy permanente "cascarón" de SignTrack
+# (login, chats y contactos funcionales; llamadas y reconocimiento de señas
+# quedan fuera a propósito, esas siguen siendo exclusivas de la demo en vivo
+# desde la Mac + túnel).
+#
+# Cómo usarlo (una sola vez, desde el dashboard de Render):
+#   1. Crear cuenta en https://render.com (gratis) y conectar el repo de GitHub
+#      Gappy99/SignTrack.
+#   2. "New" -> "Blueprint" -> elegir este repo y la rama "develop".
+#      Render detecta este archivo automáticamente.
+#   3. Antes de confirmar, Render va a pedir rellenar las variables marcadas
+#      como "sync: false" abajo (ver notas junto a cada una).
+#   4. Después del primer deploy, copiar las URLs públicas que Render asigna
+#      a "signtrack-identity" y "signtrack-messaging", y pegarlas en las
+#      variables DownstreamUrls__* del servicio "signtrack-gateway"
+#      (Render las deja vacías al inicio porque no existen todavía).
+
+services:
+  - type: web
+    name: signtrack-identity
+    runtime: docker
+    dockerfilePath: ./deploy/Dockerfile.service
+    dockerContext: .
+    plan: free
+    region: oregon
+    healthCheckPath: /api/v1/health
+    dockerBuildArgs:
+      PROJECT_PATH: services/identity/SignTrack.Identity.Api/SignTrack.Identity.Api.csproj
+      ASSEMBLY_NAME: SignTrack.Identity.Api
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      # Pegar aquí el connection string de Neon (Dashboard de Neon -> Connection string,
+      # formato "Host=...;Database=...;Username=...;Password=...;Port=5432;Ssl Mode=Require")
+      - key: ConnectionStrings__DefaultConnection
+        sync: false
+      - key: JwtSettings__SecretKey
+        generateValue: true
+      - key: JwtSettings__Issuer
+        value: SignTrack.Identity
+      - key: JwtSettings__Audience
+        value: SignTrack.Identity
+      - key: Auth__AutoActivateInDevelopment
+        value: "true"
+      # URL pública del Static Site del frontend en Render (Fase C) — pegar
+      # una vez creado, ej. https://signtrack-web.onrender.com
+      - key: Security__AllowedOrigins__0
+        sync: false
+      - key: AppSettings__FrontendUrl
+        sync: false
+
+  - type: web
+    name: signtrack-messaging
+    runtime: docker
+    dockerfilePath: ./deploy/Dockerfile.service
+    dockerContext: .
+    plan: free
+    region: oregon
+    healthCheckPath: /api/v1/health
+    dockerBuildArgs:
+      PROJECT_PATH: services/messaging/SignTrack.Messaging.Api/SignTrack.Messaging.Api.csproj
+      ASSEMBLY_NAME: SignTrack.Messaging.Api
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__DefaultConnection
+        sync: false
+      - key: JwtSettings__SecretKey
+        sync: false # mismo valor que en signtrack-identity, copiar desde ahí
+      - key: JwtSettings__Issuer
+        value: SignTrack.Identity
+      - key: JwtSettings__Audience
+        value: SignTrack.Identity
+
+  - type: web
+    name: signtrack-gateway
+    runtime: docker
+    dockerfilePath: ./deploy/Dockerfile.service
+    dockerContext: .
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    dockerBuildArgs:
+      PROJECT_PATH: services/gateway/SignTrack.Gateway.Api/SignTrack.Gateway.Api.csproj
+      ASSEMBLY_NAME: SignTrack.Gateway.Api
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: JwtSettings__SecretKey
+        sync: false # mismo valor que en signtrack-identity
+      - key: JwtSettings__Issuer
+        value: SignTrack.Identity
+      - key: JwtSettings__Audience
+        value: SignTrack.Identity
+      # Rellenar despues del primer deploy con las URLs publicas reales
+      # (ej. https://signtrack-identity.onrender.com)
+      - key: DownstreamUrls__Identity
+        sync: false
+      - key: DownstreamUrls__Messaging
+        sync: false
+      # Calls y Recognition no se despliegan aquí a propósito — se dejan
+      # apuntando a localhost, esas rutas simplemente no responderán.
+      - key: DownstreamUrls__Calls
+        value: http://localhost:5200
+      - key: DownstreamUrls__Recognition
+        value: http://localhost:3000
