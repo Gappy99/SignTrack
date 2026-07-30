@@ -322,15 +322,64 @@ public class ConversationService(MessagingDbContext db, IChatHubNotifier chatHub
                 .FirstOrDefaultAsync();
         }
 
+        var displayTitle = c.Title;
+        if (c.Type == "dm")
+        {
+            var otherUserId = c.Participants.FirstOrDefault(p => p.UserId != userId)?.UserId;
+            var otherName = otherUserId != null ? await GetUserDisplayNameAsync(otherUserId) : null;
+            if (!string.IsNullOrWhiteSpace(otherName))
+                displayTitle = otherName;
+        }
+        else if (c.Type == "call" && !string.IsNullOrWhiteSpace(c.GroupId))
+        {
+            var roomTitle = await GetRoomTitleAsync(c.GroupId);
+            if (!string.IsNullOrWhiteSpace(roomTitle))
+                displayTitle = $"Reunión: {roomTitle}";
+        }
+
         return new ConversationListItemDto(
             c.Id,
             c.Type,
             c.GroupId,
-            c.Title,
+            displayTitle,
             last?.Content,
             last?.SentAt,
             c.UpdatedAt,
             await CountUnreadAsync(userId, c.Id));
+    }
+
+    private async Task<string?> GetUserDisplayNameAsync(string userId)
+    {
+        var connection = db.Database.GetDbConnection();
+        if (connection.State != System.Data.ConnectionState.Open)
+            await connection.OpenAsync();
+
+        await using var cmd = connection.CreateCommand();
+        cmd.CommandText = "SELECT name FROM users WHERE id = @userId LIMIT 1";
+        var p = cmd.CreateParameter();
+        p.ParameterName = "userId";
+        p.Value = userId;
+        cmd.Parameters.Add(p);
+
+        var result = await cmd.ExecuteScalarAsync();
+        return result as string;
+    }
+
+    private async Task<string?> GetRoomTitleAsync(string roomId)
+    {
+        var connection = db.Database.GetDbConnection();
+        if (connection.State != System.Data.ConnectionState.Open)
+            await connection.OpenAsync();
+
+        await using var cmd = connection.CreateCommand();
+        cmd.CommandText = "SELECT title FROM call_rooms WHERE id = @roomId LIMIT 1";
+        var p = cmd.CreateParameter();
+        p.ParameterName = "roomId";
+        p.Value = roomId;
+        cmd.Parameters.Add(p);
+
+        var result = await cmd.ExecuteScalarAsync();
+        return result as string;
     }
 
     private static MessageDto MapMessage(Message m) => new(
