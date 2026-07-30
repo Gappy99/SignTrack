@@ -6,9 +6,11 @@
 	encode gzip
 	redir / /signtrack/ permanent
 
-	handle /signtrack/* {
+	route /signtrack/* {
 		uri strip_prefix /signtrack
 		root * /srv/frontend
+		@html path /index.html /
+		header @html Cache-Control "no-cache, no-store, must-revalidate"
 		try_files {path} /index.html
 		file_server
 	}
