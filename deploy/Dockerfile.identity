@@ -1,0 +1,14 @@
+# Build de SignTrack.Identity.Api para Render (sin build args, self-contained)
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+COPY SignTrack.sln ./
+COPY services/ ./services/
+RUN dotnet restore SignTrack.sln
+RUN dotnet publish "services/identity/SignTrack.Identity.Api/SignTrack.Identity.Api.csproj" -c Release -o /app/publish --no-restore
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "SignTrack.Identity.Api.dll"]

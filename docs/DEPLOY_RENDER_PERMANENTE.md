@@ -70,6 +70,9 @@ Render. Una vez tengas esa URL:
 
 1. Vuelve a **signtrack-identity** → pega esa URL en `Security__AllowedOrigins__0`
    y en `AppSettings__FrontendUrl`.
+2. Vuelve a **signtrack-gateway** → pega esa misma URL en `CORS_ORIGINS`
+   (el Gateway usa un mecanismo de CORS distinto al de Identity, hay que
+   configurarlo en los dos).
 
 ## Verificación
 

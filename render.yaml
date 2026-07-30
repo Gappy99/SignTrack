@@ -19,14 +19,11 @@ services:
   - type: web
     name: signtrack-identity
     runtime: docker
-    dockerfilePath: ./deploy/Dockerfile.service
+    dockerfilePath: ./deploy/Dockerfile.identity
     dockerContext: .
     plan: free
     region: oregon
     healthCheckPath: /api/v1/health
-    dockerBuildArgs:
-      PROJECT_PATH: services/identity/SignTrack.Identity.Api/SignTrack.Identity.Api.csproj
-      ASSEMBLY_NAME: SignTrack.Identity.Api
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
@@ -52,14 +49,11 @@ services:
   - type: web
     name: signtrack-messaging
     runtime: docker
-    dockerfilePath: ./deploy/Dockerfile.service
+    dockerfilePath: ./deploy/Dockerfile.messaging
     dockerContext: .
     plan: free
     region: oregon
     healthCheckPath: /api/v1/health
-    dockerBuildArgs:
-      PROJECT_PATH: services/messaging/SignTrack.Messaging.Api/SignTrack.Messaging.Api.csproj
-      ASSEMBLY_NAME: SignTrack.Messaging.Api
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
@@ -75,14 +69,11 @@ services:
   - type: web
     name: signtrack-gateway
     runtime: docker
-    dockerfilePath: ./deploy/Dockerfile.service
+    dockerfilePath: ./deploy/Dockerfile.gateway
     dockerContext: .
     plan: free
     region: oregon
     healthCheckPath: /health
-    dockerBuildArgs:
-      PROJECT_PATH: services/gateway/SignTrack.Gateway.Api/SignTrack.Gateway.Api.csproj
-      ASSEMBLY_NAME: SignTrack.Gateway.Api
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
@@ -104,3 +95,7 @@ services:
         value: http://localhost:5200
       - key: DownstreamUrls__Recognition
         value: http://localhost:3000
+      # URL del Static Site del frontend (Fase C), separadas por coma si hay
+      # varias. Ej. https://signtrack-web.onrender.com
+      - key: CORS_ORIGINS
+        sync: false
