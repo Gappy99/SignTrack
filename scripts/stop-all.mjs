@@ -16,7 +16,8 @@ for (const port of ports) {
 }
 
 spawnSync('pkill', ['-f', 'start-all.mjs'], { stdio: 'ignore' })
-spawnSync('pkill', ['-f', 'start-home.mjs'], { stdio: 'ignore' })
+// Nunca matar start-home.mjs aquí: start:home llama a stop-all al inicio
+// y se autoapagaba con [1] killed.
 spawnSync('pkill', ['-f', 'SignTrack.Identity.Api'], { stdio: 'ignore' })
 spawnSync('pkill', ['-f', 'SignTrack.Gateway.Api'], { stdio: 'ignore' })
 spawnSync('pkill', ['-f', 'SignTrack.Calls.Api'], { stdio: 'ignore' })

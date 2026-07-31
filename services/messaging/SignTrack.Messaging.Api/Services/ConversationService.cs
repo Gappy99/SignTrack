@@ -254,7 +254,19 @@ public class ConversationService(MessagingDbContext db, IChatHubNotifier chatHub
 
         if (existing != null)
         {
-            await EnsureParticipantAsync(userId, existing.Id);
+            // El chat de la llamada se crea con quien estuviera en la sala en ese
+            // momento; quien se une despues (sala ya creada) todavia no es
+            // participante de la conversacion aunque si pertenezca a la reunion.
+            var alreadyIn = existing.Participants.Any(p => p.UserId == userId);
+            if (!alreadyIn)
+            {
+                var currentMemberIds = await GetCallRoomMemberIdsAsync(roomId);
+                if (!currentMemberIds.Contains(userId))
+                    throw new UnauthorizedAccessException("No perteneces a esta reunión");
+
+                existing.Participants.Add(NewParticipant(userId));
+                await db.SaveChangesAsync();
+            }
             return await MapListItemAsync(existing, userId);
         }
 

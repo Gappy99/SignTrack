@@ -94,8 +94,12 @@ public class CallHub(RoomService rooms) : Hub
             await Clients.Caller.SendAsync("ExistingSigningStatuses", new { roomId, userIds = roomState.Keys.ToArray() });
         }
 
+        // Incluye el nombre para que quienes ya estaban en la sala puedan
+        // mostrarlo en el tile sin depender de la lista de participantes
+        // cargada al entrar (que no incluye a quien se une despues).
+        var displayName = await rooms.GetParticipantDisplayNameAsync(userId, roomId);
         await Clients.OthersInGroup(CallGroup(roomId))
-            .SendAsync("ParticipantJoined", new { roomId, userId });
+            .SendAsync("ParticipantJoined", new { roomId, userId, displayName });
     }
 
     public async Task LeaveCallRoom(string roomId)
@@ -106,6 +110,8 @@ public class CallHub(RoomService rooms) : Hub
         {
             if (SigningStatusByRoom.TryGetValue(roomId, out var roomState))
                 roomState.TryRemove(userId, out _);
+
+            await rooms.LeaveRoomAsync(userId, roomId);
 
             await Clients.OthersInGroup(CallGroup(roomId))
                 .SendAsync("ParticipantLeft", new { roomId, userId });

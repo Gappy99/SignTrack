@@ -147,6 +147,19 @@ public class RoomService(CallsDbContext db, IConfiguration configuration, LiveKi
         return BuildJoinResponse(room, participant.Id);
     }
 
+    // Libera el lugar del usuario en la sala. Sin esto, salir de una llamada
+    // nunca liberaba el cupo y la sala quedaba "llena" para siempre despues
+    // de que el maximo de personas hubiera entrado alguna vez.
+    public async Task LeaveRoomAsync(string userId, string roomId)
+    {
+        var participant = await db.RoomParticipants
+            .FirstOrDefaultAsync(p => p.RoomId == roomId && p.UserId == userId);
+        if (participant == null) return;
+
+        db.RoomParticipants.Remove(participant);
+        await db.SaveChangesAsync();
+    }
+
     public async Task EndRoomAsync(string userId, string roomId)
     {
         var room = await db.CallRooms.FindAsync(roomId)

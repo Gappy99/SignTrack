@@ -63,7 +63,12 @@ if (!existsSync(frontendRoot)) {
 }
 
 console.log('\n3) Compilando frontend...')
-spawnSync('pnpm', ['install'], { cwd: frontendRoot, stdio: 'inherit' })
+if (!existsSync(join(frontendRoot, 'node_modules'))) {
+  console.log('   (primera vez: instalando dependencias...)')
+  spawnSync('pnpm', ['install'], { cwd: frontendRoot, stdio: 'inherit' })
+} else {
+  console.log('   (dependencias ya instaladas, saltando pnpm install)')
+}
 const build = spawnSync('pnpm', ['exec', 'vite', 'build'], {
   cwd: frontendRoot,
   stdio: 'inherit',
